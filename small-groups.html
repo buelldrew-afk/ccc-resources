@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Small Group Resources</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Layout: one reading column, like a church handbook. Statement first, then a sticky section index, then a quiet list of entries per section. */
+:root {
+  --bg: #f6f7f4;
+  --surface: #ffffff;
+  --fg: #1d2420;
+  --muted: #59645e;
+  --rule: #d8ddd7;
+  --accent: #2c5a4c;
+  --accent-soft: #e3ece7;
+  --pick: #7a5a12;
+  --pick-soft: #f4ecd9;
+  --grace: #2c5a4c;
+  --grace-soft: #e3ece7;
+  --ok: #3d5277;
+  --ok-soft: #e4e9f2;
+  --font-display: "Spectral", Georgia, "Times New Roman", serif;
+  --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141917; --surface: #1b211e; --fg: #e4e9e5; --muted: #9aa69f; --rule: #2f3833;
+    --accent: #8fc2ae; --accent-soft: #22302a;
+    --pick: #e0bf6f; --pick-soft: #2f2817;
+    --grace: #8fc2ae; --grace-soft: #20302a;
+    --ok: #a9bde3; --ok-soft: #232b3a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141917; --surface: #1b211e; --fg: #e4e9e5; --muted: #9aa69f; --rule: #2f3833;
+  --accent: #8fc2ae; --accent-soft: #22302a;
+  --pick: #e0bf6f; --pick-soft: #2f2817;
+  --grace: #8fc2ae; --grace-soft: #20302a;
+  --ok: #a9bde3; --ok-soft: #232b3a;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 17px; line-height: 1.6;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.wrap {
+  max-width: 760px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+header.top { padding-block: 48px 28px; border-bottom: 1px solid var(--rule); }
+.eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin: 0 0 10px; }
+h1 { font-family: var(--font-display); font-weight: 600; font-size: clamp(32px, 6vw, 44px); line-height: 1.12; margin: 0 0 12px; text-wrap: balance; }
+.lede { color: var(--muted); margin: 0; max-width: 60ch; }
+.draft { display: inline-block; margin-top: 16px; font-size: 13px; font-weight: 600; color: var(--pick); background: var(--pick-soft); padding: 3px 10px; border-radius: 4px; }
+
+h2 { font-family: var(--font-display); font-weight: 600; font-size: 27px; line-height: 1.2; margin: 0 0 6px; text-wrap: balance; }
+h3 { font-family: var(--font-display); font-weight: 600; font-size: 19px; margin: 0 0 4px; }
+p { margin: 0; }
+.prose { display: grid; gap: 14px; max-width: 65ch; }
+
+section.statement { padding-block: 36px; display: grid; gap: 24px; }
+.standards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; list-style: none; padding: 0; margin: 0; }
+.standards li { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 14px 16px; min-width: 0; }
+.standards strong { display: block; font-size: 15px; margin-bottom: 2px; }
+.standards span { color: var(--muted); font-size: 15px; line-height: 1.5; }
+
+.tiers { display: grid; gap: 10px; }
+.tier { display: grid; grid-template-columns: 9.5em 1fr; gap: 12px; align-items: baseline; }
+.tier p { color: var(--muted); font-size: 15.5px; min-width: 0; }
+.ask { background: var(--accent-soft); border-radius: 6px; padding: 18px 20px; display: grid; gap: 8px; }
+.ask p { font-size: 16px; }
+
+.chip { display: inline-block; font-size: 12.5px; font-weight: 700; letter-spacing: .02em; padding: 2px 9px; border-radius: 999px; white-space: nowrap; }
+.chip.pick { color: var(--pick); background: var(--pick-soft); }
+.chip.grace { color: var(--grace); background: var(--grace-soft); }
+.chip.ok { color: var(--ok); background: var(--ok-soft); }
+
+nav.index {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: var(--bg); border-block: 1px solid var(--rule);
+}
+nav.index .wrap { display: flex; gap: 6px; overflow-x: auto; padding-block: 10px; scrollbar-width: none; }
+nav.index a {
+  flex: none; font-size: 14px; font-weight: 600; color: var(--muted); text-decoration: none;
+  padding: 5px 11px; border-radius: 999px; border: 1px solid var(--rule); background: var(--surface);
+}
+nav.index a:hover, nav.index a:focus-visible { color: var(--accent); border-color: var(--accent); outline: none; }
+
+main { padding-block: 12px 64px; }
+section.group { padding-top: 36px; scroll-margin-top: 64px; }
+.group-intro { color: var(--muted); font-size: 15.5px; max-width: 62ch; margin-bottom: 8px; }
+ul.items { list-style: none; padding: 0; margin: 12px 0 0; border-top: 1px solid var(--rule); }
+ul.items li { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; padding: 14px 0; border-bottom: 1px solid var(--rule); }
+.item-main { min-width: 0; }
+.t { font-family: var(--font-display); font-style: italic; font-size: 18.5px; line-height: 1.3; }
+.a { color: var(--muted); font-size: 15px; }
+.n { font-size: 15px; margin-top: 3px; }
+.n q { font-style: italic; }
+.item-side { padding-top: 3px; }
+
+footer { border-top: 1px solid var(--rule); padding-block: 24px 40px; color: var(--muted); font-size: 14px; }
+
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .tier { grid-template-columns: 1fr; gap: 4px; }
+  ul.items li { grid-template-columns: 1fr; }
+  .item-side { padding-top: 4px; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+.n a { color: var(--accent); }
+.back { margin: 0 0 14px; font-size: 14px; }
+.back a, .feedback a, ul.items .t a { color: var(--accent); }
+ul.items .t a { text-decoration: none; }
+ul.items .t a:hover { text-decoration: underline; }
+.feedback { margin-top: 40px; background: var(--pick-soft); border-radius: 6px; padding: 18px 20px; display: grid; gap: 8px; }
+.feedback p { font-size: 16px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <p class="back"><a href="./">← All recommended resources</a></p>
+    <p class="eyebrow">Cool Community Church · Small Groups &amp; Adult Bible Study</p>
+    <h1>Recommended Resources</h1>
+    <p class="lede">Studies and books we trust for small groups and adult classes, so leaders can spend their time teaching instead of searching.</p>
+    <p class="draft">Draft for review</p>  </div>
+</header>
+
+<div class="wrap">
+  <section class="statement" id="how-we-choose">
+    <div class="prose">
+      <h2>How We Choose</h2>
+      <p>The elders are called to guard the flock and to hold firm to sound teaching (Acts 20:28; Titus 1:9). One of the most practical ways we do that is by caring about what our people read and study together. This list is meant to make that easy. We would much rather point you toward good books than spend our time warning you away from bad ones.</p>
+      <p>Every resource here has been read by Pastor Drew, sold by a bookstore we trust, or reviewed and approved. Each one fits the convictions below.</p>
+    </div>
+
+    <ul class="standards">
+      <li><strong>Scripture is our authority</strong><span>The Bible is inspired, inerrant, and sufficient for life and godliness.</span></li>
+      <li><strong>Our doctrinal statement</strong><span>Reformed in our understanding of salvation, dispensational in our reading of Israel and the end times.</span></li>
+      <li><strong>What We Teach</strong><span>We choose books that are in keeping with our church's What We Teach document.</span></li>
+      <li><strong>Biblical counseling</strong><span>We love the rich, Scripture-filled help that comes from the biblical counseling movement: ACBC, CCEF, and authors like Paul Tripp, Ed Welch, and David Powlison. For struggles such as conflict, anger, anxiety, and grief, these are the voices we turn to first.</span></li>
+    </ul>
+
+    <div class="tiers">
+      <h3>What the labels mean</h3>
+      <div class="tier"><span><span class="chip pick">Pastor Drew's pick</span></span><p>Pastor Drew has read it and recommends it personally.</p></div>
+      <div class="tier"><span><span class="chip grace">Grace Books</span></span><p>Sold by Grace Books, the bookstore ministry of Grace Community Church. Anything they carry is approved.</p></div>
+      <div class="tier"><span><span class="chip ok">Approved</span></span><p>Reviewed and approved for use at Cool Community Church.</p></div>
+    </div>
+
+    <div class="ask">
+      <h3>Want to use something that isn't listed?</h3>
+      <p>That isn't a no. It just hasn't been reviewed yet. Give Pastor Drew the title, the author, and how you plan to use it, and we'll get back to you.</p>
+      <p>If your group is already partway through a study that isn't on the list, finish it, then choose your next study from here.</p>
+    </div>
+  </section>
+</div>
+
+<nav class="index" aria-label="Sections">
+  <div class="wrap">
+    <a href="#studies">Ready-made studies</a>
+    <a href="#by-pastor-drew">By Pastor Drew</a>
+    <a href="#knowing-god">Knowing God</a>
+    <a href="#gospel-cross">Christ &amp; the cross</a>
+    <a href="#prayer">Prayer &amp; disciplines</a>
+    <a href="#holiness">Holiness &amp; growth</a>
+    <a href="#classics">Classics</a>
+    <a href="#church">The church</a>
+    <a href="#evangelism">Evangelism</a>
+    <a href="#doctrine">Doctrine</a>
+    <a href="#devotionals">Devotionals</a>
+    <a href="#biography">Biography</a>
+    <a href="#seasonal">Advent &amp; Easter</a>
+    <a href="#leaders">For leaders</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section class="group" id="studies">
+    <h2>Ready-Made Studies</h2>
+    <p class="group-intro">Resources with lessons, a study guide, a workbook, or video, ready for a group to work through together.</p>
+    <ul class="items">
+      <li><div class="item-main"><div class="t">Fundamentals of the Faith</div><div class="a">Moody Publishers · student edition and teacher's guide</div><div class="n">Thirteen lessons on the core doctrines of the Christian faith.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li><div class="item-main"><div class="t">Forerunners of the Faith</div><div class="a">Nathan Busenitz · student edition and teacher's guide</div><div class="n">Thirteen lessons on the basics of church history.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li><div class="item-main"><div class="t">MacArthur Bible Studies</div><div class="a">John MacArthur</div><div class="n">Book-by-book study guides. Grace Books carries Genesis, Exodus &amp; Numbers, 1 Samuel, Daniel &amp; Esther, Matthew, Luke, Acts, 1 and 2 Corinthians, Galatians, Philippians, Colossians &amp; Philemon, 1 &amp; 2 Timothy, James, and Revelation.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li><div class="item-main"><div class="t">Strange New World (with study guide and video study)</div><div class="a">Carl Trueman</div><div class="n">How our culture arrived at today's confusion about identity and sexuality.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">When Helping Hurts: The Small Group Experience</div><div class="a">Steve Corbett &amp; Brian Fikkert</div><div class="n">A video-based study on caring for the poor wisely.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+    </ul>
+  </section>
+
+  <section class="group" id="by-pastor-drew">
+    <h2>From Our Pulpit</h2>
+    <p class="group-intro">Books by Pastor Drew, drawn from sermons preached at Cool Community Church.</p>
+    <ul class="items">
+      <li><div class="item-main"><div class="t">Ten Words to Build Your Life On</div><div class="a">Drew Buell · Cool Publishers</div><div class="n">Sermons on the Ten Commandments.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Heaven: Our Forever Home</div><div class="a">Drew Buell · Cool Publishers</div><div class="n">What the Bible teaches about heaven, for lay readers.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Membership Matters</div><div class="a">Drew Buell</div><div class="n">The biblical doctrine of church membership, with chapters on praying for the church and listening to a sermon.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">We Are Not Descended from Fearful Men</div><div class="a">Drew Buell · Cool Publishers</div><div class="n">Five sermons preached during 2020.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Let All Mortal Flesh Keep Silence</div><div class="a">Drew Buell · Cool Publishers</div><div class="n">An Advent devotional.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">I Still Do</div><div class="a">Drew Buell · Cool Publishers</div><div class="n">What marriage is all about: communication, the husband's and wife's callings, resolving everyday conflict, and intimacy. Good for couples' groups and premarital classes.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Journeys: An Adoption Story</div><div class="a">Drew Buell · Cool Publishers</div><div class="n">The Buell family's adoption story.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+    </ul>
+  </section>
+
+  <section class="group" id="knowing-god">
+    <h2>Knowing God</h2>
+    <p class="group-intro">Books for a group to read a chapter at a time and talk through together, arranged by topic.</p>
+    <ul class="items">
+      <li><div class="item-main"><div class="t">The Knowledge of the Holy</div><div class="a">A. W. Tozer</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">The Holiness of God</div><div class="a">R. C. Sproul</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Rejoice and Tremble</div><div class="a">Michael Reeves</div><div class="n">The fear of the Lord.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Delighting in the Trinity</div><div class="a">Michael Reeves</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Chosen by God</div><div class="a">R. C. Sproul</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">The Epic Story of the Bible</div><div class="a">Greg Gilbert</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">The One Story Bible</div><div class="a">Greg Gilbert</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+    </ul>
+  </section>
+
+  <section class="group" id="gospel-cross">
+    <h2>Christ, the Gospel &amp; the Cross</h2>
+    <ul class="items">
+      <li><div class="item-main"><div class="t">Gentle and Lowly</div><div class="a">Dane Ortlund</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">The Heart of Jesus</div><div class="a">Dane Ortlund</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Come, You Weary</div><div class="a">Michael Reeves</div><div class="n">A short book.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">The Gospel</div><div class="a">Ray Ortlund</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Good News at Rock Bottom</div><div class="a">Ray Ortlund</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Hidden in the Gospel</div><div class="a">William Farley</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">The Cross Centered Life</div><div class="a">C. J. Mahaney</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">The Cross He Bore</div><div class="a">Frederick Leahy</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">The Truth of the Cross</div><div class="a">R. C. Sproul</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">The Cross of Christ</div><div class="a">John Stott</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Man of Sorrows, King of Glory</div><div class="a">Jonty Rhodes</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Union with Christ</div><div class="a">Sinclair Ferguson</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Saved to Sin No More</div><div class="a">Brad Wetherell</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Slave</div><div class="a">John MacArthur</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">How Can I Be Sure I'm a Christian?</div><div class="a">Donald Whitney</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+    </ul>
+  </section>
+
+  <section class="group" id="prayer">
+    <h2>Prayer &amp; Spiritual Disciplines</h2>
+    <ul class="items">
+      <li><div class="item-main"><div class="t">A Praying Life</div><div class="a">Paul Miller</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Praying Backwards</div><div class="a">Bryan Chapell</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Before the Throne of Grace</div><div class="a">John MacArthur</div><div class="n">On prayer.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">The Prayer of the Lord</div><div class="a">R. C. Sproul</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">It Happens After Prayer</div><div class="a">H. B. Charles Jr.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Spiritual Disciplines for the Christian Life</div><div class="a">Donald Whitney</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Habits of Grace</div><div class="a">David Mathis</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">A Heart Aflame for God</div><div class="a">Matthew Bingham</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">The Quiet Time Kickstart</div><div class="a">Rachel Jones</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+    </ul>
+  </section>
+
+  <section class="group" id="holiness">
+    <h2>Holiness &amp; Christian Growth</h2>
+    <ul class="items">
+      <li><div class="item-main"><div class="t">The Pursuit of Holiness</div><div class="a">Jerry Bridges</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">The Hole in Our Holiness</div><div class="a">Kevin DeYoung</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Overcoming Sin and Temptation</div><div class="a">John Owen</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">The Devoted Mind</div><div class="a">Kris Lundgaard</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Trusting God</div><div class="a">Jerry Bridges</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Feelings and Faith</div><div class="a">Brian Borgman</div><div class="n">Godly emotions in the Christian life.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">With All Your Heart</div><div class="a">A. Craig Troxel</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">The Blessing of Humility</div><div class="a">Jerry Bridges</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Humility</div><div class="a">Wayne Mack</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Humility: True Greatness</div><div class="a">C. J. Mahaney</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Envy</div><div class="a">Mike Fabarez</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Don't Waste Your Life</div><div class="a">John Piper</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Just Do Something</div><div class="a">Kevin DeYoung</div><div class="n">Finding God's will.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Crazy Busy</div><div class="a">Kevin DeYoung</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Lessons from the Upper Room</div><div class="a">Sinclair Ferguson</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+    </ul>
+  </section>
+
+  <section class="group" id="classics">
+    <h2>Puritans &amp; Classics</h2>
+    <ul class="items">
+      <li><div class="item-main"><div class="t">The Pilgrim's Progress</div><div class="a">John Bunyan</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">The Screwtape Letters</div><div class="a">C. S. Lewis</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">All Things for Good</div><div class="a">Thomas Watson</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">The Rare Jewel of Christian Contentment</div><div class="a">Jeremiah Burroughs</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">The Bruised Reed</div><div class="a">Richard Sibbes</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Rules for Walking in Fellowship</div><div class="a">John Owen</div><div class="n">Especially good for small groups.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+    </ul>
+  </section>
+
+  <section class="group" id="church">
+    <h2>The Church</h2>
+    <ul class="items">
+      <li><div class="item-main"><div class="t">Nine Marks of a Healthy Church</div><div class="a">Mark Dever</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">The Deliberate Church</div><div class="a">Mark Dever &amp; Paul Alexander</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">The Loveliest Place</div><div class="a">Dustin Benge</div><div class="n">The beauty of the local church.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Love the Ones Who Drive You Crazy</div><div class="a">Jamie Dunlop</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Fight for Your Pastor</div><div class="a">Peter Orr</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Instruments in the Redeemer's Hands</div><div class="a">Paul David Tripp</div><div class="n">Helping one another change.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+    </ul>
+  </section>
+
+  <section class="group" id="evangelism">
+    <h2>Evangelism</h2>
+    <ul class="items">
+      <li><div class="item-main"><div class="t">Evangelism and the Sovereignty of God</div><div class="a">J. I. Packer</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">The Truth about Lies</div><div class="a">J. Mack Stiles</div><div class="n">On evangelism.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">World Religions in Seven Sentences</div><div class="a">Douglas Groothuis</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Reaching Your Muslim Neighbor with the Gospel</div><div class="a">Ayman Ibrahim</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Tell Your Catholic Friend</div><div class="a">Leonardo De Chirico</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+    </ul>
+  </section>
+
+  <section class="group" id="doctrine">
+    <h2>Doctrine &amp; Church History</h2>
+    <ul class="items">
+      <li><div class="item-main"><div class="t">Essential Christian Doctrine</div><div class="a">John MacArthur &amp; Richard Mayhue, eds.</div><div class="n">The shorter companion to <i>Biblical Doctrine</i>. A good group reference.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Biblical Doctrine</div><div class="a">John MacArthur &amp; Richard Mayhue, eds.</div><div class="n">For leaders.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Systematic Theology</div><div class="a">Wayne Grudem</div><div class="n">For leaders. On spiritual gifts and the age of the earth, see <i>Biblical Doctrine</i> instead.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">The Apostles' Creed</div><div class="a">R. Albert Mohler Jr.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Israel in the Bible's Storyline</div><div class="a">Michael Vlach</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Has the Church Replaced Israel?</div><div class="a">Michael Vlach</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">The Bible and Future Events</div><div class="a">Leon Wood</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Strange Fire</div><div class="a">John MacArthur</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">What It Means to Be Protestant</div><div class="a">Gavin Ortlund</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Rescuing the Gospel</div><div class="a">Erwin Lutzer</div><div class="n">The story of the Reformation.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">The Unquenchable Flame</div><div class="a">Michael Reeves</div><div class="n">The heart of the Reformation.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">The Reformation: How a Monk and a Mallet Changed the World</div><div class="a">Stephen Nichols</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Father, Son, and Holy Spirit</div><div class="a">Bruce Ware</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">The Deep Things of God</div><div class="a">Fred Sanders</div><div class="n">On the Trinity.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">The Forgotten Trinity</div><div class="a">James White</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Heaven on Earth</div><div class="a">Derek Thomas</div><div class="n">What the Bible teaches about life to come.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">The Glory of Heaven</div><div class="a">John MacArthur</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Biblical Teaching on the Doctrines of Heaven and Hell</div><div class="a">Edward Donnelly</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Heaven</div><div class="a">Randy Alcorn</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">2000 Years of Christ's Power</div><div class="a">Nick Needham</div><div class="n">Church history in several volumes.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Church History 101</div><div class="a">Sinclair Ferguson, Joel Beeke &amp; Michael Haykin</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Church History in Plain Language</div><div class="a">Bruce Shelley</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Meet the Puritans</div><div class="a">Joel Beeke &amp; Randall Pederson</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+    </ul>
+  </section>
+
+  <section class="group" id="devotionals">
+    <h2>Daily Devotionals</h2>
+    <ul class="items">
+      <li><div class="item-main"><div class="t">New Morning Mercies</div><div class="a">Paul David Tripp</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Everyday Gospel</div><div class="a">Paul David Tripp</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Daily Doctrine</div><div class="a">Kevin DeYoung</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+    </ul>
+  </section>
+
+  <section class="group" id="biography">
+    <h2>Biography</h2>
+    <p class="group-intro">Lives that show God's faithfulness, good for a group or for reading on your own.</p>
+    <ul class="items">
+      <li><div class="item-main"><div class="t">Jonathan Edwards: A Life</div><div class="a">George Marsden</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Spurgeon</div><div class="a">Arnold Dallimore</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">George Whitefield</div><div class="a">Arnold Dallimore</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Susie</div><div class="a">Ray Rhodes Jr.</div><div class="n">The life of Susannah Spurgeon.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">John Newton</div><div class="a">Jonathan Aitken</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Fearless Pilgrim</div><div class="a">Faith Cook</div><div class="n">The life of John Bunyan.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Amy Carmichael: Beauty for Ashes</div><div class="a">Iain Murray</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">A. W. Tozer: A Passion for God</div><div class="a">Lyle Dorsett</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Missionary biographies</div><div class="a">Vance Christie</div><div class="n">Adoniram Judson, David Livingstone, John and Betty Stam, and Hudson Taylor.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+    </ul>
+  </section>
+
+  <section class="group" id="seasonal">
+    <h2>Advent &amp; Easter</h2>
+    <ul class="items">
+      <li><div class="item-main"><div class="t">The Advent of Glory</div><div class="a">R. C. Sproul</div><div class="n">24 devotions for Christmas.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Love Came Down at Christmas</div><div class="a">Sinclair Ferguson</div><div class="n">Daily readings for Advent.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Hidden Christmas</div><div class="a">Timothy Keller</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">The Characters of Christmas</div><div class="a">Daniel Darling</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Come, Let Us Adore Him</div><div class="a">Paul David Tripp</div><div class="n">A daily Advent devotional.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Captivated</div><div class="a">Thabiti Anyabwile</div><div class="n">The cross and the resurrection, for Easter.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+    </ul>
+  </section>
+
+  <section class="group" id="leaders">
+    <h2>For Group Leaders</h2>
+    <ul class="items">
+      <li><div class="item-main"><div class="t">How to Study the Bible</div><div class="a">John MacArthur</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li><div class="item-main"><div class="t">Growth Groups</div><div class="a">Colin Marshall</div><div class="n">A training course in how to lead small groups.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">MacArthur Study Bible</div><div class="a">John MacArthur</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Knowing Scripture</div><div class="a">R. C. Sproul</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">How to Get the Most from God's Word</div><div class="a">John MacArthur</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Read This First</div><div class="a">Gary Millar</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">One-to-One Bible Reading</div><div class="a">David Helm</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">The Trellis and the Vine</div><div class="a">Colin Marshall &amp; Tony Payne</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+    </ul>
+  </section>
+
+<section class="feedback">
+  <h3>Reviewing this draft?</h3>
+  <p>Thank you for helping. As you read, jot down anything you would add, remove, or move, and anything in a note that seems off. Then send your thoughts to Pastor Drew.</p>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">Cool Community Church · 863 Cave Valley Rd, Cool, CA · Small groups &amp; adult Bible study resource list, updated October 2026</div>
+</footer>
+</body>
+</html>

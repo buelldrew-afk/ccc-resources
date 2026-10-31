@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Personal Growth & Counseling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Layout: one reading column, like a church handbook. Statement first, then a sticky section index, then a quiet list of entries per section. */
+:root {
+  --bg: #f6f7f4;
+  --surface: #ffffff;
+  --fg: #1d2420;
+  --muted: #59645e;
+  --rule: #d8ddd7;
+  --accent: #2c5a4c;
+  --accent-soft: #e3ece7;
+  --pick: #7a5a12;
+  --pick-soft: #f4ecd9;
+  --grace: #2c5a4c;
+  --grace-soft: #e3ece7;
+  --ok: #3d5277;
+  --ok-soft: #e4e9f2;
+  --font-display: "Spectral", Georgia, "Times New Roman", serif;
+  --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141917; --surface: #1b211e; --fg: #e4e9e5; --muted: #9aa69f; --rule: #2f3833;
+    --accent: #8fc2ae; --accent-soft: #22302a;
+    --pick: #e0bf6f; --pick-soft: #2f2817;
+    --grace: #8fc2ae; --grace-soft: #20302a;
+    --ok: #a9bde3; --ok-soft: #232b3a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141917; --surface: #1b211e; --fg: #e4e9e5; --muted: #9aa69f; --rule: #2f3833;
+  --accent: #8fc2ae; --accent-soft: #22302a;
+  --pick: #e0bf6f; --pick-soft: #2f2817;
+  --grace: #8fc2ae; --grace-soft: #20302a;
+  --ok: #a9bde3; --ok-soft: #232b3a;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 17px; line-height: 1.6;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.wrap {
+  max-width: 760px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+header.top { padding-block: 48px 28px; border-bottom: 1px solid var(--rule); }
+.eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin: 0 0 10px; }
+h1 { font-family: var(--font-display); font-weight: 600; font-size: clamp(32px, 6vw, 44px); line-height: 1.12; margin: 0 0 12px; text-wrap: balance; }
+.lede { color: var(--muted); margin: 0; max-width: 60ch; }
+.draft { display: inline-block; margin-top: 16px; font-size: 13px; font-weight: 600; color: var(--pick); background: var(--pick-soft); padding: 3px 10px; border-radius: 4px; }
+
+h2 { font-family: var(--font-display); font-weight: 600; font-size: 27px; line-height: 1.2; margin: 0 0 6px; text-wrap: balance; }
+h3 { font-family: var(--font-display); font-weight: 600; font-size: 19px; margin: 0 0 4px; }
+p { margin: 0; }
+.prose { display: grid; gap: 14px; max-width: 65ch; }
+
+section.statement { padding-block: 36px; display: grid; gap: 24px; }
+.standards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; list-style: none; padding: 0; margin: 0; }
+.standards li { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 14px 16px; min-width: 0; }
+.standards strong { display: block; font-size: 15px; margin-bottom: 2px; }
+.standards span { color: var(--muted); font-size: 15px; line-height: 1.5; }
+
+.tiers { display: grid; gap: 10px; }
+.tier { display: grid; grid-template-columns: 9.5em 1fr; gap: 12px; align-items: baseline; }
+.tier p { color: var(--muted); font-size: 15.5px; min-width: 0; }
+.ask { background: var(--accent-soft); border-radius: 6px; padding: 18px 20px; display: grid; gap: 8px; }
+.ask p { font-size: 16px; }
+
+.chip { display: inline-block; font-size: 12.5px; font-weight: 700; letter-spacing: .02em; padding: 2px 9px; border-radius: 999px; white-space: nowrap; }
+.chip.pick { color: var(--pick); background: var(--pick-soft); }
+.chip.grace { color: var(--grace); background: var(--grace-soft); }
+.chip.ok { color: var(--ok); background: var(--ok-soft); }
+
+nav.index {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: var(--bg); border-block: 1px solid var(--rule);
+}
+nav.index .wrap { display: flex; gap: 6px; overflow-x: auto; padding-block: 10px; scrollbar-width: none; }
+nav.index a {
+  flex: none; font-size: 14px; font-weight: 600; color: var(--muted); text-decoration: none;
+  padding: 5px 11px; border-radius: 999px; border: 1px solid var(--rule); background: var(--surface);
+}
+nav.index a:hover, nav.index a:focus-visible { color: var(--accent); border-color: var(--accent); outline: none; }
+
+main { padding-block: 12px 64px; }
+section.group { padding-top: 36px; scroll-margin-top: 64px; }
+.group-intro { color: var(--muted); font-size: 15.5px; max-width: 62ch; margin-bottom: 8px; }
+ul.items { list-style: none; padding: 0; margin: 12px 0 0; border-top: 1px solid var(--rule); }
+ul.items li { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; padding: 14px 0; border-bottom: 1px solid var(--rule); }
+.item-main { min-width: 0; }
+.t { font-family: var(--font-display); font-style: italic; font-size: 18.5px; line-height: 1.3; }
+.a { color: var(--muted); font-size: 15px; }
+.n { font-size: 15px; margin-top: 3px; }
+.n q { font-style: italic; }
+.item-side { padding-top: 3px; }
+
+footer { border-top: 1px solid var(--rule); padding-block: 24px 40px; color: var(--muted); font-size: 14px; }
+
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .tier { grid-template-columns: 1fr; gap: 4px; }
+  ul.items li { grid-template-columns: 1fr; }
+  .item-side { padding-top: 4px; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+.n a { color: var(--accent); }
+.back { margin: 0 0 14px; font-size: 14px; }
+.back a, .feedback a, ul.items .t a { color: var(--accent); }
+ul.items .t a { text-decoration: none; }
+ul.items .t a:hover { text-decoration: underline; }
+.feedback { margin-top: 40px; background: var(--pick-soft); border-radius: 6px; padding: 18px 20px; display: grid; gap: 8px; }
+.feedback p { font-size: 16px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <p class="back"><a href="./">← All recommended resources</a></p>
+    <p class="eyebrow">Cool Community Church · Personal Growth &amp; Counseling</p>
+    <h1>Recommended Resources</h1>
+    <p class="lede">Books we trust for the struggles of the heart, from depression and anxiety to anger, addiction, and grief, and for growing in Christ through them.</p>
+    <p class="draft">Draft for review</p>  </div>
+</header>
+
+<div class="wrap">
+  <section class="statement" id="how-we-choose">
+    <div class="prose">
+      <h2>How We Choose</h2>
+      <p>The elders are called to guard the flock and to hold firm to sound teaching (Acts 20:28; Titus 1:9). One of the most practical ways we do that is by caring about what our people read and study together. This list is meant to make that easy. We would much rather point you toward good books than spend our time warning you away from bad ones.</p>
+      <p>Every resource here has been read by Pastor Drew, sold by a bookstore we trust, or reviewed and approved. Each one fits the convictions below.</p>
+    </div>
+
+    <ul class="standards">
+      <li><strong>Scripture is our authority</strong><span>The Bible is inspired, inerrant, and sufficient for life and godliness.</span></li>
+      <li><strong>Our doctrinal statement</strong><span>Reformed in our understanding of salvation, dispensational in our reading of Israel and the end times.</span></li>
+      <li><strong>What We Teach</strong><span>We choose books that are in keeping with our church's What We Teach document.</span></li>
+      <li><strong>Biblical counseling</strong><span>We love the rich, Scripture-filled help that comes from the biblical counseling movement: ACBC, CCEF, and authors like Paul Tripp, Ed Welch, and David Powlison. For struggles such as conflict, anger, anxiety, and grief, these are the voices we turn to first.</span></li>
+    </ul>
+
+    <div class="tiers">
+      <h3>What the labels mean</h3>
+      <div class="tier"><span><span class="chip pick">Pastor Drew's pick</span></span><p>Pastor Drew has read it and recommends it personally.</p></div>
+      <div class="tier"><span><span class="chip grace">Grace Books</span></span><p>Sold by Grace Books, the bookstore ministry of Grace Community Church. Anything they carry is approved.</p></div>
+      <div class="tier"><span><span class="chip ok">Approved</span></span><p>Reviewed and approved for use at Cool Community Church.</p></div>
+    </div>
+
+    <div class="ask">
+      <h3>Want to use something that isn't listed?</h3>
+      <p>That isn't a no. It just hasn't been reviewed yet. Give Pastor Drew the title, the author, and how you plan to use it, and we'll get back to you.</p>
+      <p>If your group is already partway through a study that isn't on the list, finish it, then choose your next study from here.</p>
+    </div>
+  </section>
+</div>
+
+<nav class="index" aria-label="Sections">
+  <div class="wrap">
+    <a href="#getting-help">Getting help</a>
+    <a href="#depression">Depression</a>
+    <a href="#anxiety">Anxiety &amp; fear</a>
+    <a href="#relationships">Anger &amp; conflict</a>
+    <a href="#addiction">Addiction</a>
+    <a href="#suffering">Suffering &amp; grief</a>
+    <a href="#identity">Identity</a>
+    <a href="#money">Money</a>
+    <a href="#growth">Growing in Christ</a>
+    <a href="#helpers">Helping others</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section class="group" id="getting-help">
+    <h2>Getting Help</h2>
+    <p class="group-intro">Every resource on this page comes from the biblical counseling tradition. Books are a wonderful help, but they work best alongside a conversation with one of our pastors, not in place of one.</p>
+    <ul class="items">
+      <li><div class="item-main"><div class="t">Biblical Counseling: What to Expect</div><div class="a">Lou Priolo</div><div class="n">A short booklet for anyone about to meet with a counselor.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li><div class="item-main"><div class="t">Association of Certified Biblical Counselors (ACBC)</div><div class="a">biblicalcounseling.com</div><div class="n">Resources, and a directory of certified biblical counselors. <a href="https://biblicalcounseling.com" target="_blank" rel="noopener">biblicalcounseling.com</a></div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Christian Counseling &amp; Educational Foundation (CCEF)</div><div class="a">ccef.org</div><div class="n">Articles, minibooks, and podcasts on specific struggles. <a href="https://www.ccef.org" target="_blank" rel="noopener">ccef.org</a></div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">CCEF minibooks</div><div class="a">New Growth Press</div><div class="n">Short, inexpensive booklets on specific struggles such as anxiety, depression, anger, grief, and pornography. Good to read with a friend or to hand to someone who is hurting.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Transformed (podcast)</div><div class="a">Greg Gifford</div><div class="n">Short episodes on anxiety, depression, relationships, and real change. <a href="https://fortisinstitute.org/greg-gifford/" target="_blank" rel="noopener">fortisinstitute.org/greg-gifford</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Lies My Therapist Told Me</div><div class="a">Greg Gifford</div><div class="n">Why Christians should aim for more than treating symptoms: a biblical critique of today's mental health assumptions.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+    </ul>
+  </section>
+
+  <section class="group" id="depression">
+    <h2>Depression &amp; Discouragement</h2>
+    <ul class="items">
+      <li><div class="item-main"><div class="t">Depression: Looking Up from the Stubborn Darkness</div><div class="a">Ed Welch</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Spiritual Depression</div><div class="a">D. Martyn Lloyd-Jones</div><div class="n">Classic sermons on the causes and cure of spiritual discouragement.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">A Lifting Up for the Downcast</div><div class="a">William Bridge</div><div class="n">A Puritan classic for the discouraged Christian.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li><div class="item-main"><div class="t">Feelings and Faith</div><div class="a">Brian Borgman</div><div class="n">Pastor Drew's strongest recommendation on handling emotions biblically.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">The Bruised Reed</div><div class="a">Richard Sibbes</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Come, You Weary</div><div class="a">Michael Reeves</div><div class="n">A short book.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Helping Your Family Through PTSD</div><div class="a">Greg Gifford</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Understanding Trauma</div><div class="a">Steve Midgley</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Disrupted Journey</div><div class="a">Nate Brooks</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+    </ul>
+  </section>
+
+  <section class="group" id="anxiety">
+    <h2>Anxiety, Fear &amp; Worry</h2>
+    <ul class="items">
+      <li><div class="item-main"><div class="t">Overcoming Anxiety</div><div class="a">David Powlison</div><div class="n">Relief for worried people.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Running Scared</div><div class="a">Ed Welch</div><div class="n">Fear, worry, and the God of rest.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">When People Are Big and God Is Small</div><div class="a">Ed Welch</div><div class="n">Peer pressure, codependency, and the fear of man.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li><div class="item-main"><div class="t">Courage: Fighting Fear with Fear</div><div class="a">Wayne &amp; Joshua Mack</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li><div class="item-main"><div class="t">Trusting God</div><div class="a">Jerry Bridges</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Rejoice and Tremble</div><div class="a">Michael Reeves</div><div class="n">The fear of the Lord.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">We Are Not Descended from Fearful Men</div><div class="a">Drew Buell · Cool Publishers</div><div class="n">Five sermons preached during 2020.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+    </ul>
+  </section>
+
+  <section class="group" id="relationships">
+    <h2>Anger, Conflict &amp; Forgiveness</h2>
+    <ul class="items">
+      <li><div class="item-main"><div class="t">War of Words</div><div class="a">Paul David Tripp</div><div class="n">Communication and conflict, starting with the heart.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Forgive as the Lord Forgave You</div><div class="a">Patrick Morison</div><div class="n">A booklet.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li><div class="item-main"><div class="t">Answering the Hard Questions about Forgiveness</div><div class="a">John MacArthur</div><div class="n">A booklet.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li><div class="item-main"><div class="t">Putting Your Past in Its Place</div><div class="a">Stephen Viars</div><div class="n">Moving forward in freedom and forgiveness.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Picking Up the Pieces</div><div class="a">Lou Priolo</div><div class="n">Recovering from broken relationships.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">When Words Matter Most</div><div class="a">Crossway</div><div class="n">Speaking truth with grace to those you love.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li><div class="item-main"><div class="t">Healing Contentious Relationships</div><div class="a">Thomas Parr</div><div class="n">Overcoming the power of pride and strife.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+    </ul>
+  </section>
+
+  <section class="group" id="addiction">
+    <h2>Addiction &amp; Sexual Sin</h2>
+    <ul class="items">
+      <li><div class="item-main"><div class="t">Addictions: A Banquet in the Grave</div><div class="a">Ed Welch</div><div class="n">Finding hope in the power of the gospel.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Passions of the Heart</div><div class="a">John D. Street</div><div class="n">Biblical counsel for stubborn sexual sins.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li><div class="item-main"><div class="t">What Do You Do When You Know That You're Hooked?</div><div class="a">Jay Adams</div><div class="n">A booklet.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li><div class="item-main"><div class="t">Idols of the Heart</div><div class="a">Elyse Fitzpatrick</div><div class="n">Learning to long for God alone.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li><div class="item-main"><div class="t">Finally Free</div><div class="a">Heath Lambert</div><div class="n">Fighting for purity with the power of grace.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Sexual Sanity for Men</div><div class="a">David White</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Sexual Sanity for Women</div><div class="a">Ellen Dykas</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Undefiled</div><div class="a">Harry Schaumburg</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+    </ul>
+  </section>
+
+  <section class="group" id="suffering">
+    <h2>Suffering, Illness &amp; Grief</h2>
+    <ul class="items">
+      <li><div class="item-main"><div class="t">Walking with God through Pain and Suffering</div><div class="a">Timothy Keller</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">O Death, Where Is Your Sting?</div><div class="a">C. H. Spurgeon</div><div class="n">Classic sermons on dying in Christ.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">No Tears in Heaven</div><div class="a">C. H. Spurgeon</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Every Moment Holy, Volume II</div><div class="a">Douglas McKelvey</div><div class="n">Prayers and liturgies for seasons of death and grief.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Comfort Those Who Grieve</div><div class="a">Paul Tautges</div><div class="n">For those caring for the grieving.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Safe in the Arms of God</div><div class="a">John MacArthur</div><div class="n">For parents who have lost a child.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Finding Grace in the Face of Dementia</div><div class="a">John Dunlop</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">HELP! Someone I Love Has Alzheimer's</div><div class="a">Deborah Howard &amp; Judy Howe</div><div class="n">A booklet.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li><div class="item-main"><div class="t">Great Is Thy Faithfulness</div><div class="a">Leslye &amp; Robert Bohrer</div><div class="n">Living joyfully with Down syndrome.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li><div class="item-main"><div class="t">ADD: Wandering Minds and Wired Bodies</div><div class="a">Ed Welch</div><div class="n">A booklet.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li><div class="item-main"><div class="t">Surprised by Suffering</div><div class="a">R. C. Sproul</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Does Grace Grow Best in Winter?</div><div class="a">Ligon Duncan</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Waiting Isn't a Waste</div><div class="a">Mark Vroegop</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Suffering and the Sovereignty of God</div><div class="a">John Piper &amp; Justin Taylor, eds.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Songs of Suffering</div><div class="a">Joni Eareckson Tada</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">A Book of Comfort for Those in Sickness</div><div class="a">P. B. Power</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Grieving, Hope and Solace</div><div class="a">Albert N. Martin</div><div class="n">When a loved one dies in Christ.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">The Suffering of a Child</div><div class="a">Heather So</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">The Last Enemy</div><div class="a">Michael Wittmer</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Facing the Last Enemy</div><div class="a">Guy Prentiss Waters</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+    </ul>
+  </section>
+
+  <section class="group" id="identity">
+    <h2>Identity &amp; Sexuality</h2>
+    <ul class="items">
+      <li><div class="item-main"><div class="t">The Secret Thoughts of an Unlikely Convert</div><div class="a">Rosaria Butterfield</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Openness Unhindered</div><div class="a">Rosaria Butterfield</div><div class="n">Sexual identity and union with Christ.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">What Does the Bible Teach about Homosexuality?</div><div class="a">Christian Focus</div><div class="n">A short book.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li><div class="item-main"><div class="t">What Does the Bible Teach about Transgenderism?</div><div class="a">Christian Focus</div><div class="n">A short book.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+    </ul>
+  </section>
+
+  <section class="group" id="money">
+    <h2>Money &amp; Possessions</h2>
+    <ul class="items">
+      <li><div class="item-main"><div class="t">Money, Debt, and Finances</div><div class="a">Jim Newheiser</div><div class="n">Critical questions answered from the biblical counseling tradition.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Managing God's Money</div><div class="a">Randy Alcorn</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">The Treasure Principle</div><div class="a">Randy Alcorn</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+    </ul>
+  </section>
+
+  <section class="group" id="growth">
+    <h2>Growing in Christ</h2>
+    <p class="group-intro">How God changes His people, and how to put off sin and put on righteousness.</p>
+    <ul class="items">
+      <li><div class="item-main"><div class="t">How People Change</div><div class="a">Timothy Lane &amp; Paul David Tripp</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">The Pursuit of Holiness</div><div class="a">Jerry Bridges</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Respectable Sins (with discussion guide)</div><div class="a">Jerry Bridges</div><div class="n">Confronting the sins we tolerate.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">The Practice of Godliness</div><div class="a">Jerry Bridges</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">The Transforming Power of the Gospel</div><div class="a">Jerry Bridges</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Saved to Sin No More</div><div class="a">Brad Wetherell</div><div class="n">How union with Christ empowers a life of holiness.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Whiter Than Snow</div><div class="a">Paul David Tripp</div><div class="n">Meditations on sin and mercy.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Broken-Down House</div><div class="a">Paul David Tripp</div><div class="n">Living productively in a world gone bad.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Christ and Your Problems</div><div class="a">Jay Adams</div><div class="n">A booklet.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li><div class="item-main"><div class="t">The Rare Jewel of Christian Contentment</div><div class="a">Jeremiah Burroughs</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Humility: True Greatness</div><div class="a">C. J. Mahaney</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">A Homework Manual for Biblical Living</div><div class="a">Wayne Mack</div><div class="n">Practical assignments on personal and relational problems.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">God's Solutions to Life's Problems</div><div class="a">Wayne Mack</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Heart &amp; Habits: How We Change for Good</div><div class="a">Greg Gifford</div><div class="n">First place in ACBC's 2021 list of best biblical counseling books.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+    </ul>
+  </section>
+
+  <section class="group" id="helpers">
+    <h2>For Those Who Help Others</h2>
+    <p class="group-intro">For pastors, leaders, and any member who wants to bring God's Word to a friend who is struggling.</p>
+    <ul class="items">
+      <li><div class="item-main"><div class="t">Instruments in the Redeemer's Hands</div><div class="a">Paul David Tripp</div><div class="n">People in need of change helping people in need of change.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Seeing with New Eyes</div><div class="a">David Powlison</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Speaking Truth in Love</div><div class="a">David Powlison</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Counseling One Another</div><div class="a">Paul Tautges</div><div class="n">A theology of interpersonal discipleship.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li><div class="item-main"><div class="t">Competent to Counsel</div><div class="a">Jay Adams</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">A Theology of Christian Counseling</div><div class="a">Jay Adams</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li><div class="item-main"><div class="t">A Theology of Biblical Counseling</div><div class="a">Heath Lambert</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li><div class="item-main"><div class="t">Counseling the Hard Cases</div><div class="a">Stuart Scott &amp; Heath Lambert</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li><div class="item-main"><div class="t">Men Counseling Men</div><div class="a">John D. Street, ed.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li><div class="item-main"><div class="t">Quick Scripture Reference for Counseling</div><div class="a">John Kruis</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li><div class="item-main"><div class="t">Quick Scripture Reference for Counseling Youth</div><div class="a">Keith &amp; Patricia Miller</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+    </ul>
+  </section>
+
+<section class="feedback">
+  <h3>Reviewing this draft?</h3>
+  <p>Thank you for helping. As you read, jot down anything you would add, remove, or move, and anything in a note that seems off. Then send your thoughts to Pastor Drew.</p>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">Cool Community Church · 863 Cave Valley Rd, Cool, CA · Personal growth &amp; counseling resource list, updated October 2026</div>
+</footer>
+</body>
+</html>
