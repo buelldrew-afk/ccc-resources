@@ -24,6 +24,8 @@
   --grace-soft: #e3ece7;
   --ok: #3d5277;
   --ok-soft: #e4e9f2;
+  --challies: #7a3b52;
+  --challies-soft: #f3e6eb;
   --font-display: "Spectral", Georgia, "Times New Roman", serif;
   --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
 }
@@ -34,6 +36,7 @@
     --pick: #e0bf6f; --pick-soft: #2f2817;
     --grace: #8fc2ae; --grace-soft: #20302a;
     --ok: #a9bde3; --ok-soft: #232b3a;
+    --challies: #e3a3bb; --challies-soft: #33212a;
     color-scheme: dark;
   }
 }
@@ -43,6 +46,7 @@
   --pick: #e0bf6f; --pick-soft: #2f2817;
   --grace: #8fc2ae; --grace-soft: #20302a;
   --ok: #a9bde3; --ok-soft: #232b3a;
+  --challies: #e3a3bb; --challies-soft: #33212a;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -74,7 +78,7 @@ section.statement { padding-block: 36px; display: grid; gap: 24px; }
 .standards span { color: var(--muted); font-size: 15px; line-height: 1.5; }
 
 .tiers { display: grid; gap: 10px; }
-.tier { display: grid; grid-template-columns: 9.5em 1fr; gap: 12px; align-items: baseline; }
+.tier { display: grid; grid-template-columns: 13.5em 1fr; gap: 12px; align-items: baseline; }
 .tier p { color: var(--muted); font-size: 15.5px; min-width: 0; }
 .ask { background: var(--accent-soft); border-radius: 6px; padding: 18px 20px; display: grid; gap: 8px; }
 .ask p { font-size: 16px; }
@@ -83,6 +87,7 @@ section.statement { padding-block: 36px; display: grid; gap: 24px; }
 .chip.pick { color: var(--pick); background: var(--pick-soft); }
 .chip.grace { color: var(--grace); background: var(--grace-soft); }
 .chip.ok { color: var(--ok); background: var(--ok-soft); }
+.chip.challies { color: var(--challies); background: var(--challies-soft); }
 
 nav.index {
   position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
@@ -105,7 +110,7 @@ ul.items li { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; pad
 .a { color: var(--muted); font-size: 15px; }
 .n { font-size: 15px; margin-top: 3px; }
 .n q { font-style: italic; }
-.item-side { padding-top: 3px; }
+.item-side { padding-top: 3px; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
 
 footer { border-top: 1px solid var(--rule); padding-block: 24px 40px; color: var(--muted); font-size: 14px; }
 
@@ -113,7 +118,7 @@ footer { border-top: 1px solid var(--rule); padding-block: 24px 40px; color: var
   body { font-size: 16px; }
   .tier { grid-template-columns: 1fr; gap: 4px; }
   ul.items li { grid-template-columns: 1fr; }
-  .item-side { padding-top: 4px; }
+  .item-side { padding-top: 4px; flex-direction: row; flex-wrap: wrap; align-items: flex-start; }
 }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 .back { margin: 0 0 14px; font-size: 14px; }
@@ -154,6 +159,7 @@ ul.items .t a:hover { text-decoration: underline; }
       <div class="tier"><span><span class="chip pick">Pastor Drew's pick</span></span><p>Pastor Drew has read it and recommends it personally.</p></div>
       <div class="tier"><span><span class="chip grace">Grace Books</span></span><p>Sold by Grace Books, the bookstore ministry of Grace Community Church. Anything they carry is approved.</p></div>
       <div class="tier"><span><span class="chip ok">Approved</span></span><p>Reviewed and approved for use at Cool Community Church.</p></div>
+      <div class="tier"><span><span class="chip challies">Recommended by Tim Challies</span></span><p>From Tim Challies's recommended-book lists at challies.com, checked against our convictions before it was added.</p></div>
     </div>
 
     <div class="ask">
@@ -219,15 +225,15 @@ ul.items .t a:hover { text-decoration: underline; }
       <li><div class="item-main"><div class="t">A Promise Kept</div><div class="a">Robertson McQuilkin</div><div class="n">A husband's faithfulness to his wife through Alzheimer's.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
       <li><div class="item-main"><div class="t">The Meaning of Marriage</div><div class="a">Timothy Keller</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
       <li><div class="item-main"><div class="t">Sex, Romance, and the Glory of God</div><div class="a">C. J. Mahaney</div><div class="n">What every Christian husband needs to know.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">This Momentary Marriage</div><div class="a">John Piper</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Gospel-Shaped Marriage</div><div class="a">Chad &amp; Emily Van Dixhoorn</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Build a Stronger Marriage</div><div class="a">Bob Lepine</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Power with Purpose</div><div class="a">David &amp; Krista Dunham</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Thriving Marriage</div><div class="a">Mark &amp; Bethany Kelley</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">The Marriage Bed</div><div class="a">Ray Rhodes Jr.</div><div class="n">Intimacy in marriage.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Redeeming Sex in Marriage</div><div class="a">Scott Mehl</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Sex and Self-Forgetfulness</div><div class="a">Doug Hanna</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Intended for Pleasure</div><div class="a">Ed Wheat</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">This Momentary Marriage</div><div class="a">John Piper</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Gospel-Shaped Marriage</div><div class="a">Chad &amp; Emily Van Dixhoorn</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Build a Stronger Marriage</div><div class="a">Bob Lepine</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Power with Purpose</div><div class="a">David &amp; Krista Dunham</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Thriving Marriage</div><div class="a">Mark &amp; Bethany Kelley</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">The Marriage Bed</div><div class="a">Ray Rhodes Jr.</div><div class="n">Intimacy in marriage.</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Redeeming Sex in Marriage</div><div class="a">Scott Mehl</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Sex and Self-Forgetfulness</div><div class="a">Doug Hanna</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Intended for Pleasure</div><div class="a">Ed Wheat</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
     </ul>
   </section>
 
@@ -239,10 +245,10 @@ ul.items .t a:hover { text-decoration: underline; }
       <li><div class="item-main"><div class="t">Preparing for Marriage</div><div class="a">Dennis Rainey, ed.</div><div class="n">Premarital workbook, with a leader's guide.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
       <li><div class="item-main"><div class="t">Three to Get Ready</div><div class="a">Howard Eyrich</div><div class="n">A premarital counseling manual from the biblical counseling tradition. For leaders.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
       <li><div class="item-main"><div class="t">Passion and Purity</div><div class="a">Elisabeth Elliot</div><div class="n">For singles: bringing your love life under Christ's control.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">A Christ-Centered Wedding</div><div class="a">Catherine Parks</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Sex, Dating, and Relationships</div><div class="a">Gerald Hiestand &amp; Jay Thomas</div><div class="n">For singles.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Water for My Camels</div><div class="a">Paul Grimmond</div><div class="n">For singles.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">5 Paths to the Love of Your Life</div><div class="a">Alex Chediak, ed.</div><div class="n">For singles.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">A Christ-Centered Wedding</div><div class="a">Catherine Parks</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Sex, Dating, and Relationships</div><div class="a">Gerald Hiestand &amp; Jay Thomas</div><div class="n">For singles.</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Water for My Camels</div><div class="a">Paul Grimmond</div><div class="n">For singles.</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">5 Paths to the Love of Your Life</div><div class="a">Alex Chediak, ed.</div><div class="n">For singles.</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
     </ul>
   </section>
 
@@ -284,13 +290,13 @@ ul.items .t a:hover { text-decoration: underline; }
       <li><div class="item-main"><div class="t">The War on Children</div><div class="a">John MacArthur</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
       <li><div class="item-main"><div class="t">Hints for Parents</div><div class="a">Gardiner Spring</div><div class="n">A short classic.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
       <li><div class="item-main"><div class="t">The Talk</div><div class="a">Luke Gilkerson</div><div class="n">Helps parents begin talking with young children about sex.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Gospel-Powered Parenting</div><div class="a">William Farley</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Purposeful and Persistent Parenting</div><div class="a">John &amp; Cindy Raquet</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Grounded in Grace</div><div class="a">Jonathan Holmes</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Good News for Parents</div><div class="a">Adam Griffin</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">What Do I Say When…?</div><div class="a">Andrew &amp; Christian Walker</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Helping Your Kids Know God's Good Design</div><div class="a">Elizabeth Urbanowicz</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Going Public</div><div class="a">David &amp; Kelli Pritchard</div><div class="n">For families with children in public school.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Gospel-Powered Parenting</div><div class="a">William Farley</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Purposeful and Persistent Parenting</div><div class="a">John &amp; Cindy Raquet</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Grounded in Grace</div><div class="a">Jonathan Holmes</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Good News for Parents</div><div class="a">Adam Griffin</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">What Do I Say When…?</div><div class="a">Andrew &amp; Christian Walker</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Helping Your Kids Know God's Good Design</div><div class="a">Elizabeth Urbanowicz</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Going Public</div><div class="a">David &amp; Kelli Pritchard</div><div class="n">For families with children in public school.</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
     </ul>
   </section>
 
@@ -361,7 +367,7 @@ ul.items .t a:hover { text-decoration: underline; }
       <li><div class="item-main"><div class="t">Wellness for the Glory of God</div><div class="a">John Dunlop</div><div class="n">Living well after 40.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
       <li><div class="item-main"><div class="t">Safe in the Arms of God</div><div class="a">John MacArthur</div><div class="n">For parents who have lost a child.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
       <li><div class="item-main"><div class="t">Comfort Those Who Grieve</div><div class="a">Paul Tautges</div><div class="n">For those caring for the grieving.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">You Are Still a Mother</div><div class="a">Jackie Gibson</div><div class="n">For mothers grieving miscarriage or the loss of a child.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">You Are Still a Mother</div><div class="a">Jackie Gibson</div><div class="n">For mothers grieving miscarriage or the loss of a child.</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
     </ul>
   </section>
 

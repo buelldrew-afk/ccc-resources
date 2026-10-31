@@ -24,6 +24,8 @@
   --grace-soft: #e3ece7;
   --ok: #3d5277;
   --ok-soft: #e4e9f2;
+  --challies: #7a3b52;
+  --challies-soft: #f3e6eb;
   --font-display: "Spectral", Georgia, "Times New Roman", serif;
   --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
 }
@@ -34,6 +36,7 @@
     --pick: #e0bf6f; --pick-soft: #2f2817;
     --grace: #8fc2ae; --grace-soft: #20302a;
     --ok: #a9bde3; --ok-soft: #232b3a;
+    --challies: #e3a3bb; --challies-soft: #33212a;
     color-scheme: dark;
   }
 }
@@ -43,6 +46,7 @@
   --pick: #e0bf6f; --pick-soft: #2f2817;
   --grace: #8fc2ae; --grace-soft: #20302a;
   --ok: #a9bde3; --ok-soft: #232b3a;
+  --challies: #e3a3bb; --challies-soft: #33212a;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -74,7 +78,7 @@ section.statement { padding-block: 36px; display: grid; gap: 24px; }
 .standards span { color: var(--muted); font-size: 15px; line-height: 1.5; }
 
 .tiers { display: grid; gap: 10px; }
-.tier { display: grid; grid-template-columns: 9.5em 1fr; gap: 12px; align-items: baseline; }
+.tier { display: grid; grid-template-columns: 13.5em 1fr; gap: 12px; align-items: baseline; }
 .tier p { color: var(--muted); font-size: 15.5px; min-width: 0; }
 .ask { background: var(--accent-soft); border-radius: 6px; padding: 18px 20px; display: grid; gap: 8px; }
 .ask p { font-size: 16px; }
@@ -83,6 +87,7 @@ section.statement { padding-block: 36px; display: grid; gap: 24px; }
 .chip.pick { color: var(--pick); background: var(--pick-soft); }
 .chip.grace { color: var(--grace); background: var(--grace-soft); }
 .chip.ok { color: var(--ok); background: var(--ok-soft); }
+.chip.challies { color: var(--challies); background: var(--challies-soft); }
 
 nav.index {
   position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
@@ -105,7 +110,7 @@ ul.items li { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; pad
 .a { color: var(--muted); font-size: 15px; }
 .n { font-size: 15px; margin-top: 3px; }
 .n q { font-style: italic; }
-.item-side { padding-top: 3px; }
+.item-side { padding-top: 3px; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
 
 footer { border-top: 1px solid var(--rule); padding-block: 24px 40px; color: var(--muted); font-size: 14px; }
 
@@ -113,7 +118,7 @@ footer { border-top: 1px solid var(--rule); padding-block: 24px 40px; color: var
   body { font-size: 16px; }
   .tier { grid-template-columns: 1fr; gap: 4px; }
   ul.items li { grid-template-columns: 1fr; }
-  .item-side { padding-top: 4px; }
+  .item-side { padding-top: 4px; flex-direction: row; flex-wrap: wrap; align-items: flex-start; }
 }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 .n a { color: var(--accent); }
@@ -155,6 +160,7 @@ ul.items .t a:hover { text-decoration: underline; }
       <div class="tier"><span><span class="chip pick">Pastor Drew's pick</span></span><p>Pastor Drew has read it and recommends it personally.</p></div>
       <div class="tier"><span><span class="chip grace">Grace Books</span></span><p>Sold by Grace Books, the bookstore ministry of Grace Community Church. Anything they carry is approved.</p></div>
       <div class="tier"><span><span class="chip ok">Approved</span></span><p>Reviewed and approved for use at Cool Community Church.</p></div>
+      <div class="tier"><span><span class="chip challies">Recommended by Tim Challies</span></span><p>From Tim Challies's recommended-book lists at challies.com, checked against our convictions before it was added.</p></div>
     </div>
 
     <div class="ask">

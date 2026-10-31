@@ -24,6 +24,8 @@
   --grace-soft: #e3ece7;
   --ok: #3d5277;
   --ok-soft: #e4e9f2;
+  --challies: #7a3b52;
+  --challies-soft: #f3e6eb;
   --font-display: "Spectral", Georgia, "Times New Roman", serif;
   --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
 }
@@ -34,6 +36,7 @@
     --pick: #e0bf6f; --pick-soft: #2f2817;
     --grace: #8fc2ae; --grace-soft: #20302a;
     --ok: #a9bde3; --ok-soft: #232b3a;
+    --challies: #e3a3bb; --challies-soft: #33212a;
     color-scheme: dark;
   }
 }
@@ -43,6 +46,7 @@
   --pick: #e0bf6f; --pick-soft: #2f2817;
   --grace: #8fc2ae; --grace-soft: #20302a;
   --ok: #a9bde3; --ok-soft: #232b3a;
+  --challies: #e3a3bb; --challies-soft: #33212a;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -74,7 +78,7 @@ section.statement { padding-block: 36px; display: grid; gap: 24px; }
 .standards span { color: var(--muted); font-size: 15px; line-height: 1.5; }
 
 .tiers { display: grid; gap: 10px; }
-.tier { display: grid; grid-template-columns: 9.5em 1fr; gap: 12px; align-items: baseline; }
+.tier { display: grid; grid-template-columns: 13.5em 1fr; gap: 12px; align-items: baseline; }
 .tier p { color: var(--muted); font-size: 15.5px; min-width: 0; }
 .ask { background: var(--accent-soft); border-radius: 6px; padding: 18px 20px; display: grid; gap: 8px; }
 .ask p { font-size: 16px; }
@@ -83,6 +87,7 @@ section.statement { padding-block: 36px; display: grid; gap: 24px; }
 .chip.pick { color: var(--pick); background: var(--pick-soft); }
 .chip.grace { color: var(--grace); background: var(--grace-soft); }
 .chip.ok { color: var(--ok); background: var(--ok-soft); }
+.chip.challies { color: var(--challies); background: var(--challies-soft); }
 
 nav.index {
   position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
@@ -105,7 +110,7 @@ ul.items li { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; pad
 .a { color: var(--muted); font-size: 15px; }
 .n { font-size: 15px; margin-top: 3px; }
 .n q { font-style: italic; }
-.item-side { padding-top: 3px; }
+.item-side { padding-top: 3px; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
 
 footer { border-top: 1px solid var(--rule); padding-block: 24px 40px; color: var(--muted); font-size: 14px; }
 
@@ -113,7 +118,7 @@ footer { border-top: 1px solid var(--rule); padding-block: 24px 40px; color: var
   body { font-size: 16px; }
   .tier { grid-template-columns: 1fr; gap: 4px; }
   ul.items li { grid-template-columns: 1fr; }
-  .item-side { padding-top: 4px; }
+  .item-side { padding-top: 4px; flex-direction: row; flex-wrap: wrap; align-items: flex-start; }
 }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 .n a { color: var(--accent); }
@@ -155,6 +160,7 @@ ul.items .t a:hover { text-decoration: underline; }
       <div class="tier"><span><span class="chip pick">Pastor Drew's pick</span></span><p>Pastor Drew has read it and recommends it personally.</p></div>
       <div class="tier"><span><span class="chip grace">Grace Books</span></span><p>Sold by Grace Books, the bookstore ministry of Grace Community Church. Anything they carry is approved.</p></div>
       <div class="tier"><span><span class="chip ok">Approved</span></span><p>Reviewed and approved for use at Cool Community Church.</p></div>
+      <div class="tier"><span><span class="chip challies">Recommended by Tim Challies</span></span><p>From Tim Challies's recommended-book lists at challies.com, checked against our convictions before it was added.</p></div>
     </div>
 
     <div class="ask">
@@ -206,11 +212,11 @@ ul.items .t a:hover { text-decoration: underline; }
       <li><div class="item-main"><div class="t">Masculine Christianity</div><div class="a">Zachary Garris</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
       <li><div class="item-main"><div class="t">The Big Fight</div><div class="a">Tim Thornborough</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
       <li><div class="item-main"><div class="t">Men Counseling Men</div><div class="a">John D. Street, ed.</div><div class="n">For leaders.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
-      <li><div class="item-main"><div class="t">Using Authority Well</div><div class="a">Jonathan Leeman</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">How to Lead Your Family</div><div class="a">Joel Beeke</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">The Humility Project for Men</div><div class="a">Ed Welch</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">The Manual</div><div class="a">Al Stewart</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Reclaiming Masculinity</div><div class="a">Matt Fuller</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Using Authority Well</div><div class="a">Jonathan Leeman</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">How to Lead Your Family</div><div class="a">Joel Beeke</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">The Humility Project for Men</div><div class="a">Ed Welch</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">The Manual</div><div class="a">Al Stewart</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Reclaiming Masculinity</div><div class="a">Matt Fuller</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
     </ul>
   </section>
 
@@ -223,16 +229,16 @@ ul.items .t a:hover { text-decoration: underline; }
       <li><div class="item-main"><div class="t">Faithful Women and Their Extraordinary God</div><div class="a">Noël Piper</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
       <li><div class="item-main"><div class="t">A Young Woman After God's Own Heart</div><div class="a">Elizabeth George</div><div class="n">For young women.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
       <li><div class="item-main"><div class="t">Shopping for Time</div><div class="a">Carolyn Mahaney &amp; daughters</div><div class="n">Using time well.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Fierce Women</div><div class="a">Kimberly Wagner</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">True Woman 101</div><div class="a">Mary Kassian &amp; Nancy DeMoss Wolgemuth</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">True Beauty</div><div class="a">Carolyn Mahaney &amp; Nicole Whitacre</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">To Be a Woman</div><div class="a">Katie McCoy</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Risen Motherhood</div><div class="a">Emily Jensen &amp; Laura Wifler</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Making Good Return</div><div class="a">Kathleen Nielson</div><div class="n">For women in later life.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Homemaking Matters</div><div class="a">Marci Ferrell</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Mothering Against Futility</div><div class="a">Simona Gorton</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">A Place of Quiet Rest</div><div class="a">Nancy Leigh DeMoss</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Purity Is Possible</div><div class="a">Helen Thorne</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Fierce Women</div><div class="a">Kimberly Wagner</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">True Woman 101</div><div class="a">Mary Kassian &amp; Nancy DeMoss Wolgemuth</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">True Beauty</div><div class="a">Carolyn Mahaney &amp; Nicole Whitacre</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">To Be a Woman</div><div class="a">Katie McCoy</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Risen Motherhood</div><div class="a">Emily Jensen &amp; Laura Wifler</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Making Good Return</div><div class="a">Kathleen Nielson</div><div class="n">For women in later life.</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Homemaking Matters</div><div class="a">Marci Ferrell</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Mothering Against Futility</div><div class="a">Simona Gorton</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">A Place of Quiet Rest</div><div class="a">Nancy Leigh DeMoss</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Purity Is Possible</div><div class="a">Helen Thorne</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
     </ul>
   </section>
 

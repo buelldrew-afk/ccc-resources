@@ -24,6 +24,8 @@
   --grace-soft: #e3ece7;
   --ok: #3d5277;
   --ok-soft: #e4e9f2;
+  --challies: #7a3b52;
+  --challies-soft: #f3e6eb;
   --font-display: "Spectral", Georgia, "Times New Roman", serif;
   --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
 }
@@ -34,6 +36,7 @@
     --pick: #e0bf6f; --pick-soft: #2f2817;
     --grace: #8fc2ae; --grace-soft: #20302a;
     --ok: #a9bde3; --ok-soft: #232b3a;
+    --challies: #e3a3bb; --challies-soft: #33212a;
     color-scheme: dark;
   }
 }
@@ -43,6 +46,7 @@
   --pick: #e0bf6f; --pick-soft: #2f2817;
   --grace: #8fc2ae; --grace-soft: #20302a;
   --ok: #a9bde3; --ok-soft: #232b3a;
+  --challies: #e3a3bb; --challies-soft: #33212a;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -74,7 +78,7 @@ section.statement { padding-block: 36px; display: grid; gap: 24px; }
 .standards span { color: var(--muted); font-size: 15px; line-height: 1.5; }
 
 .tiers { display: grid; gap: 10px; }
-.tier { display: grid; grid-template-columns: 9.5em 1fr; gap: 12px; align-items: baseline; }
+.tier { display: grid; grid-template-columns: 13.5em 1fr; gap: 12px; align-items: baseline; }
 .tier p { color: var(--muted); font-size: 15.5px; min-width: 0; }
 .ask { background: var(--accent-soft); border-radius: 6px; padding: 18px 20px; display: grid; gap: 8px; }
 .ask p { font-size: 16px; }
@@ -83,6 +87,7 @@ section.statement { padding-block: 36px; display: grid; gap: 24px; }
 .chip.pick { color: var(--pick); background: var(--pick-soft); }
 .chip.grace { color: var(--grace); background: var(--grace-soft); }
 .chip.ok { color: var(--ok); background: var(--ok-soft); }
+.chip.challies { color: var(--challies); background: var(--challies-soft); }
 
 nav.index {
   position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
@@ -105,7 +110,7 @@ ul.items li { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; pad
 .a { color: var(--muted); font-size: 15px; }
 .n { font-size: 15px; margin-top: 3px; }
 .n q { font-style: italic; }
-.item-side { padding-top: 3px; }
+.item-side { padding-top: 3px; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
 
 footer { border-top: 1px solid var(--rule); padding-block: 24px 40px; color: var(--muted); font-size: 14px; }
 
@@ -113,7 +118,7 @@ footer { border-top: 1px solid var(--rule); padding-block: 24px 40px; color: var
   body { font-size: 16px; }
   .tier { grid-template-columns: 1fr; gap: 4px; }
   ul.items li { grid-template-columns: 1fr; }
-  .item-side { padding-top: 4px; }
+  .item-side { padding-top: 4px; flex-direction: row; flex-wrap: wrap; align-items: flex-start; }
 }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 .n a { color: var(--accent); }
@@ -155,6 +160,7 @@ ul.items .t a:hover { text-decoration: underline; }
       <div class="tier"><span><span class="chip pick">Pastor Drew's pick</span></span><p>Pastor Drew has read it and recommends it personally.</p></div>
       <div class="tier"><span><span class="chip grace">Grace Books</span></span><p>Sold by Grace Books, the bookstore ministry of Grace Community Church. Anything they carry is approved.</p></div>
       <div class="tier"><span><span class="chip ok">Approved</span></span><p>Reviewed and approved for use at Cool Community Church.</p></div>
+      <div class="tier"><span><span class="chip challies">Recommended by Tim Challies</span></span><p>From Tim Challies's recommended-book lists at challies.com, checked against our convictions before it was added.</p></div>
     </div>
 
     <div class="ask">
@@ -217,12 +223,12 @@ ul.items .t a:hover { text-decoration: underline; }
     <p class="group-intro">Books for a group to read a chapter at a time and talk through together, arranged by topic.</p>
     <ul class="items">
       <li><div class="item-main"><div class="t">The Knowledge of the Holy</div><div class="a">A. W. Tozer</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The Holiness of God</div><div class="a">R. C. Sproul</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">The Holiness of God</div><div class="a">R. C. Sproul</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
       <li><div class="item-main"><div class="t">Rejoice and Tremble</div><div class="a">Michael Reeves</div><div class="n">The fear of the Lord.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
       <li><div class="item-main"><div class="t">Delighting in the Trinity</div><div class="a">Michael Reeves</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Chosen by God</div><div class="a">R. C. Sproul</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">The Epic Story of the Bible</div><div class="a">Greg Gilbert</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">The One Story Bible</div><div class="a">Greg Gilbert</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Chosen by God</div><div class="a">R. C. Sproul</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">The Epic Story of the Bible</div><div class="a">Greg Gilbert</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">The One Story Bible</div><div class="a">Greg Gilbert</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
     </ul>
   </section>
 
@@ -230,20 +236,20 @@ ul.items .t a:hover { text-decoration: underline; }
     <h2>Christ, the Gospel &amp; the Cross</h2>
     <ul class="items">
       <li><div class="item-main"><div class="t">Gentle and Lowly</div><div class="a">Dane Ortlund</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The Heart of Jesus</div><div class="a">Dane Ortlund</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">The Heart of Jesus</div><div class="a">Dane Ortlund</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
       <li><div class="item-main"><div class="t">Come, You Weary</div><div class="a">Michael Reeves</div><div class="n">A short book.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The Gospel</div><div class="a">Ray Ortlund</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Good News at Rock Bottom</div><div class="a">Ray Ortlund</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Hidden in the Gospel</div><div class="a">William Farley</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">The Cross Centered Life</div><div class="a">C. J. Mahaney</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The Cross He Bore</div><div class="a">Frederick Leahy</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">The Truth of the Cross</div><div class="a">R. C. Sproul</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">The Cross of Christ</div><div class="a">John Stott</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Man of Sorrows, King of Glory</div><div class="a">Jonty Rhodes</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">The Gospel</div><div class="a">Ray Ortlund</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Good News at Rock Bottom</div><div class="a">Ray Ortlund</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Hidden in the Gospel</div><div class="a">William Farley</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">The Cross Centered Life</div><div class="a">C. J. Mahaney</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">The Cross He Bore</div><div class="a">Frederick Leahy</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">The Truth of the Cross</div><div class="a">R. C. Sproul</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">The Cross of Christ</div><div class="a">John Stott</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Man of Sorrows, King of Glory</div><div class="a">Jonty Rhodes</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
       <li><div class="item-main"><div class="t">Union with Christ</div><div class="a">Sinclair Ferguson</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
       <li><div class="item-main"><div class="t">Saved to Sin No More</div><div class="a">Brad Wetherell</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
       <li><div class="item-main"><div class="t">Slave</div><div class="a">John MacArthur</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">How Can I Be Sure I'm a Christian?</div><div class="a">Donald Whitney</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">How Can I Be Sure I'm a Christian?</div><div class="a">Donald Whitney</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
     </ul>
   </section>
 
@@ -252,13 +258,13 @@ ul.items .t a:hover { text-decoration: underline; }
     <ul class="items">
       <li><div class="item-main"><div class="t">A Praying Life</div><div class="a">Paul Miller</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
       <li><div class="item-main"><div class="t">Praying Backwards</div><div class="a">Bryan Chapell</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Before the Throne of Grace</div><div class="a">John MacArthur</div><div class="n">On prayer.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">The Prayer of the Lord</div><div class="a">R. C. Sproul</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">It Happens After Prayer</div><div class="a">H. B. Charles Jr.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Spiritual Disciplines for the Christian Life</div><div class="a">Donald Whitney</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Habits of Grace</div><div class="a">David Mathis</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">A Heart Aflame for God</div><div class="a">Matthew Bingham</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">The Quiet Time Kickstart</div><div class="a">Rachel Jones</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Before the Throne of Grace</div><div class="a">John MacArthur</div><div class="n">On prayer.</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">The Prayer of the Lord</div><div class="a">R. C. Sproul</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">It Happens After Prayer</div><div class="a">H. B. Charles Jr.</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Spiritual Disciplines for the Christian Life</div><div class="a">Donald Whitney</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Habits of Grace</div><div class="a">David Mathis</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">A Heart Aflame for God</div><div class="a">Matthew Bingham</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">The Quiet Time Kickstart</div><div class="a">Rachel Jones</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
     </ul>
   </section>
 
@@ -266,16 +272,16 @@ ul.items .t a:hover { text-decoration: underline; }
     <h2>Holiness &amp; Christian Growth</h2>
     <ul class="items">
       <li><div class="item-main"><div class="t">The Pursuit of Holiness</div><div class="a">Jerry Bridges</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The Hole in Our Holiness</div><div class="a">Kevin DeYoung</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Overcoming Sin and Temptation</div><div class="a">John Owen</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">The Devoted Mind</div><div class="a">Kris Lundgaard</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">The Hole in Our Holiness</div><div class="a">Kevin DeYoung</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Overcoming Sin and Temptation</div><div class="a">John Owen</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">The Devoted Mind</div><div class="a">Kris Lundgaard</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
       <li><div class="item-main"><div class="t">Trusting God</div><div class="a">Jerry Bridges</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
       <li><div class="item-main"><div class="t">Feelings and Faith</div><div class="a">Brian Borgman</div><div class="n">Godly emotions in the Christian life.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
       <li><div class="item-main"><div class="t">With All Your Heart</div><div class="a">A. Craig Troxel</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The Blessing of Humility</div><div class="a">Jerry Bridges</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Humility</div><div class="a">Wayne Mack</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">The Blessing of Humility</div><div class="a">Jerry Bridges</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Humility</div><div class="a">Wayne Mack</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
       <li><div class="item-main"><div class="t">Humility: True Greatness</div><div class="a">C. J. Mahaney</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Envy</div><div class="a">Mike Fabarez</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Envy</div><div class="a">Mike Fabarez</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
       <li><div class="item-main"><div class="t">Don't Waste Your Life</div><div class="a">John Piper</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
       <li><div class="item-main"><div class="t">Just Do Something</div><div class="a">Kevin DeYoung</div><div class="n">Finding God's will.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
       <li><div class="item-main"><div class="t">Crazy Busy</div><div class="a">Kevin DeYoung</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
@@ -298,11 +304,11 @@ ul.items .t a:hover { text-decoration: underline; }
   <section class="group" id="church">
     <h2>The Church</h2>
     <ul class="items">
-      <li><div class="item-main"><div class="t">Nine Marks of a Healthy Church</div><div class="a">Mark Dever</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">The Deliberate Church</div><div class="a">Mark Dever &amp; Paul Alexander</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">The Loveliest Place</div><div class="a">Dustin Benge</div><div class="n">The beauty of the local church.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Love the Ones Who Drive You Crazy</div><div class="a">Jamie Dunlop</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Fight for Your Pastor</div><div class="a">Peter Orr</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Nine Marks of a Healthy Church</div><div class="a">Mark Dever</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">The Deliberate Church</div><div class="a">Mark Dever &amp; Paul Alexander</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">The Loveliest Place</div><div class="a">Dustin Benge</div><div class="n">The beauty of the local church.</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Love the Ones Who Drive You Crazy</div><div class="a">Jamie Dunlop</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Fight for Your Pastor</div><div class="a">Peter Orr</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
       <li><div class="item-main"><div class="t">Instruments in the Redeemer's Hands</div><div class="a">Paul David Tripp</div><div class="n">Helping one another change.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
     </ul>
   </section>
@@ -311,10 +317,10 @@ ul.items .t a:hover { text-decoration: underline; }
     <h2>Evangelism</h2>
     <ul class="items">
       <li><div class="item-main"><div class="t">Evangelism and the Sovereignty of God</div><div class="a">J. I. Packer</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The Truth about Lies</div><div class="a">J. Mack Stiles</div><div class="n">On evangelism.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">World Religions in Seven Sentences</div><div class="a">Douglas Groothuis</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Reaching Your Muslim Neighbor with the Gospel</div><div class="a">Ayman Ibrahim</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Tell Your Catholic Friend</div><div class="a">Leonardo De Chirico</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">The Truth about Lies</div><div class="a">J. Mack Stiles</div><div class="n">On evangelism.</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">World Religions in Seven Sentences</div><div class="a">Douglas Groothuis</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Reaching Your Muslim Neighbor with the Gospel</div><div class="a">Ayman Ibrahim</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Tell Your Catholic Friend</div><div class="a">Leonardo De Chirico</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
     </ul>
   </section>
 
@@ -333,26 +339,26 @@ ul.items .t a:hover { text-decoration: underline; }
       <li><div class="item-main"><div class="t">Rescuing the Gospel</div><div class="a">Erwin Lutzer</div><div class="n">The story of the Reformation.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
       <li><div class="item-main"><div class="t">The Unquenchable Flame</div><div class="a">Michael Reeves</div><div class="n">The heart of the Reformation.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
       <li><div class="item-main"><div class="t">The Reformation: How a Monk and a Mallet Changed the World</div><div class="a">Stephen Nichols</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Father, Son, and Holy Spirit</div><div class="a">Bruce Ware</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The Deep Things of God</div><div class="a">Fred Sanders</div><div class="n">On the Trinity.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">The Forgotten Trinity</div><div class="a">James White</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Heaven on Earth</div><div class="a">Derek Thomas</div><div class="n">What the Bible teaches about life to come.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The Glory of Heaven</div><div class="a">John MacArthur</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Biblical Teaching on the Doctrines of Heaven and Hell</div><div class="a">Edward Donnelly</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Heaven</div><div class="a">Randy Alcorn</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">2000 Years of Christ's Power</div><div class="a">Nick Needham</div><div class="n">Church history in several volumes.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Church History 101</div><div class="a">Sinclair Ferguson, Joel Beeke &amp; Michael Haykin</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Church History in Plain Language</div><div class="a">Bruce Shelley</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Meet the Puritans</div><div class="a">Joel Beeke &amp; Randall Pederson</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Father, Son, and Holy Spirit</div><div class="a">Bruce Ware</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">The Deep Things of God</div><div class="a">Fred Sanders</div><div class="n">On the Trinity.</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">The Forgotten Trinity</div><div class="a">James White</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Heaven on Earth</div><div class="a">Derek Thomas</div><div class="n">What the Bible teaches about life to come.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">The Glory of Heaven</div><div class="a">John MacArthur</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Biblical Teaching on the Doctrines of Heaven and Hell</div><div class="a">Edward Donnelly</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Heaven</div><div class="a">Randy Alcorn</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">2000 Years of Christ's Power</div><div class="a">Nick Needham</div><div class="n">Church history in several volumes.</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Church History 101</div><div class="a">Sinclair Ferguson, Joel Beeke &amp; Michael Haykin</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Church History in Plain Language</div><div class="a">Bruce Shelley</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Meet the Puritans</div><div class="a">Joel Beeke &amp; Randall Pederson</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
     </ul>
   </section>
 
   <section class="group" id="devotionals">
     <h2>Daily Devotionals</h2>
     <ul class="items">
-      <li><div class="item-main"><div class="t">New Morning Mercies</div><div class="a">Paul David Tripp</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Everyday Gospel</div><div class="a">Paul David Tripp</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Daily Doctrine</div><div class="a">Kevin DeYoung</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">New Morning Mercies</div><div class="a">Paul David Tripp</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Everyday Gospel</div><div class="a">Paul David Tripp</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Daily Doctrine</div><div class="a">Kevin DeYoung</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
     </ul>
   </section>
 
@@ -360,15 +366,15 @@ ul.items .t a:hover { text-decoration: underline; }
     <h2>Biography</h2>
     <p class="group-intro">Lives that show God's faithfulness, good for a group or for reading on your own.</p>
     <ul class="items">
-      <li><div class="item-main"><div class="t">Jonathan Edwards: A Life</div><div class="a">George Marsden</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Spurgeon</div><div class="a">Arnold Dallimore</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">George Whitefield</div><div class="a">Arnold Dallimore</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Susie</div><div class="a">Ray Rhodes Jr.</div><div class="n">The life of Susannah Spurgeon.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">John Newton</div><div class="a">Jonathan Aitken</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Fearless Pilgrim</div><div class="a">Faith Cook</div><div class="n">The life of John Bunyan.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Amy Carmichael: Beauty for Ashes</div><div class="a">Iain Murray</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">A. W. Tozer: A Passion for God</div><div class="a">Lyle Dorsett</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Missionary biographies</div><div class="a">Vance Christie</div><div class="n">Adoniram Judson, David Livingstone, John and Betty Stam, and Hudson Taylor.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Jonathan Edwards: A Life</div><div class="a">George Marsden</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Spurgeon</div><div class="a">Arnold Dallimore</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">George Whitefield</div><div class="a">Arnold Dallimore</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Susie</div><div class="a">Ray Rhodes Jr.</div><div class="n">The life of Susannah Spurgeon.</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">John Newton</div><div class="a">Jonathan Aitken</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Fearless Pilgrim</div><div class="a">Faith Cook</div><div class="n">The life of John Bunyan.</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Amy Carmichael: Beauty for Ashes</div><div class="a">Iain Murray</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">A. W. Tozer: A Passion for God</div><div class="a">Lyle Dorsett</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Missionary biographies</div><div class="a">Vance Christie</div><div class="n">Adoniram Judson, David Livingstone, John and Betty Stam, and Hudson Taylor.</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
     </ul>
   </section>
 
@@ -389,12 +395,12 @@ ul.items .t a:hover { text-decoration: underline; }
     <ul class="items">
       <li><div class="item-main"><div class="t">How to Study the Bible</div><div class="a">John MacArthur</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
       <li><div class="item-main"><div class="t">Growth Groups</div><div class="a">Colin Marshall</div><div class="n">A training course in how to lead small groups.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">MacArthur Study Bible</div><div class="a">John MacArthur</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Knowing Scripture</div><div class="a">R. C. Sproul</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">How to Get the Most from God's Word</div><div class="a">John MacArthur</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Read This First</div><div class="a">Gary Millar</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">One-to-One Bible Reading</div><div class="a">David Helm</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">The Trellis and the Vine</div><div class="a">Colin Marshall &amp; Tony Payne</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">MacArthur Study Bible</div><div class="a">John MacArthur</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Knowing Scripture</div><div class="a">R. C. Sproul</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">How to Get the Most from God's Word</div><div class="a">John MacArthur</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Read This First</div><div class="a">Gary Millar</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">One-to-One Bible Reading</div><div class="a">David Helm</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">The Trellis and the Vine</div><div class="a">Colin Marshall &amp; Tony Payne</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
     </ul>
   </section>
 

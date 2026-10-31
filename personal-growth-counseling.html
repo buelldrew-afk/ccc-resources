@@ -24,6 +24,8 @@
   --grace-soft: #e3ece7;
   --ok: #3d5277;
   --ok-soft: #e4e9f2;
+  --challies: #7a3b52;
+  --challies-soft: #f3e6eb;
   --font-display: "Spectral", Georgia, "Times New Roman", serif;
   --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
 }
@@ -34,6 +36,7 @@
     --pick: #e0bf6f; --pick-soft: #2f2817;
     --grace: #8fc2ae; --grace-soft: #20302a;
     --ok: #a9bde3; --ok-soft: #232b3a;
+    --challies: #e3a3bb; --challies-soft: #33212a;
     color-scheme: dark;
   }
 }
@@ -43,6 +46,7 @@
   --pick: #e0bf6f; --pick-soft: #2f2817;
   --grace: #8fc2ae; --grace-soft: #20302a;
   --ok: #a9bde3; --ok-soft: #232b3a;
+  --challies: #e3a3bb; --challies-soft: #33212a;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -74,7 +78,7 @@ section.statement { padding-block: 36px; display: grid; gap: 24px; }
 .standards span { color: var(--muted); font-size: 15px; line-height: 1.5; }
 
 .tiers { display: grid; gap: 10px; }
-.tier { display: grid; grid-template-columns: 9.5em 1fr; gap: 12px; align-items: baseline; }
+.tier { display: grid; grid-template-columns: 13.5em 1fr; gap: 12px; align-items: baseline; }
 .tier p { color: var(--muted); font-size: 15.5px; min-width: 0; }
 .ask { background: var(--accent-soft); border-radius: 6px; padding: 18px 20px; display: grid; gap: 8px; }
 .ask p { font-size: 16px; }
@@ -83,6 +87,7 @@ section.statement { padding-block: 36px; display: grid; gap: 24px; }
 .chip.pick { color: var(--pick); background: var(--pick-soft); }
 .chip.grace { color: var(--grace); background: var(--grace-soft); }
 .chip.ok { color: var(--ok); background: var(--ok-soft); }
+.chip.challies { color: var(--challies); background: var(--challies-soft); }
 
 nav.index {
   position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
@@ -105,7 +110,7 @@ ul.items li { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; pad
 .a { color: var(--muted); font-size: 15px; }
 .n { font-size: 15px; margin-top: 3px; }
 .n q { font-style: italic; }
-.item-side { padding-top: 3px; }
+.item-side { padding-top: 3px; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
 
 footer { border-top: 1px solid var(--rule); padding-block: 24px 40px; color: var(--muted); font-size: 14px; }
 
@@ -113,7 +118,7 @@ footer { border-top: 1px solid var(--rule); padding-block: 24px 40px; color: var
   body { font-size: 16px; }
   .tier { grid-template-columns: 1fr; gap: 4px; }
   ul.items li { grid-template-columns: 1fr; }
-  .item-side { padding-top: 4px; }
+  .item-side { padding-top: 4px; flex-direction: row; flex-wrap: wrap; align-items: flex-start; }
 }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 .n a { color: var(--accent); }
@@ -155,6 +160,7 @@ ul.items .t a:hover { text-decoration: underline; }
       <div class="tier"><span><span class="chip pick">Pastor Drew's pick</span></span><p>Pastor Drew has read it and recommends it personally.</p></div>
       <div class="tier"><span><span class="chip grace">Grace Books</span></span><p>Sold by Grace Books, the bookstore ministry of Grace Community Church. Anything they carry is approved.</p></div>
       <div class="tier"><span><span class="chip ok">Approved</span></span><p>Reviewed and approved for use at Cool Community Church.</p></div>
+      <div class="tier"><span><span class="chip challies">Recommended by Tim Challies</span></span><p>From Tim Challies's recommended-book lists at challies.com, checked against our convictions before it was added.</p></div>
     </div>
 
     <div class="ask">
@@ -204,9 +210,9 @@ ul.items .t a:hover { text-decoration: underline; }
       <li><div class="item-main"><div class="t">Feelings and Faith</div><div class="a">Brian Borgman</div><div class="n">Pastor Drew's strongest recommendation on handling emotions biblically.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
       <li><div class="item-main"><div class="t">The Bruised Reed</div><div class="a">Richard Sibbes</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
       <li><div class="item-main"><div class="t">Come, You Weary</div><div class="a">Michael Reeves</div><div class="n">A short book.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li><div class="item-main"><div class="t">Understanding Trauma</div><div class="a">Steve Midgley</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Disrupted Journey</div><div class="a">Nate Brooks</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
       <li><div class="item-main"><div class="t">Helping Your Family Through PTSD</div><div class="a">Greg Gifford</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Understanding Trauma</div><div class="a">Steve Midgley</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Disrupted Journey</div><div class="a">Nate Brooks</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
     </ul>
   </section>
 
@@ -243,10 +249,10 @@ ul.items .t a:hover { text-decoration: underline; }
       <li><div class="item-main"><div class="t">Passions of the Heart</div><div class="a">John D. Street</div><div class="n">Biblical counsel for stubborn sexual sins.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
       <li><div class="item-main"><div class="t">What Do You Do When You Know That You're Hooked?</div><div class="a">Jay Adams</div><div class="n">A booklet.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
       <li><div class="item-main"><div class="t">Idols of the Heart</div><div class="a">Elyse Fitzpatrick</div><div class="n">Learning to long for God alone.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
-      <li><div class="item-main"><div class="t">Finally Free</div><div class="a">Heath Lambert</div><div class="n">Fighting for purity with the power of grace.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Sexual Sanity for Men</div><div class="a">David White</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Sexual Sanity for Women</div><div class="a">Ellen Dykas</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Undefiled</div><div class="a">Harry Schaumburg</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Finally Free</div><div class="a">Heath Lambert</div><div class="n">Fighting for purity with the power of grace.</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Sexual Sanity for Men</div><div class="a">David White</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Sexual Sanity for Women</div><div class="a">Ellen Dykas</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Undefiled</div><div class="a">Harry Schaumburg</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
     </ul>
   </section>
 
@@ -263,16 +269,16 @@ ul.items .t a:hover { text-decoration: underline; }
       <li><div class="item-main"><div class="t">HELP! Someone I Love Has Alzheimer's</div><div class="a">Deborah Howard &amp; Judy Howe</div><div class="n">A booklet.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
       <li><div class="item-main"><div class="t">Great Is Thy Faithfulness</div><div class="a">Leslye &amp; Robert Bohrer</div><div class="n">Living joyfully with Down syndrome.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
       <li><div class="item-main"><div class="t">ADD: Wandering Minds and Wired Bodies</div><div class="a">Ed Welch</div><div class="n">A booklet.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
-      <li><div class="item-main"><div class="t">Surprised by Suffering</div><div class="a">R. C. Sproul</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Does Grace Grow Best in Winter?</div><div class="a">Ligon Duncan</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Waiting Isn't a Waste</div><div class="a">Mark Vroegop</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Suffering and the Sovereignty of God</div><div class="a">John Piper &amp; Justin Taylor, eds.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Songs of Suffering</div><div class="a">Joni Eareckson Tada</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">A Book of Comfort for Those in Sickness</div><div class="a">P. B. Power</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Grieving, Hope and Solace</div><div class="a">Albert N. Martin</div><div class="n">When a loved one dies in Christ.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">The Suffering of a Child</div><div class="a">Heather So</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">The Last Enemy</div><div class="a">Michael Wittmer</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Facing the Last Enemy</div><div class="a">Guy Prentiss Waters</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Surprised by Suffering</div><div class="a">R. C. Sproul</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Does Grace Grow Best in Winter?</div><div class="a">Ligon Duncan</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Waiting Isn't a Waste</div><div class="a">Mark Vroegop</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Suffering and the Sovereignty of God</div><div class="a">John Piper &amp; Justin Taylor, eds.</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Songs of Suffering</div><div class="a">Joni Eareckson Tada</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">A Book of Comfort for Those in Sickness</div><div class="a">P. B. Power</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Grieving, Hope and Solace</div><div class="a">Albert N. Martin</div><div class="n">When a loved one dies in Christ.</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">The Suffering of a Child</div><div class="a">Heather So</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">The Last Enemy</div><div class="a">Michael Wittmer</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Facing the Last Enemy</div><div class="a">Guy Prentiss Waters</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
     </ul>
   </section>
 
@@ -289,9 +295,9 @@ ul.items .t a:hover { text-decoration: underline; }
   <section class="group" id="money">
     <h2>Money &amp; Possessions</h2>
     <ul class="items">
-      <li><div class="item-main"><div class="t">Money, Debt, and Finances</div><div class="a">Jim Newheiser</div><div class="n">Critical questions answered from the biblical counseling tradition.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Managing God's Money</div><div class="a">Randy Alcorn</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">The Treasure Principle</div><div class="a">Randy Alcorn</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li><div class="item-main"><div class="t">Money, Debt, and Finances</div><div class="a">Jim Newheiser</div><div class="n">Critical questions answered from the biblical counseling tradition.</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">Managing God's Money</div><div class="a">Randy Alcorn</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li><div class="item-main"><div class="t">The Treasure Principle</div><div class="a">Randy Alcorn</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
     </ul>
   </section>
 
