@@ -4,86 +4,79 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="media/brand/favicon.png">
 <title>Online Resources</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap">
 <style>
-/* Layout: one reading column, like a church handbook. Statement first, then a sticky section index, then a quiet list of entries per section. */
+/* Styled to match the new Cool Community Church website (brand colors and type from the Feb 2025 brand guidelines).
+   Layout: a navy banner, the "How We Choose" statement, a sticky section index, then a list of entries per section. */
 :root {
-  --bg: #f6f7f4;
-  --surface: #ffffff;
-  --fg: #1d2420;
-  --muted: #59645e;
-  --rule: #d8ddd7;
-  --accent: #2c5a4c;
-  --accent-soft: #e3ece7;
-  --pick: #7a5a12;
-  --pick-soft: #f4ecd9;
-  --grace: #2c5a4c;
-  --grace-soft: #e3ece7;
-  --ok: #3d5277;
-  --ok-soft: #e4e9f2;
-  --challies: #7a3b52;
-  --challies-soft: #f3e6eb;
-  --font-display: "Spectral", Georgia, "Times New Roman", serif;
-  --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #141917; --surface: #1b211e; --fg: #e4e9e5; --muted: #9aa69f; --rule: #2f3833;
-    --accent: #8fc2ae; --accent-soft: #22302a;
-    --pick: #e0bf6f; --pick-soft: #2f2817;
-    --grace: #8fc2ae; --grace-soft: #20302a;
-    --ok: #a9bde3; --ok-soft: #232b3a;
-    --challies: #e3a3bb; --challies-soft: #33212a;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #141917; --surface: #1b211e; --fg: #e4e9e5; --muted: #9aa69f; --rule: #2f3833;
-  --accent: #8fc2ae; --accent-soft: #22302a;
-  --pick: #e0bf6f; --pick-soft: #2f2817;
-  --grace: #8fc2ae; --grace-soft: #20302a;
-  --ok: #a9bde3; --ok-soft: #232b3a;
-  --challies: #e3a3bb; --challies-soft: #33212a;
-  color-scheme: dark;
+  --navy: #202D50;
+  --steel: #436A8B;
+  --blue: #1C75BC;
+  --paper: #F6F7F9;
+  --bg: #FFFFFF;
+  --surface: #FFFFFF;
+  --fg: #1B2235;
+  --muted: #5C5C5C;
+  --rule: #E4E6EA;
+  --accent: #1C75BC;
+  --accent-soft: #EEF4FB;
+  --pick: #7A5A12;
+  --pick-soft: #F6EEDB;
+  --grace: #1C75BC;
+  --grace-soft: #E6F0FA;
+  --ok: #436A8B;
+  --ok-soft: #E8EEF3;
+  --challies: #7A3B52;
+  --challies-soft: #F3E6EB;
+  --font: "Avenir Next", "Avenir", "Nunito Sans", "Helvetica Neue", Arial, sans-serif;
+  --radius: 10px;
 }
 * { box-sizing: border-box; }
 body {
-  background: var(--bg); color: var(--fg);
-  font-family: var(--font-body); font-size: 17px; line-height: 1.6;
+  margin: 0; background: var(--bg); color: var(--fg);
+  font-family: var(--font); font-size: 17px; line-height: 1.65;
 }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+a { color: var(--blue); }
+a:hover { color: var(--navy); }
 .wrap {
-  max-width: 760px; margin: 0 auto;
+  max-width: 800px; margin: 0 auto;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
 }
-header.top { padding-block: 48px 28px; border-bottom: 1px solid var(--rule); }
-.eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin: 0 0 10px; }
-h1 { font-family: var(--font-display); font-weight: 600; font-size: clamp(32px, 6vw, 44px); line-height: 1.12; margin: 0 0 12px; text-wrap: balance; }
-.lede { color: var(--muted); margin: 0; max-width: 60ch; }
-.draft { display: inline-block; margin-top: 16px; font-size: 13px; font-weight: 600; color: var(--pick); background: var(--pick-soft); padding: 3px 10px; border-radius: 4px; }
 
-h2 { font-family: var(--font-display); font-weight: 600; font-size: 27px; line-height: 1.2; margin: 0 0 6px; text-wrap: balance; }
-h3 { font-family: var(--font-display); font-weight: 600; font-size: 19px; margin: 0 0 4px; }
+header.top { background: linear-gradient(160deg, var(--steel), var(--navy)); color: #fff; padding-block: 56px 44px; }
+header.top h1 { color: #fff; }
+header.top .eyebrow { color: #D6DCE6; }
+header.top .lede { color: #fff; opacity: .95; font-size: 1.15rem; }
+.eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--steel); margin: 0 0 10px; }
+h1, h2, h3 { color: var(--navy); font-weight: 800; }
+h1 { font-size: clamp(32px, 6vw, 48px); line-height: 1.12; letter-spacing: -.01em; margin: 0 0 12px; text-wrap: balance; }
+.lede { color: var(--muted); margin: 0; max-width: 60ch; }
+.draft { display: inline-block; margin-top: 18px; font-size: 13px; font-weight: 700; color: #5C4400; background: #FFF4D6; padding: 4px 12px; border-radius: 999px; }
+
+h2 { font-size: clamp(24px, 3vw, 30px); line-height: 1.2; margin: 0 0 6px; text-wrap: balance; }
+h3 { font-size: 19px; line-height: 1.3; margin: 0 0 4px; }
 p { margin: 0; }
 .prose { display: grid; gap: 14px; max-width: 65ch; }
 
-section.statement { padding-block: 36px; display: grid; gap: 24px; }
-.standards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; list-style: none; padding: 0; margin: 0; }
-.standards li { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 14px 16px; min-width: 0; }
-.standards strong { display: block; font-size: 15px; margin-bottom: 2px; }
-.standards span { color: var(--muted); font-size: 15px; line-height: 1.5; }
+section.statement { padding-block: 44px; display: grid; gap: 24px; }
+.standards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; list-style: none; padding: 0; margin: 0; }
+.standards li { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 18px 20px; min-width: 0; }
+.standards strong { display: block; font-size: 15.5px; color: var(--navy); margin-bottom: 2px; }
+.standards span { color: var(--muted); font-size: 15px; line-height: 1.55; }
 
 .tiers { display: grid; gap: 10px; }
 .tier { display: grid; grid-template-columns: 13.5em 1fr; gap: 12px; align-items: baseline; }
 .tier p { color: var(--muted); font-size: 15.5px; min-width: 0; }
-.ask { background: var(--accent-soft); border-radius: 6px; padding: 18px 20px; display: grid; gap: 8px; }
+.ask { background: var(--paper); border: 1px solid var(--rule); border-radius: var(--radius); padding: 20px 22px; display: grid; gap: 8px; }
 .ask p { font-size: 16px; }
 
-.chip { display: inline-block; font-size: 12.5px; font-weight: 700; letter-spacing: .02em; padding: 2px 9px; border-radius: 999px; white-space: nowrap; }
+.chip { display: inline-block; font-size: 12.5px; font-weight: 700; letter-spacing: .02em; padding: 3px 10px; border-radius: 999px; white-space: nowrap; }
 .chip.pick { color: var(--pick); background: var(--pick-soft); }
 .chip.grace { color: var(--grace); background: var(--grace-soft); }
 .chip.ok { color: var(--ok); background: var(--ok-soft); }
@@ -91,24 +84,24 @@ section.statement { padding-block: 36px; display: grid; gap: 24px; }
 
 nav.index {
   position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
-  background: var(--bg); border-block: 1px solid var(--rule);
+  background: var(--paper); border-block: 1px solid var(--rule);
 }
-nav.index .wrap { display: flex; gap: 6px; overflow-x: auto; padding-block: 10px; scrollbar-width: none; }
+nav.index .wrap { display: flex; gap: 8px; overflow-x: auto; padding-block: 12px; scrollbar-width: none; }
 nav.index a {
-  flex: none; font-size: 14px; font-weight: 600; color: var(--muted); text-decoration: none;
-  padding: 5px 11px; border-radius: 999px; border: 1px solid var(--rule); background: var(--surface);
+  flex: none; font-size: 14px; font-weight: 700; color: var(--navy); text-decoration: none;
+  padding: 6px 14px; border-radius: 999px; border: 1.5px solid var(--rule); background: var(--surface);
 }
-nav.index a:hover, nav.index a:focus-visible { color: var(--accent); border-color: var(--accent); outline: none; }
+nav.index a:hover, nav.index a:focus-visible { color: #fff; background: var(--blue); border-color: var(--blue); outline: none; }
 
 main { padding-block: 12px 64px; }
-section.group { padding-top: 36px; scroll-margin-top: 64px; }
+section.group { padding-top: 40px; scroll-margin-top: 70px; }
 .group-intro { color: var(--muted); font-size: 15.5px; max-width: 62ch; margin-bottom: 8px; }
-ul.items { list-style: none; padding: 0; margin: 12px 0 0; border-top: 1px solid var(--rule); }
-ul.items li { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; padding: 14px 0; border-bottom: 1px solid var(--rule); }
+ul.items { list-style: none; padding: 0; margin: 14px 0 0; border-top: 2px solid var(--navy); }
+ul.items li { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; padding: 16px 0; border-bottom: 1px solid var(--rule); }
 .item-main { min-width: 0; }
-.t { font-family: var(--font-display); font-style: italic; font-size: 18.5px; line-height: 1.3; }
-.a { color: var(--muted); font-size: 15px; }
-.n { font-size: 15px; margin-top: 3px; }
+.t { font-weight: 700; font-size: 18px; line-height: 1.3; color: var(--navy); }
+.a { color: var(--steel); font-size: 15px; font-weight: 600; }
+.n { font-size: 15px; margin-top: 4px; }
 .n q { font-style: italic; }
 .item-side { padding-top: 3px; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
 
@@ -116,21 +109,52 @@ footer { border-top: 1px solid var(--rule); padding-block: 24px 40px; color: var
 
 @media (max-width: 560px) {
   body { font-size: 16px; }
+  header.top { padding-block: 40px 32px; }
   .tier { grid-template-columns: 1fr; gap: 4px; }
   ul.items li { grid-template-columns: 1fr; }
   .item-side { padding-top: 4px; flex-direction: row; flex-wrap: wrap; align-items: flex-start; }
 }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 .n a { color: var(--accent); }
-.back { margin: 0 0 14px; font-size: 14px; }
-.back a, .feedback a, ul.items .t a { color: var(--accent); }
+.back { margin: 0 0 14px; font-size: 14px; font-weight: 600; }
+.back a { color: #fff; text-decoration: none; opacity: .9; }
+.back a:hover { opacity: 1; text-decoration: underline; }
+.feedback a, ul.items .t a { color: var(--accent); }
 ul.items .t a { text-decoration: none; }
 ul.items .t a:hover { text-decoration: underline; }
-.feedback { margin-top: 40px; background: var(--pick-soft); border-radius: 6px; padding: 18px 20px; display: grid; gap: 8px; }
+.feedback { margin-top: 48px; background: var(--paper); border: 1px solid var(--rule); border-left: 4px solid var(--blue); border-radius: var(--radius); padding: 20px 22px; display: grid; gap: 8px; }
 .feedback p { font-size: 16px; }
+.wide { max-width: 1120px; margin: 0 auto; padding-inline: max(16px, env(safe-area-inset-left, 0px)) max(16px, env(safe-area-inset-right, 0px)); }
+.site-header { background: #fff; border-bottom: 1px solid var(--rule); }
+.site-header .wide { display: flex; align-items: center; gap: 20px; min-height: 72px; }
+.brand img { height: 56px; width: auto; display: block; }
+.site-nav { margin-left: auto; display: flex; align-items: center; gap: 20px; }
+.site-nav a { text-decoration: none; color: var(--fg); font-weight: 600; font-size: .98rem; }
+.site-nav a:hover, .site-nav a[aria-current="page"] { color: var(--blue); }
+.btn { display: inline-block; text-decoration: none; font-weight: 700; padding: 10px 18px; border-radius: 999px; background: var(--blue); color: #fff !important; line-height: 1.2; }
+.btn:hover { background: var(--navy); }
+.site-footer { background: var(--navy); color: #D6DCE6; padding: 56px 0 32px; font-size: .97rem; border: 0; margin: 0; }
+.site-footer a { color: #fff; }
+.site-footer h3 { color: #fff; font-size: 1rem; text-transform: uppercase; letter-spacing: .08em; margin: 0 0 10px; }
+.site-footer .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; }
+.site-footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.site-footer .logo { width: 120px; height: auto; margin-bottom: 16px; display: block; }
+.site-footer .legal { margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.15); font-size: .85rem; color: #A7A9AC; }
+@media (max-width: 560px) { .site-nav { gap: 14px; } .site-nav .hide-sm { display: none; } .brand img { height: 46px; } }
 </style>
 </head>
 <body>
+<header class="site-header">
+  <div class="wide">
+    <a class="brand" href="https://coolcommunitychurch.github.io/coolchurch-website/index.html"><img src="media/brand/logo.png" alt="Cool Community Church" width="75" height="56"></a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="./">Resources</a>
+      <a class="hide-sm" href="https://coolcommunitychurch.github.io/coolchurch-website/sermons.html">Sermons</a>
+      <a class="hide-sm" href="https://coolcommunitychurch.github.io/coolchurch-website/visit.html">Plan Your Visit</a>
+      <a class="btn" href="https://coolcommunitychurch.github.io/coolchurch-website/index.html">Church website</a>
+    </nav>
+  </div>
+</header>
 <header class="top">
   <div class="wrap">
     <p class="back"><a href="./">← All recommended resources</a></p>
@@ -279,8 +303,47 @@ ul.items .t a:hover { text-decoration: underline; }
 </section>
 </main>
 
-<footer>
-  <div class="wrap">Cool Community Church · 863 Cave Valley Rd, Cool, CA · Online resource list, updated October 2026</div>
+<footer class="site-footer">
+  <div class="wide">
+    <div class="cols">
+      <div>
+        <img class="logo" src="media/brand/logo-white.png" alt="Cool Community Church" width="120" height="89">
+        <h3>Visit</h3>
+        <p>Sundays at 10:30 am<br>863 Cave Valley Rd<br>Cool, CA 95614</p>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="tel:+15308854385">(530) 885-4385</a></li>
+          <li><a href="mailto:info@coolchurch.org">info@coolchurch.org</a></li>
+          <li>Office: Mon–Thu, 10 am–4 pm</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="marriage-family.html">Marriage &amp; Family</a></li>
+          <li><a href="small-groups.html">Small Groups &amp; Adult Bible Study</a></li>
+          <li><a href="childrens-ministry.html">Children's Ministry</a></li>
+          <li><a href="youth-ministry.html">Youth Ministry</a></li>
+          <li><a href="mens-womens-ministry.html">Men's &amp; Women's Ministry</a></li>
+          <li><a href="personal-growth-counseling.html">Personal Growth &amp; Counseling</a></li>
+          <li><a href="elders-leaders.html">Elders &amp; Leaders</a></li>
+          <li><a href="online-resources.html">Online Resources</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Church</h3>
+        <ul>
+          <li><a href="https://coolcommunitychurch.github.io/coolchurch-website/about.html">About</a></li>
+          <li><a href="https://coolcommunitychurch.github.io/coolchurch-website/sermons.html">Sermons</a></li>
+          <li><a href="https://coolcommunitychurch.github.io/coolchurch-website/crossroads.html">Crossroads Counseling</a></li>
+          <li><a href="https://subsplash.com/coolcommunitychurch/app" target="_blank" rel="noopener">Get the app</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="legal">© 2026 Cool Community Church · Recommended resources, updated November 2026</p>
+  </div>
 </footer>
 </body>
 </html>
