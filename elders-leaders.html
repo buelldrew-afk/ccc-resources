@@ -124,6 +124,7 @@ ul.items .t a { text-decoration: none; }
 ul.items .t a:hover { text-decoration: underline; }
 .feedback { margin-top: 48px; background: var(--paper); border: 1px solid var(--rule); border-left: 4px solid var(--blue); border-radius: var(--radius); padding: 20px 22px; display: grid; gap: 8px; }
 .feedback p { font-size: 16px; }
+/* Church site header and footer */
 .wide { max-width: 1120px; margin: 0 auto; padding-inline: max(16px, env(safe-area-inset-left, 0px)) max(16px, env(safe-area-inset-right, 0px)); }
 .site-header { background: #fff; border-bottom: 1px solid var(--rule); }
 .site-header .wide { display: flex; align-items: center; gap: 20px; min-height: 72px; }
@@ -140,17 +141,112 @@ ul.items .t a:hover { text-decoration: underline; }
 .site-footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
 .site-footer .logo { width: 120px; height: auto; margin-bottom: 16px; display: block; }
 .site-footer .legal { margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.15); font-size: .85rem; color: #A7A9AC; }
-@media (max-width: 560px) { .site-nav { gap: 14px; } .site-nav .hide-sm { display: none; } .brand img { height: 46px; } }
+.site-header { position: relative; z-index: 20; }
+.site-nav { gap: 22px; }
+.site-nav .btn { padding: 10px 18px; }
+.menu-toggle { display: none; margin-left: auto; background: none; border: 0; padding: 8px; cursor: pointer; color: var(--navy); }
+.menu-toggle svg { width: 28px; height: 28px; display: block; }
+@media (max-width: 900px) {
+  .menu-toggle { display: block; }
+  .site-nav { display: none; position: absolute; left: 0; right: 0; top: 72px; flex-direction: column; align-items: stretch; gap: 0;
+              background: #fff; border-bottom: 1px solid var(--rule); padding: 8px 16px 16px; box-shadow: 0 12px 24px rgba(20,28,50,.12); }
+  .site-nav.open { display: flex; }
+  .site-nav a { padding: 12px 4px; border-bottom: 1px solid #EEF0F3; }
+  .site-nav .btn { margin-top: 10px; text-align: center; border-bottom: 0; }
+}
+/* The resource menu: brand text and the Ministries drop-down */
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand span { color: var(--navy); font-weight: 800; font-size: .95rem; line-height: 1.15; letter-spacing: .01em; border-left: 1.5px solid var(--rule); padding-left: 12px; }
+.site-nav a[aria-current="page"], .dd.here > .dd-btn { color: var(--blue); }
+.dd { position: relative; }
+.dd-btn { font: inherit; font-weight: 600; font-size: .98rem; color: var(--fg); background: none; border: 0; padding: 0; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
+.dd-btn svg { width: 16px; height: 16px; transition: transform .15s; }
+.dd-btn:hover { color: var(--blue); }
+.dd-menu { display: none; position: absolute; top: calc(100% + 14px); left: -16px; min-width: 300px; background: #fff; border: 1px solid var(--rule); border-radius: var(--radius); box-shadow: 0 16px 32px rgba(20,28,50,.14); padding: 8px; z-index: 30; }
+.dd-menu a { display: block; padding: 9px 12px; border-radius: 6px; font-size: .95rem; }
+.dd-menu a:hover { background: var(--paper); }
+.dd.open .dd-menu { display: block; }
+.dd.open .dd-btn svg { transform: rotate(180deg); }
+@media (hover: hover) and (min-width: 901px) {
+  .dd:hover .dd-menu, .dd:focus-within .dd-menu { display: block; }
+  .dd::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 16px; }
+}
+@media (max-width: 900px) {
+  .dd { border-bottom: 1px solid #EEF0F3; }
+  .dd-btn { width: 100%; justify-content: space-between; padding: 12px 4px; }
+  .dd-menu { position: static; box-shadow: none; border: 0; padding: 0 0 8px 12px; min-width: 0; }
+  .dd-menu a { padding: 9px 4px; border-bottom: 0; }
+}
+@media (max-width: 560px) { .brand img { height: 46px; } .brand span { font-size: .85rem; } }
+/* Short note in place of the full statement */
+.choose-note { margin: 24px 0 0; padding: 14px 18px; background: var(--paper); border: 1px solid var(--rule); border-radius: var(--radius); font-size: 15.5px; color: var(--muted); }
+.choose-note a { font-weight: 700; white-space: nowrap; }
+/* Search and filters */
+.finder { padding-top: 20px; }
+.find { width: 100%; font: inherit; font-size: 16px; padding: 11px 16px; border: 1.5px solid var(--rule); border-radius: 999px; background: #fff; color: var(--fg); }
+.find:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px var(--accent-soft); }
+.fchips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.fchip { font: inherit; font-size: 13.5px; font-weight: 700; color: var(--navy); background: #fff; border: 1.5px solid var(--rule); border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.fchip:hover { border-color: var(--blue); }
+.fchip[aria-pressed="true"] { background: var(--blue); border-color: var(--blue); color: #fff; }
+.fcount { margin-top: 8px; font-size: 14px; color: var(--muted); min-height: 1.4em; }
+.hidden { display: none !important; }
+/* Entries: cover, link, tags */
+ul.items li.entry { grid-template-columns: 56px 1fr auto; gap: 4px 16px; }
+ul.items li.entry.no-cover { grid-template-columns: 1fr auto; }
+.cover { width: 56px; height: 84px; object-fit: cover; border-radius: 4px; box-shadow: 0 3px 8px rgba(20,28,50,.18); background: var(--paper); }
+.cover.blank { background: linear-gradient(160deg, #DDE3EA, #B9C6D3); box-shadow: none; }
+.get { display: inline-block; margin-top: 6px; font-size: 14px; font-weight: 700; text-decoration: none; }
+.get:hover { text-decoration: underline; }
+.study { margin-top: 4px; font-size: 14px; font-weight: 700; color: var(--steel); }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.tag { font-size: 12px; font-weight: 700; color: var(--steel); border: 1px solid var(--rule); border-radius: 999px; padding: 1px 8px; }
+.found { margin-top: 4px; font-size: 13.5px; color: var(--muted); }
+.chip.start { color: #fff; background: var(--navy); }
+.chip.new { color: #fff; background: #2E8540; }
+@media (max-width: 560px) {
+  ul.items li.entry { grid-template-columns: 48px 1fr; }
+  ul.items li.entry .item-side { grid-column: 2; }
+  ul.items li.entry.no-cover { grid-template-columns: 1fr; }
+  ul.items li.entry.no-cover .item-side { grid-column: 1; }
+  .cover { width: 48px; height: 72px; }
+}
+/* Home page */
+.results { list-style: none; padding: 0; margin: 10px 0 0; }
+.results li { padding: 10px 0; border-bottom: 1px solid var(--rule); }
+.results a { font-weight: 700; text-decoration: none; }
+.results .where { font-size: 14px; color: var(--muted); }
+.topic-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.topic-grid a { font-size: 14.5px; font-weight: 700; text-decoration: none; color: var(--navy); background: var(--paper); border: 1.5px solid var(--rule); border-radius: 999px; padding: 6px 14px; }
+.topic-grid a:hover { background: var(--blue); border-color: var(--blue); color: #fff; }
 </style>
+<script src="site.js" defer></script>
 </head>
 <body>
 <header class="site-header">
   <div class="wide">
-    <a class="brand" href="https://coolcommunitychurch.github.io/coolchurch-website/index.html"><img src="media/brand/logo.png" alt="Cool Community Church" width="75" height="56"></a>
-    <nav class="site-nav" aria-label="Main">
-      <a href="./">Resources</a>
-      <a class="hide-sm" href="https://coolcommunitychurch.github.io/coolchurch-website/sermons.html">Sermons</a>
-      <a class="hide-sm" href="https://coolcommunitychurch.github.io/coolchurch-website/visit.html">Plan Your Visit</a>
+    <a class="brand" href="./"><img src="media/brand/logo.png" alt="Cool Community Church" width="75" height="56"><span>Recommended<br>Resources</span></a>
+    <button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <a href="./">Home</a>
+      <div class="dd here">
+        <button class="dd-btn" type="button" aria-expanded="false" aria-controls="dd-ministries">Ministries<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="dd-menu" id="dd-ministries">
+          <a href="marriage-family.html">Marriage &amp; Family</a>
+          <a href="small-groups.html">Small Groups &amp; Adult Bible Study</a>
+          <a href="childrens-ministry.html">Children's Ministry</a>
+          <a href="youth-ministry.html">Youth Ministry</a>
+          <a href="mens-womens-ministry.html">Men's &amp; Women's Ministry</a>
+          <a href="personal-growth-counseling.html">Personal Growth &amp; Counseling</a>
+          <a href="elders-leaders.html" aria-current="page">Elders &amp; Leaders</a>
+        </div>
+      </div>
+      <a href="topics.html">Topics</a>
+      <a href="online-resources.html">Online</a>
+      <a href="./#new">What's New</a>
+      <a href="how-we-choose.html">How We Choose</a>
       <a class="btn" href="https://coolcommunitychurch.github.io/coolchurch-website/index.html">Church website</a>
     </nav>
   </div>
@@ -165,36 +261,16 @@ ul.items .t a:hover { text-decoration: underline; }
 </header>
 
 <div class="wrap">
-  <section class="statement" id="how-we-choose">
-    <div class="prose">
-      <h2>How We Choose</h2>
-      <p>The elders are called to guard the flock and to hold firm to sound teaching (Acts 20:28; Titus 1:9). One of the most practical ways we do that is by caring about what our people read and study together. This list is meant to make that easy. We would much rather point you toward good books than spend our time warning you away from bad ones.</p>
-      <p>Every resource here has been read by Pastor Drew, sold by a bookstore we trust, or reviewed and approved. Each one fits the convictions below.</p>
-    </div>
-
-    <ul class="standards">
-      <li><strong>Scripture is our authority</strong><span>The Bible is inspired, inerrant, and sufficient for life and godliness.</span></li>
-      <li><strong>Our doctrinal statement</strong><span>Reformed in our understanding of salvation, dispensational in our reading of Israel and the end times.</span></li>
-      <li><strong>What We Teach</strong><span>We choose books that are in keeping with our church's What We Teach document.</span></li>
-      <li><strong>Biblical counseling</strong><span>We love the rich, Scripture-filled help that comes from the biblical counseling movement: ACBC, CCEF, and authors like Paul Tripp, Ed Welch, and David Powlison. For struggles such as conflict, anger, anxiety, and grief, these are the voices we turn to first.</span></li>
-    </ul>
-
-    <div class="tiers">
-      <h3>What the labels mean</h3>
-      <div class="tier"><span><span class="chip pick">Pastor Drew's pick</span></span><p>Pastor Drew has read it and recommends it personally.</p></div>
-      <div class="tier"><span><span class="chip grace">Grace Books</span></span><p>Sold by Grace Books, the bookstore ministry of Grace Community Church. Anything they carry is approved.</p></div>
-      <div class="tier"><span><span class="chip ok">Approved</span></span><p>Reviewed and approved for use at Cool Community Church.</p></div>
-      <div class="tier"><span><span class="chip challies">Recommended by Tim Challies</span></span><p>From Tim Challies's recommended-book lists at challies.com, checked against our convictions before it was added.</p></div>
-    </div>
-
-    <div class="ask">
-      <h3>Want to use something that isn't listed?</h3>
-      <p>That isn't a no. It just hasn't been reviewed yet. Give Pastor Drew the title, the author, and how you plan to use it, and we'll get back to you.</p>
-      <p>If your group is already partway through a study that isn't on the list, finish it, then choose your next study from here.</p>
-    </div>
-  </section>
+  <p class="choose-note">Everything here has been read by Pastor Drew, sold by a bookstore we trust, or reviewed and approved. <a href="how-we-choose.html">How we choose and what the labels mean →</a></p>
 </div>
 
+<div class="finder" role="search">
+  <div class="wrap">
+    <input type="search" class="find" placeholder="Search this page" aria-label="Search this page">
+    <div class="fchips" aria-label="Show only"><button type="button" class="fchip" data-f="pick" aria-pressed="false">Pastor Drew's picks</button><button type="button" class="fchip" data-f="leaders" aria-pressed="false">For leaders</button></div>
+    <p class="fcount" aria-live="polite"></p>
+  </div>
+</div>
 <nav class="index" aria-label="Sections">
   <div class="wrap">
     <a href="#shepherding">Shepherding</a>
@@ -210,44 +286,44 @@ ul.items .t a:hover { text-decoration: underline; }
   <section class="group" id="shepherding">
     <h2>Shepherding the Flock</h2>
     <ul class="items">
-      <li><div class="item-main"><div class="t">The Shepherd Leader</div><div class="a">Timothy Witmer</div><div class="n">Pastor Drew: <q>By far the best book I have ever read on the ministry of biblical eldership.</q> It is the template for how our elders understand their work.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Meetings That Work</div><div class="a">Alexander Strauch</div><div class="n">A short guide to elder meetings that are healthy and productive.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Spurgeon the Pastor</div><div class="a">Geoff Chang</div><div class="n">How Spurgeon shepherded a church of thousands: membership, discipline, and the Lord's Table.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick leaders" data-q="the shepherd leader timothy witmer pastor drew: by far the best book i have ever read on the ministry of biblical eldership. it is the template for how our elders understand their work."><img class="cover" src="media/covers/shepherd-leader.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">The Shepherd Leader</div><div class="a">Timothy Witmer</div><div class="n">Pastor Drew: <q>By far the best book I have ever read on the ministry of biblical eldership.</q> It is the template for how our elders understand their work.</div><div class="tags"><span class="tag">For leaders</span></div><a class="get" href="https://www.gracebooks.com/the-shepherd-leader.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick leaders" data-q="meetings that work alexander strauch a short guide to elder meetings that are healthy and productive."><img class="cover" src="media/covers/meetings-that-work.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">Meetings That Work</div><div class="a">Alexander Strauch</div><div class="n">A short guide to elder meetings that are healthy and productive.</div><div class="tags"><span class="tag">For leaders</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Meetings+That+Work+Alexander+Strauch" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick leaders" data-q="spurgeon the pastor geoff chang how spurgeon shepherded a church of thousands: membership, discipline, and the lord&#x27;s table."><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">Spurgeon the Pastor</div><div class="a">Geoff Chang</div><div class="n">How Spurgeon shepherded a church of thousands: membership, discipline, and the Lord's Table.</div><div class="tags"><span class="tag">For leaders</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Spurgeon+the+Pastor+Geoff+Chang" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
     </ul>
   </section>
 
   <section class="group" id="preaching">
     <h2>Preaching &amp; Teaching</h2>
     <ul class="items">
-      <li><div class="item-main"><div class="t">Preaching: A God-Centred Vision</div><div class="a">Michael Reeves</div><div class="n">A short vision for preaching that is delightful, challenging, and inspiring.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Feed My Sheep</div><div class="a">Don Kistler, ed.</div><div class="n">Eleven pastors and scholars make the case for expository preaching.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Why Are We So Often Boring?</div><div class="a">Bob Fyall</div><div class="n">Lessons for preachers from the Preacher of Ecclesiastes.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The Heart of the Preacher</div><div class="a">Rick Reed</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The Hermeneutics of the Biblical Authors</div><div class="a">Abner Chou</div><div class="n">How the prophets and apostles interpreted Scripture. Academic, and a must-read.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick leaders" data-q="preaching: a god-centred vision michael reeves a short vision for preaching that is delightful, challenging, and inspiring."><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">Preaching: A God-Centred Vision</div><div class="a">Michael Reeves</div><div class="n">A short vision for preaching that is delightful, challenging, and inspiring.</div><div class="tags"><span class="tag">For leaders</span></div><a class="get" href="https://www.gracebooks.com/preaching-a-god-centered-vision.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick leaders" data-q="feed my sheep don kistler, ed. eleven pastors and scholars make the case for expository preaching."><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">Feed My Sheep</div><div class="a">Don Kistler, ed.</div><div class="n">Eleven pastors and scholars make the case for expository preaching.</div><div class="tags"><span class="tag">For leaders</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Feed+My+Sheep+Don+Kistler%2C+ed." target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick leaders" data-q="why are we so often boring? bob fyall lessons for preachers from the preacher of ecclesiastes."><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">Why Are We So Often Boring?</div><div class="a">Bob Fyall</div><div class="n">Lessons for preachers from the Preacher of Ecclesiastes.</div><div class="tags"><span class="tag">For leaders</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Why+Are+We+So+Often+Boring%3F+Bob+Fyall" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick leaders" data-q="the heart of the preacher rick reed "><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">The Heart of the Preacher</div><div class="a">Rick Reed</div><div class="tags"><span class="tag">For leaders</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=The+Heart+of+the+Preacher+Rick+Reed" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick leaders" data-q="the hermeneutics of the biblical authors abner chou how the prophets and apostles interpreted scripture. academic, and a must-read."><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">The Hermeneutics of the Biblical Authors</div><div class="a">Abner Chou</div><div class="n">How the prophets and apostles interpreted Scripture. Academic, and a must-read.</div><div class="tags"><span class="tag">For leaders</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=The+Hermeneutics+of+the+Biblical+Authors+Abner+Chou" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
     </ul>
   </section>
 
   <section class="group" id="pastors-heart">
     <h2>The Leader's Own Soul</h2>
     <ul class="items">
-      <li><div class="item-main"><div class="t">A Labor of Love: Puritan Pastoral Priorities</div><div class="a">J. Stephen Yuille</div><div class="n">George Swinnock's sixteen desires for his ministry.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Zeal Without Burnout</div><div class="a">Christopher Ash</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The Ministry of Small Things</div><div class="a">Reuben Bredenhof</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick leaders" data-q="a labor of love: puritan pastoral priorities j. stephen yuille george swinnock&#x27;s sixteen desires for his ministry."><img class="cover" src="media/covers/labor-of-love.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">A Labor of Love: Puritan Pastoral Priorities</div><div class="a">J. Stephen Yuille</div><div class="n">George Swinnock's sixteen desires for his ministry.</div><div class="tags"><span class="tag">For leaders</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=A+Labor+of+Love%3A+Puritan+Pastoral+Priorities+J.+Stephen+Yuille" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick leaders" data-q="zeal without burnout christopher ash "><img class="cover" src="media/covers/zeal-without-burnout.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">Zeal Without Burnout</div><div class="a">Christopher Ash</div><div class="tags"><span class="tag">For leaders</span></div><a class="get" href="https://www.gracebooks.com/zeal-without-burnout.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick leaders" data-q="the ministry of small things reuben bredenhof "><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">The Ministry of Small Things</div><div class="a">Reuben Bredenhof</div><div class="tags"><span class="tag">For leaders</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=The+Ministry+of+Small+Things+Reuben+Bredenhof" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
     </ul>
   </section>
 
   <section class="group" id="conflict">
     <h2>Difficult People &amp; Anxious Times</h2>
     <ul class="items">
-      <li><div class="item-main"><div class="t">Well-Intentioned Dragons</div><div class="a">Marshall Shelley</div><div class="n">A classic on ministering to difficult people by building a healthy church.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Leadership and Emotional Sabotage</div><div class="a">Joe Rigney</div><div class="n">Steady leadership when anxiety sweeps through a church or a family.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick leaders" data-q="well-intentioned dragons marshall shelley a classic on ministering to difficult people by building a healthy church."><img class="cover" src="media/covers/wellintentioned-dragons.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">Well-Intentioned Dragons</div><div class="a">Marshall Shelley</div><div class="n">A classic on ministering to difficult people by building a healthy church.</div><div class="tags"><span class="tag">For leaders</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Well-Intentioned+Dragons+Marshall+Shelley" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick leaders" data-q="leadership and emotional sabotage joe rigney steady leadership when anxiety sweeps through a church or a family."><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">Leadership and Emotional Sabotage</div><div class="a">Joe Rigney</div><div class="n">Steady leadership when anxiety sweeps through a church or a family.</div><div class="tags"><span class="tag">For leaders</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Leadership+and+Emotional+Sabotage+Joe+Rigney" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
     </ul>
   </section>
 
   <section class="group" id="culture">
     <h2>The Church Today</h2>
     <ul class="items">
-      <li><div class="item-main"><div class="t">Shepherds for Sale</div><div class="a">Megan Basham</div><div class="n">How progressive money and influence have shaped evangelical leaders. Well researched.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick leaders" data-q="shepherds for sale megan basham how progressive money and influence have shaped evangelical leaders. well researched."><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">Shepherds for Sale</div><div class="a">Megan Basham</div><div class="n">How progressive money and influence have shaped evangelical leaders. Well researched.</div><div class="tags"><span class="tag">For leaders</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Shepherds+for+Sale+Megan+Basham" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
     </ul>
   </section>
 
@@ -284,6 +360,8 @@ ul.items .t a:hover { text-decoration: underline; }
           <li><a href="personal-growth-counseling.html">Personal Growth &amp; Counseling</a></li>
           <li><a href="elders-leaders.html">Elders &amp; Leaders</a></li>
           <li><a href="online-resources.html">Online Resources</a></li>
+          <li><a href="topics.html">Browse by topic</a></li>
+          <li><a href="how-we-choose.html">How we choose</a></li>
         </ul>
       </div>
       <div>
@@ -291,6 +369,7 @@ ul.items .t a:hover { text-decoration: underline; }
         <ul>
           <li><a href="https://coolcommunitychurch.github.io/coolchurch-website/about.html">About</a></li>
           <li><a href="https://coolcommunitychurch.github.io/coolchurch-website/sermons.html">Sermons</a></li>
+          <li><a href="https://coolcommunitychurch.github.io/coolchurch-website/visit.html">Plan Your Visit</a></li>
           <li><a href="https://coolcommunitychurch.github.io/coolchurch-website/crossroads.html">Crossroads Counseling</a></li>
           <li><a href="https://subsplash.com/coolcommunitychurch/app" target="_blank" rel="noopener">Get the app</a></li>
         </ul>

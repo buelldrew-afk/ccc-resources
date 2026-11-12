@@ -124,6 +124,7 @@ ul.items .t a { text-decoration: none; }
 ul.items .t a:hover { text-decoration: underline; }
 .feedback { margin-top: 48px; background: var(--paper); border: 1px solid var(--rule); border-left: 4px solid var(--blue); border-radius: var(--radius); padding: 20px 22px; display: grid; gap: 8px; }
 .feedback p { font-size: 16px; }
+/* Church site header and footer */
 .wide { max-width: 1120px; margin: 0 auto; padding-inline: max(16px, env(safe-area-inset-left, 0px)) max(16px, env(safe-area-inset-right, 0px)); }
 .site-header { background: #fff; border-bottom: 1px solid var(--rule); }
 .site-header .wide { display: flex; align-items: center; gap: 20px; min-height: 72px; }
@@ -140,17 +141,112 @@ ul.items .t a:hover { text-decoration: underline; }
 .site-footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
 .site-footer .logo { width: 120px; height: auto; margin-bottom: 16px; display: block; }
 .site-footer .legal { margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.15); font-size: .85rem; color: #A7A9AC; }
-@media (max-width: 560px) { .site-nav { gap: 14px; } .site-nav .hide-sm { display: none; } .brand img { height: 46px; } }
+.site-header { position: relative; z-index: 20; }
+.site-nav { gap: 22px; }
+.site-nav .btn { padding: 10px 18px; }
+.menu-toggle { display: none; margin-left: auto; background: none; border: 0; padding: 8px; cursor: pointer; color: var(--navy); }
+.menu-toggle svg { width: 28px; height: 28px; display: block; }
+@media (max-width: 900px) {
+  .menu-toggle { display: block; }
+  .site-nav { display: none; position: absolute; left: 0; right: 0; top: 72px; flex-direction: column; align-items: stretch; gap: 0;
+              background: #fff; border-bottom: 1px solid var(--rule); padding: 8px 16px 16px; box-shadow: 0 12px 24px rgba(20,28,50,.12); }
+  .site-nav.open { display: flex; }
+  .site-nav a { padding: 12px 4px; border-bottom: 1px solid #EEF0F3; }
+  .site-nav .btn { margin-top: 10px; text-align: center; border-bottom: 0; }
+}
+/* The resource menu: brand text and the Ministries drop-down */
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand span { color: var(--navy); font-weight: 800; font-size: .95rem; line-height: 1.15; letter-spacing: .01em; border-left: 1.5px solid var(--rule); padding-left: 12px; }
+.site-nav a[aria-current="page"], .dd.here > .dd-btn { color: var(--blue); }
+.dd { position: relative; }
+.dd-btn { font: inherit; font-weight: 600; font-size: .98rem; color: var(--fg); background: none; border: 0; padding: 0; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
+.dd-btn svg { width: 16px; height: 16px; transition: transform .15s; }
+.dd-btn:hover { color: var(--blue); }
+.dd-menu { display: none; position: absolute; top: calc(100% + 14px); left: -16px; min-width: 300px; background: #fff; border: 1px solid var(--rule); border-radius: var(--radius); box-shadow: 0 16px 32px rgba(20,28,50,.14); padding: 8px; z-index: 30; }
+.dd-menu a { display: block; padding: 9px 12px; border-radius: 6px; font-size: .95rem; }
+.dd-menu a:hover { background: var(--paper); }
+.dd.open .dd-menu { display: block; }
+.dd.open .dd-btn svg { transform: rotate(180deg); }
+@media (hover: hover) and (min-width: 901px) {
+  .dd:hover .dd-menu, .dd:focus-within .dd-menu { display: block; }
+  .dd::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 16px; }
+}
+@media (max-width: 900px) {
+  .dd { border-bottom: 1px solid #EEF0F3; }
+  .dd-btn { width: 100%; justify-content: space-between; padding: 12px 4px; }
+  .dd-menu { position: static; box-shadow: none; border: 0; padding: 0 0 8px 12px; min-width: 0; }
+  .dd-menu a { padding: 9px 4px; border-bottom: 0; }
+}
+@media (max-width: 560px) { .brand img { height: 46px; } .brand span { font-size: .85rem; } }
+/* Short note in place of the full statement */
+.choose-note { margin: 24px 0 0; padding: 14px 18px; background: var(--paper); border: 1px solid var(--rule); border-radius: var(--radius); font-size: 15.5px; color: var(--muted); }
+.choose-note a { font-weight: 700; white-space: nowrap; }
+/* Search and filters */
+.finder { padding-top: 20px; }
+.find { width: 100%; font: inherit; font-size: 16px; padding: 11px 16px; border: 1.5px solid var(--rule); border-radius: 999px; background: #fff; color: var(--fg); }
+.find:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px var(--accent-soft); }
+.fchips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.fchip { font: inherit; font-size: 13.5px; font-weight: 700; color: var(--navy); background: #fff; border: 1.5px solid var(--rule); border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.fchip:hover { border-color: var(--blue); }
+.fchip[aria-pressed="true"] { background: var(--blue); border-color: var(--blue); color: #fff; }
+.fcount { margin-top: 8px; font-size: 14px; color: var(--muted); min-height: 1.4em; }
+.hidden { display: none !important; }
+/* Entries: cover, link, tags */
+ul.items li.entry { grid-template-columns: 56px 1fr auto; gap: 4px 16px; }
+ul.items li.entry.no-cover { grid-template-columns: 1fr auto; }
+.cover { width: 56px; height: 84px; object-fit: cover; border-radius: 4px; box-shadow: 0 3px 8px rgba(20,28,50,.18); background: var(--paper); }
+.cover.blank { background: linear-gradient(160deg, #DDE3EA, #B9C6D3); box-shadow: none; }
+.get { display: inline-block; margin-top: 6px; font-size: 14px; font-weight: 700; text-decoration: none; }
+.get:hover { text-decoration: underline; }
+.study { margin-top: 4px; font-size: 14px; font-weight: 700; color: var(--steel); }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.tag { font-size: 12px; font-weight: 700; color: var(--steel); border: 1px solid var(--rule); border-radius: 999px; padding: 1px 8px; }
+.found { margin-top: 4px; font-size: 13.5px; color: var(--muted); }
+.chip.start { color: #fff; background: var(--navy); }
+.chip.new { color: #fff; background: #2E8540; }
+@media (max-width: 560px) {
+  ul.items li.entry { grid-template-columns: 48px 1fr; }
+  ul.items li.entry .item-side { grid-column: 2; }
+  ul.items li.entry.no-cover { grid-template-columns: 1fr; }
+  ul.items li.entry.no-cover .item-side { grid-column: 1; }
+  .cover { width: 48px; height: 72px; }
+}
+/* Home page */
+.results { list-style: none; padding: 0; margin: 10px 0 0; }
+.results li { padding: 10px 0; border-bottom: 1px solid var(--rule); }
+.results a { font-weight: 700; text-decoration: none; }
+.results .where { font-size: 14px; color: var(--muted); }
+.topic-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.topic-grid a { font-size: 14.5px; font-weight: 700; text-decoration: none; color: var(--navy); background: var(--paper); border: 1.5px solid var(--rule); border-radius: 999px; padding: 6px 14px; }
+.topic-grid a:hover { background: var(--blue); border-color: var(--blue); color: #fff; }
 </style>
+<script src="site.js" defer></script>
 </head>
 <body>
 <header class="site-header">
   <div class="wide">
-    <a class="brand" href="https://coolcommunitychurch.github.io/coolchurch-website/index.html"><img src="media/brand/logo.png" alt="Cool Community Church" width="75" height="56"></a>
-    <nav class="site-nav" aria-label="Main">
-      <a href="./">Resources</a>
-      <a class="hide-sm" href="https://coolcommunitychurch.github.io/coolchurch-website/sermons.html">Sermons</a>
-      <a class="hide-sm" href="https://coolcommunitychurch.github.io/coolchurch-website/visit.html">Plan Your Visit</a>
+    <a class="brand" href="./"><img src="media/brand/logo.png" alt="Cool Community Church" width="75" height="56"><span>Recommended<br>Resources</span></a>
+    <button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <a href="./">Home</a>
+      <div class="dd">
+        <button class="dd-btn" type="button" aria-expanded="false" aria-controls="dd-ministries">Ministries<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="dd-menu" id="dd-ministries">
+          <a href="marriage-family.html">Marriage &amp; Family</a>
+          <a href="small-groups.html">Small Groups &amp; Adult Bible Study</a>
+          <a href="childrens-ministry.html">Children's Ministry</a>
+          <a href="youth-ministry.html">Youth Ministry</a>
+          <a href="mens-womens-ministry.html">Men's &amp; Women's Ministry</a>
+          <a href="personal-growth-counseling.html">Personal Growth &amp; Counseling</a>
+          <a href="elders-leaders.html">Elders &amp; Leaders</a>
+        </div>
+      </div>
+      <a href="topics.html">Topics</a>
+      <a href="online-resources.html" aria-current="page">Online</a>
+      <a href="./#new">What's New</a>
+      <a href="how-we-choose.html">How We Choose</a>
       <a class="btn" href="https://coolcommunitychurch.github.io/coolchurch-website/index.html">Church website</a>
     </nav>
   </div>
@@ -165,36 +261,16 @@ ul.items .t a:hover { text-decoration: underline; }
 </header>
 
 <div class="wrap">
-  <section class="statement" id="how-we-choose">
-    <div class="prose">
-      <h2>How We Choose</h2>
-      <p>The elders are called to guard the flock and to hold firm to sound teaching (Acts 20:28; Titus 1:9). One of the most practical ways we do that is by caring about what our people read and study together. This list is meant to make that easy. We would much rather point you toward good books than spend our time warning you away from bad ones.</p>
-      <p>Every resource here has been read by Pastor Drew, sold by a bookstore we trust, or reviewed and approved. Each one fits the convictions below.</p>
-    </div>
-
-    <ul class="standards">
-      <li><strong>Scripture is our authority</strong><span>The Bible is inspired, inerrant, and sufficient for life and godliness.</span></li>
-      <li><strong>Our doctrinal statement</strong><span>Reformed in our understanding of salvation, dispensational in our reading of Israel and the end times.</span></li>
-      <li><strong>What We Teach</strong><span>We choose books that are in keeping with our church's What We Teach document.</span></li>
-      <li><strong>Biblical counseling</strong><span>We love the rich, Scripture-filled help that comes from the biblical counseling movement: ACBC, CCEF, and authors like Paul Tripp, Ed Welch, and David Powlison. For struggles such as conflict, anger, anxiety, and grief, these are the voices we turn to first.</span></li>
-    </ul>
-
-    <div class="tiers">
-      <h3>What the labels mean</h3>
-      <div class="tier"><span><span class="chip pick">Pastor Drew's pick</span></span><p>Pastor Drew has read it and recommends it personally.</p></div>
-      <div class="tier"><span><span class="chip grace">Grace Books</span></span><p>Sold by Grace Books, the bookstore ministry of Grace Community Church. Anything they carry is approved.</p></div>
-      <div class="tier"><span><span class="chip ok">Approved</span></span><p>Reviewed and approved for use at Cool Community Church.</p></div>
-      <div class="tier"><span><span class="chip challies">Recommended by Tim Challies</span></span><p>From Tim Challies's recommended-book lists at challies.com, checked against our convictions before it was added.</p></div>
-    </div>
-
-    <div class="ask">
-      <h3>Want to use something that isn't listed?</h3>
-      <p>That isn't a no. It just hasn't been reviewed yet. Give Pastor Drew the title, the author, and how you plan to use it, and we'll get back to you.</p>
-      <p>If your group is already partway through a study that isn't on the list, finish it, then choose your next study from here.</p>
-    </div>
-  </section>
+  <p class="choose-note">Everything here has been read by Pastor Drew, sold by a bookstore we trust, or reviewed and approved. <a href="how-we-choose.html">How we choose and what the labels mean →</a></p>
 </div>
 
+<div class="finder" role="search">
+  <div class="wrap">
+    <input type="search" class="find" placeholder="Search this page" aria-label="Search this page">
+    <div class="fchips" aria-label="Show only"><button type="button" class="fchip" data-f="new" aria-pressed="false">New</button><button type="button" class="fchip" data-f="pick" aria-pressed="false">Pastor Drew's picks</button></div>
+    <p class="fcount" aria-live="polite"></p>
+  </div>
+</div>
 <nav class="index" aria-label="Sections">
   <div class="wrap">
     <a href="#daily">Daily devotional</a>
@@ -213,9 +289,9 @@ ul.items .t a:hover { text-decoration: underline; }
   <section class="group" id="daily">
     <h2>Daily Devotional</h2>
     <ul class="items">
-      <li><div class="item-main"><div class="t">Morning and Evening</div><div class="a">Crossway · Spurgeon, revised by Alistair Begg</div><div class="n">A two- to three-minute reading twice a day. <a href="https://crossway.org/podcasts" target="_blank" rel="noopener">crossway.org/podcasts</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Things Unseen</div><div class="a">Sinclair Ferguson · Ligonier</div><div class="n">A short weekday devotional. <a href="https://ligonier.org/thingsunseen" target="_blank" rel="noopener">ligonier.org/thingsunseen</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Truth for Life</div><div class="a">Alistair Begg</div><div class="n">Daily Bible teaching, plus a daily devotional. <a href="https://truthforlife.org" target="_blank" rel="noopener">truthforlife.org</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick" data-q="morning and evening crossway · spurgeon, revised by alistair begg a two- to three-minute reading twice a day. crossway.org/podcasts"><div class="item-main"><div class="t">Morning and Evening</div><div class="a">Crossway · Spurgeon, revised by Alistair Begg</div><div class="n">A two- to three-minute reading twice a day. <a href="https://crossway.org/podcasts" target="_blank" rel="noopener">crossway.org/podcasts</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick" data-q="things unseen sinclair ferguson · ligonier a short weekday devotional. ligonier.org/thingsunseen"><div class="item-main"><div class="t">Things Unseen</div><div class="a">Sinclair Ferguson · Ligonier</div><div class="n">A short weekday devotional. <a href="https://ligonier.org/thingsunseen" target="_blank" rel="noopener">ligonier.org/thingsunseen</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick" data-q="truth for life alistair begg daily bible teaching, plus a daily devotional. truthforlife.org"><div class="item-main"><div class="t">Truth for Life</div><div class="a">Alistair Begg</div><div class="n">Daily Bible teaching, plus a daily devotional. <a href="https://truthforlife.org" target="_blank" rel="noopener">truthforlife.org</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
     </ul>
   </section>
 
@@ -223,44 +299,44 @@ ul.items .t a:hover { text-decoration: underline; }
     <h2>News &amp; Culture</h2>
     <p class="group-intro">The news, from a biblical worldview.</p>
     <ul class="items">
-      <li><div class="item-main"><div class="t">The World and Everything in It</div><div class="a">WORLD News Group</div><div class="n">A weekday news podcast, plus WORLD Magazine. <a href="https://wng.org" target="_blank" rel="noopener">wng.org</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The Briefing</div><div class="a">Albert Mohler</div><div class="n">Weekday news analysis. <a href="https://albertmohler.com" target="_blank" rel="noopener">albertmohler.com</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Just Thinking</div><div class="a">Darrell Harrison &amp; Virgil Walker</div><div class="n">A podcast applying biblical truth to social, cultural, political, and theological issues. Both hosts are on the pastoral staff of Redeemer Bible Church in Gilbert, Arizona. <a href="https://justthinking.me" target="_blank" rel="noopener">justthinking.me</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick" data-q="the world and everything in it world news group a weekday news podcast, plus world magazine. wng.org"><div class="item-main"><div class="t">The World and Everything in It</div><div class="a">WORLD News Group</div><div class="n">A weekday news podcast, plus WORLD Magazine. <a href="https://wng.org" target="_blank" rel="noopener">wng.org</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick" data-q="the briefing albert mohler weekday news analysis. albertmohler.com"><div class="item-main"><div class="t">The Briefing</div><div class="a">Albert Mohler</div><div class="n">Weekday news analysis. <a href="https://albertmohler.com" target="_blank" rel="noopener">albertmohler.com</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick new" data-q="just thinking darrell harrison &amp; virgil walker a podcast applying biblical truth to social, cultural, political, and theological issues. both hosts are on the pastoral staff of redeemer bible church in gilbert, arizona. justthinking.me"><div class="item-main"><div class="t">Just Thinking</div><div class="a">Darrell Harrison &amp; Virgil Walker</div><div class="n">A podcast applying biblical truth to social, cultural, political, and theological issues. Both hosts are on the pastoral staff of Redeemer Bible Church in Gilbert, Arizona. <a href="https://justthinking.me" target="_blank" rel="noopener">justthinking.me</a></div></div><div class="item-side"><span class="chip new">New</span><span class="chip pick">Pastor Drew's pick</span></div></li>
     </ul>
   </section>
 
   <section class="group" id="ideas">
     <h2>Theology, Bible &amp; Ideas</h2>
     <ul class="items">
-      <li><div class="item-main"><div class="t">Thinking in Public</div><div class="a">Albert Mohler</div><div class="n">Long-form interviews. <a href="https://albertmohler.com" target="_blank" rel="noopener">albertmohler.com</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The Bible Sojourner</div><div class="a">Peter Goeman</div><div class="n">Hard passages, theology, and culture, weekly. <a href="https://petergoeman.com" target="_blank" rel="noopener">petergoeman.com</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Challies</div><div class="a">Tim Challies</div><div class="n">Daily link roundups, articles, and book reviews. <a href="https://challies.com" target="_blank" rel="noopener">challies.com</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Theological Studies</div><div class="a">Michael Vlach</div><div class="n">Articles on Israel, the kingdom, and the end times. <a href="https://theologicalstudies.org" target="_blank" rel="noopener">theologicalstudies.org</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The Cripplegate</div><div class="a">Nathan Busenitz, Jesse Johnson, and others</div><div class="n">A blog by pastors and seminary professors. <a href="https://thecripplegate.com" target="_blank" rel="noopener">thecripplegate.com</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">9Marks</div><div class="a">Mark Dever and others</div><div class="n">Articles and podcasts on church health, membership, and church discipline, from a Baptist and Reformed perspective. <a href="https://9marks.org" target="_blank" rel="noopener">9marks.org</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Mortification of Spin</div><div class="a">Carl Trueman and others</div><div class="n">A podcast on theology, the church, and culture. Comes from a Presbyterian, covenantal setting. <a href="https://alliancenet.org/broadcasts/mos" target="_blank" rel="noopener">alliancenet.org/broadcasts/mos</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">For the Gospel</div><div class="a">Costi Hinn</div><div class="n">A weekly podcast, videos, and articles on sound doctrine, with listener Q&amp;A. Hinn also answers the prosperity gospel, which he grew up in. <a href="https://forthegospel.org" target="_blank" rel="noopener">forthegospel.org</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Redeeming Truth</div><div class="a">Pastors of Redeemer Bible Church, Gilbert, Arizona</div><div class="n">A podcast on doctrine and church life. <a href="https://redeemingtruthmedia.org/podcast" target="_blank" rel="noopener">redeemingtruthmedia.org/podcast</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">On Preaching</div><div class="a">H. B. Charles Jr.</div><div class="n">A podcast on preaching faithfully and clearly, plus a blog and sermon outlines. Written for preachers and teachers. <a href="https://hbcharlesjr.com" target="_blank" rel="noopener">hbcharlesjr.com</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick" data-q="thinking in public albert mohler long-form interviews. albertmohler.com"><div class="item-main"><div class="t">Thinking in Public</div><div class="a">Albert Mohler</div><div class="n">Long-form interviews. <a href="https://albertmohler.com" target="_blank" rel="noopener">albertmohler.com</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick" data-q="the bible sojourner peter goeman hard passages, theology, and culture, weekly. petergoeman.com"><div class="item-main"><div class="t">The Bible Sojourner</div><div class="a">Peter Goeman</div><div class="n">Hard passages, theology, and culture, weekly. <a href="https://petergoeman.com" target="_blank" rel="noopener">petergoeman.com</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick" data-q="challies tim challies daily link roundups, articles, and book reviews. challies.com"><div class="item-main"><div class="t">Challies</div><div class="a">Tim Challies</div><div class="n">Daily link roundups, articles, and book reviews. <a href="https://challies.com" target="_blank" rel="noopener">challies.com</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick" data-q="theological studies michael vlach articles on israel, the kingdom, and the end times. theologicalstudies.org"><div class="item-main"><div class="t">Theological Studies</div><div class="a">Michael Vlach</div><div class="n">Articles on Israel, the kingdom, and the end times. <a href="https://theologicalstudies.org" target="_blank" rel="noopener">theologicalstudies.org</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick" data-q="the cripplegate nathan busenitz, jesse johnson, and others a blog by pastors and seminary professors. thecripplegate.com"><div class="item-main"><div class="t">The Cripplegate</div><div class="a">Nathan Busenitz, Jesse Johnson, and others</div><div class="n">A blog by pastors and seminary professors. <a href="https://thecripplegate.com" target="_blank" rel="noopener">thecripplegate.com</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick" data-q="9marks mark dever and others articles and podcasts on church health, membership, and church discipline, from a baptist and reformed perspective. 9marks.org"><div class="item-main"><div class="t">9Marks</div><div class="a">Mark Dever and others</div><div class="n">Articles and podcasts on church health, membership, and church discipline, from a Baptist and Reformed perspective. <a href="https://9marks.org" target="_blank" rel="noopener">9marks.org</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick" data-q="mortification of spin carl trueman and others a podcast on theology, the church, and culture. comes from a presbyterian, covenantal setting. alliancenet.org/broadcasts/mos"><div class="item-main"><div class="t">Mortification of Spin</div><div class="a">Carl Trueman and others</div><div class="n">A podcast on theology, the church, and culture. Comes from a Presbyterian, covenantal setting. <a href="https://alliancenet.org/broadcasts/mos" target="_blank" rel="noopener">alliancenet.org/broadcasts/mos</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick new" data-q="for the gospel costi hinn a weekly podcast, videos, and articles on sound doctrine, with listener q&amp;a. hinn also answers the prosperity gospel, which he grew up in. forthegospel.org"><div class="item-main"><div class="t">For the Gospel</div><div class="a">Costi Hinn</div><div class="n">A weekly podcast, videos, and articles on sound doctrine, with listener Q&amp;A. Hinn also answers the prosperity gospel, which he grew up in. <a href="https://forthegospel.org" target="_blank" rel="noopener">forthegospel.org</a></div></div><div class="item-side"><span class="chip new">New</span><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick new" data-q="redeeming truth pastors of redeemer bible church, gilbert, arizona a podcast on doctrine and church life. redeemingtruthmedia.org/podcast"><div class="item-main"><div class="t">Redeeming Truth</div><div class="a">Pastors of Redeemer Bible Church, Gilbert, Arizona</div><div class="n">A podcast on doctrine and church life. <a href="https://redeemingtruthmedia.org/podcast" target="_blank" rel="noopener">redeemingtruthmedia.org/podcast</a></div></div><div class="item-side"><span class="chip new">New</span><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick new" data-q="on preaching h. b. charles jr. a podcast on preaching faithfully and clearly, plus a blog and sermon outlines. written for preachers and teachers. hbcharlesjr.com"><div class="item-main"><div class="t">On Preaching</div><div class="a">H. B. Charles Jr.</div><div class="n">A podcast on preaching faithfully and clearly, plus a blog and sermon outlines. Written for preachers and teachers. <a href="https://hbcharlesjr.com" target="_blank" rel="noopener">hbcharlesjr.com</a></div></div><div class="item-side"><span class="chip new">New</span><span class="chip pick">Pastor Drew's pick</span></div></li>
     </ul>
   </section>
 
   <section class="group" id="apologetics">
     <h2>Apologetics &amp; Creation</h2>
     <ul class="items">
-      <li><div class="item-main"><div class="t">The Alisa Childers Podcast</div><div class="a">Alisa Childers</div><div class="n">Defending the faith, and answering progressive Christianity. <a href="https://alisachilders.com" target="_blank" rel="noopener">alisachilders.com</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Stand to Reason</div><div class="a">Greg Koukl and others</div><div class="n">Apologetics podcasts, videos, and articles from the author of <i>Tactics</i>. <a href="https://str.org" target="_blank" rel="noopener">str.org</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Answers in Genesis</div><div class="a">Ken Ham and others</div><div class="n">Articles, videos, and resources for kids on biblical, young-earth creation. <a href="https://answersingenesis.org" target="_blank" rel="noopener">answersingenesis.org</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Wretched</div><div class="a">Todd Friel</div><div class="n">Television, radio, and podcasts on the gospel and evangelism. Its punchy style isn't for everyone. <a href="https://wretched.org" target="_blank" rel="noopener">wretched.org</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Justin Peters Ministries</div><div class="a">Justin Peters</div><div class="n">Teaching and videos that answer the Word of Faith movement and the prosperity gospel, including the <i>Clouds Without Water</i> series. <a href="https://justinpeters.org" target="_blank" rel="noopener">justinpeters.org</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick" data-q="the alisa childers podcast alisa childers defending the faith, and answering progressive christianity. alisachilders.com"><div class="item-main"><div class="t">The Alisa Childers Podcast</div><div class="a">Alisa Childers</div><div class="n">Defending the faith, and answering progressive Christianity. <a href="https://alisachilders.com" target="_blank" rel="noopener">alisachilders.com</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick" data-q="stand to reason greg koukl and others apologetics podcasts, videos, and articles from the author of tactics. str.org"><div class="item-main"><div class="t">Stand to Reason</div><div class="a">Greg Koukl and others</div><div class="n">Apologetics podcasts, videos, and articles from the author of <i>Tactics</i>. <a href="https://str.org" target="_blank" rel="noopener">str.org</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick" data-q="answers in genesis ken ham and others articles, videos, and resources for kids on biblical, young-earth creation. answersingenesis.org"><div class="item-main"><div class="t">Answers in Genesis</div><div class="a">Ken Ham and others</div><div class="n">Articles, videos, and resources for kids on biblical, young-earth creation. <a href="https://answersingenesis.org" target="_blank" rel="noopener">answersingenesis.org</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick" data-q="wretched todd friel television, radio, and podcasts on the gospel and evangelism. its punchy style isn&#x27;t for everyone. wretched.org"><div class="item-main"><div class="t">Wretched</div><div class="a">Todd Friel</div><div class="n">Television, radio, and podcasts on the gospel and evangelism. Its punchy style isn't for everyone. <a href="https://wretched.org" target="_blank" rel="noopener">wretched.org</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick new" data-q="justin peters ministries justin peters teaching and videos that answer the word of faith movement and the prosperity gospel, including the clouds without water series. justinpeters.org"><div class="item-main"><div class="t">Justin Peters Ministries</div><div class="a">Justin Peters</div><div class="n">Teaching and videos that answer the Word of Faith movement and the prosperity gospel, including the <i>Clouds Without Water</i> series. <a href="https://justinpeters.org" target="_blank" rel="noopener">justinpeters.org</a></div></div><div class="item-side"><span class="chip new">New</span><span class="chip pick">Pastor Drew's pick</span></div></li>
     </ul>
   </section>
 
   <section class="group" id="counseling">
     <h2>Biblical Counseling</h2>
     <ul class="items">
-      <li><div class="item-main"><div class="t">Truth in Love</div><div class="a">Dale Johnson · ACBC</div><div class="n">A weekly podcast with biblical approaches to everyday problems. <a href="https://biblicalcounseling.com" target="_blank" rel="noopener">biblicalcounseling.com</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Transformed</div><div class="a">Greg Gifford</div><div class="n">A podcast and video series on anxiety, depression, relationships, and real change, from a professor at The Master's University. <a href="https://fortisinstitute.org/greg-gifford" target="_blank" rel="noopener">fortisinstitute.org/greg-gifford</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick" data-q="truth in love dale johnson · acbc a weekly podcast with biblical approaches to everyday problems. biblicalcounseling.com"><div class="item-main"><div class="t">Truth in Love</div><div class="a">Dale Johnson · ACBC</div><div class="n">A weekly podcast with biblical approaches to everyday problems. <a href="https://biblicalcounseling.com" target="_blank" rel="noopener">biblicalcounseling.com</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick" data-q="transformed greg gifford a podcast and video series on anxiety, depression, relationships, and real change, from a professor at the master&#x27;s university. fortisinstitute.org/greg-gifford"><div class="item-main"><div class="t">Transformed</div><div class="a">Greg Gifford</div><div class="n">A podcast and video series on anxiety, depression, relationships, and real change, from a professor at The Master's University. <a href="https://fortisinstitute.org/greg-gifford" target="_blank" rel="noopener">fortisinstitute.org/greg-gifford</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
     </ul>
   </section>
 
@@ -268,22 +344,22 @@ ul.items .t a:hover { text-decoration: underline; }
     <h2>Teaching Ministries</h2>
     <p class="group-intro">Sermons, podcasts, and articles from ministries we trust. Two come with a caveat on one topic.</p>
     <ul class="items">
-      <li><div class="item-main"><div class="t">Grace to You</div><div class="a">John MacArthur</div><div class="n">Daily radio and podcast, a sermon archive, and articles. <a href="https://gty.org" target="_blank" rel="noopener">gty.org</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Grace Community Church</div><div class="a">Sun Valley, California</div><div class="n">The full sermon archive of the church. <a href="https://gracechurch.org/sermons" target="_blank" rel="noopener">gracechurch.org/sermons</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Shepherds' Conference</div><div class="a">Grace Community Church</div><div class="n">Years of conference messages for pastors and church leaders. <a href="https://gracechurch.org/shepherdsconference" target="_blank" rel="noopener">gracechurch.org/shepherdsconference</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The Master's Seminary</div><div class="a">Sun Valley, California</div><div class="n">Podcasts, faculty lectures, and articles. <a href="https://tms.edu" target="_blank" rel="noopener">tms.edu</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Redeemer Bible Church</div><div class="a">Gilbert, Arizona · Jon Benzinger and the pastors</div><div class="n">The sermon archive of the church. <a href="https://redeemeraz.org/sermons" target="_blank" rel="noopener">redeemeraz.org/sermons</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Shiloh Metropolitan Baptist Church</div><div class="a">Jacksonville, Florida · H. B. Charles Jr.</div><div class="n">Sermons from H. B. Charles Jr. <a href="https://shiloh.church" target="_blank" rel="noopener">shiloh.church</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Ligonier Ministries</div><div class="a">R. C. Sproul, Sinclair Ferguson, and others</div><div class="n">Renewing Your Mind and other podcasts, articles, and <i>Tabletalk</i> magazine. <a href="https://ligonier.org" target="_blank" rel="noopener">ligonier.org</a><br><strong>On the end times:</strong> Ligonier teaches from a covenantal, largely amillennial framework. On Israel, the church, and the end times, go to Grace to You, <i>Biblical Doctrine</i>, or Michael Vlach instead.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Desiring God</div><div class="a">John Piper and others</div><div class="n">Ask Pastor John and other podcasts, and articles. <a href="https://desiringgod.org" target="_blank" rel="noopener">desiringgod.org</a><br><strong>On spiritual gifts:</strong> Desiring God is open to the continuation of the miraculous gifts. On tongues, prophecy, and the gifts, go to Grace to You, <i>Strange Fire</i>, or <i>Biblical Doctrine</i> instead.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick" data-q="grace to you john macarthur daily radio and podcast, a sermon archive, and articles. gty.org"><div class="item-main"><div class="t">Grace to You</div><div class="a">John MacArthur</div><div class="n">Daily radio and podcast, a sermon archive, and articles. <a href="https://gty.org" target="_blank" rel="noopener">gty.org</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick" data-q="grace community church sun valley, california the full sermon archive of the church. gracechurch.org/sermons"><div class="item-main"><div class="t">Grace Community Church</div><div class="a">Sun Valley, California</div><div class="n">The full sermon archive of the church. <a href="https://gracechurch.org/sermons" target="_blank" rel="noopener">gracechurch.org/sermons</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick" data-q="shepherds&#x27; conference grace community church years of conference messages for pastors and church leaders. gracechurch.org/shepherdsconference"><div class="item-main"><div class="t">Shepherds' Conference</div><div class="a">Grace Community Church</div><div class="n">Years of conference messages for pastors and church leaders. <a href="https://gracechurch.org/shepherdsconference" target="_blank" rel="noopener">gracechurch.org/shepherdsconference</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick" data-q="the master&#x27;s seminary sun valley, california podcasts, faculty lectures, and articles. tms.edu"><div class="item-main"><div class="t">The Master's Seminary</div><div class="a">Sun Valley, California</div><div class="n">Podcasts, faculty lectures, and articles. <a href="https://tms.edu" target="_blank" rel="noopener">tms.edu</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick new" data-q="redeemer bible church gilbert, arizona · jon benzinger and the pastors the sermon archive of the church. redeemeraz.org/sermons"><div class="item-main"><div class="t">Redeemer Bible Church</div><div class="a">Gilbert, Arizona · Jon Benzinger and the pastors</div><div class="n">The sermon archive of the church. <a href="https://redeemeraz.org/sermons" target="_blank" rel="noopener">redeemeraz.org/sermons</a></div></div><div class="item-side"><span class="chip new">New</span><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick new" data-q="shiloh metropolitan baptist church jacksonville, florida · h. b. charles jr. sermons from h. b. charles jr. shiloh.church"><div class="item-main"><div class="t">Shiloh Metropolitan Baptist Church</div><div class="a">Jacksonville, Florida · H. B. Charles Jr.</div><div class="n">Sermons from H. B. Charles Jr. <a href="https://shiloh.church" target="_blank" rel="noopener">shiloh.church</a></div></div><div class="item-side"><span class="chip new">New</span><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick" data-q="ligonier ministries r. c. sproul, sinclair ferguson, and others renewing your mind and other podcasts, articles, and tabletalk magazine. ligonier.orgon the end times: ligonier teaches from a covenantal, largely amillennial framework. on israel, the church, and the end times, go to grace to you, biblical doctrine, or michael vlach instead."><div class="item-main"><div class="t">Ligonier Ministries</div><div class="a">R. C. Sproul, Sinclair Ferguson, and others</div><div class="n">Renewing Your Mind and other podcasts, articles, and <i>Tabletalk</i> magazine. <a href="https://ligonier.org" target="_blank" rel="noopener">ligonier.org</a><br><strong>On the end times:</strong> Ligonier teaches from a covenantal, largely amillennial framework. On Israel, the church, and the end times, go to Grace to You, <i>Biblical Doctrine</i>, or Michael Vlach instead.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick" data-q="desiring god john piper and others ask pastor john and other podcasts, and articles. desiringgod.orgon spiritual gifts: desiring god is open to the continuation of the miraculous gifts. on tongues, prophecy, and the gifts, go to grace to you, strange fire, or biblical doctrine instead."><div class="item-main"><div class="t">Desiring God</div><div class="a">John Piper and others</div><div class="n">Ask Pastor John and other podcasts, and articles. <a href="https://desiringgod.org" target="_blank" rel="noopener">desiringgod.org</a><br><strong>On spiritual gifts:</strong> Desiring God is open to the continuation of the miraculous gifts. On tongues, prophecy, and the gifts, go to Grace to You, <i>Strange Fire</i>, or <i>Biblical Doctrine</i> instead.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
     </ul>
   </section>
 
   <section class="group" id="study-tools">
     <h2>Bible Study Tools &amp; Archives</h2>
     <ul class="items">
-      <li><div class="item-main"><div class="t">Blue Letter Bible</div><div class="a">Free online and app</div><div class="n">Bible study with Greek and Hebrew helps and commentaries. Some of the older commentaries come from other traditions. <a href="https://blueletterbible.org" target="_blank" rel="noopener">blueletterbible.org</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">SermonAudio</div><div class="a">Free online and app</div><div class="n">A huge library of sermons from many churches. Quality varies, so use it with discernment and stick to preachers you know. <a href="https://sermonaudio.com" target="_blank" rel="noopener">sermonaudio.com</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick" data-q="blue letter bible free online and app bible study with greek and hebrew helps and commentaries. some of the older commentaries come from other traditions. blueletterbible.org"><div class="item-main"><div class="t">Blue Letter Bible</div><div class="a">Free online and app</div><div class="n">Bible study with Greek and Hebrew helps and commentaries. Some of the older commentaries come from other traditions. <a href="https://blueletterbible.org" target="_blank" rel="noopener">blueletterbible.org</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick" data-q="sermonaudio free online and app a huge library of sermons from many churches. quality varies, so use it with discernment and stick to preachers you know. sermonaudio.com"><div class="item-main"><div class="t">SermonAudio</div><div class="a">Free online and app</div><div class="n">A huge library of sermons from many churches. Quality varies, so use it with discernment and stick to preachers you know. <a href="https://sermonaudio.com" target="_blank" rel="noopener">sermonaudio.com</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
     </ul>
   </section>
 
@@ -291,9 +367,9 @@ ul.items .t a:hover { text-decoration: underline; }
     <h2>YouTube</h2>
     <p class="group-intro">Subscribe to these channels instead of letting the algorithm decide what plays next.</p>
     <ul class="items">
-      <li><div class="item-main"><div class="t">Grace to You</div><div class="a">John MacArthur</div><div class="n">Sermons and teaching. <a href="https://youtube.com/user/JohnMacArthurGTY" target="_blank" rel="noopener">youtube.com/user/JohnMacArthurGTY</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Ligonier Ministries</div><div class="a">R. C. Sproul, Sinclair Ferguson, and others</div><div class="n">Teaching series and conference messages. The end-times caveat above applies here too. <a href="https://youtube.com/LigonierMinistries" target="_blank" rel="noopener">youtube.com/LigonierMinistries</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Redeemer Bible Church</div><div class="a">Gilbert, Arizona</div><div class="n">Sermons, and the Redeeming Truth podcast. <a href="https://youtube.com/c/RedeemerBibleChurchGilbert" target="_blank" rel="noopener">youtube.com/c/RedeemerBibleChurchGilbert</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick" data-q="grace to you john macarthur sermons and teaching. youtube.com/user/johnmacarthurgty"><div class="item-main"><div class="t">Grace to You</div><div class="a">John MacArthur</div><div class="n">Sermons and teaching. <a href="https://youtube.com/user/JohnMacArthurGTY" target="_blank" rel="noopener">youtube.com/user/JohnMacArthurGTY</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick" data-q="ligonier ministries r. c. sproul, sinclair ferguson, and others teaching series and conference messages. the end-times caveat above applies here too. youtube.com/ligonierministries"><div class="item-main"><div class="t">Ligonier Ministries</div><div class="a">R. C. Sproul, Sinclair Ferguson, and others</div><div class="n">Teaching series and conference messages. The end-times caveat above applies here too. <a href="https://youtube.com/LigonierMinistries" target="_blank" rel="noopener">youtube.com/LigonierMinistries</a></div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry no-cover" data-f="pick new" data-q="redeemer bible church gilbert, arizona sermons, and the redeeming truth podcast. youtube.com/c/redeemerbiblechurchgilbert"><div class="item-main"><div class="t">Redeemer Bible Church</div><div class="a">Gilbert, Arizona</div><div class="n">Sermons, and the Redeeming Truth podcast. <a href="https://youtube.com/c/RedeemerBibleChurchGilbert" target="_blank" rel="noopener">youtube.com/c/RedeemerBibleChurchGilbert</a></div></div><div class="item-side"><span class="chip new">New</span><span class="chip pick">Pastor Drew's pick</span></div></li>
     </ul>
   </section>
 
@@ -330,6 +406,8 @@ ul.items .t a:hover { text-decoration: underline; }
           <li><a href="personal-growth-counseling.html">Personal Growth &amp; Counseling</a></li>
           <li><a href="elders-leaders.html">Elders &amp; Leaders</a></li>
           <li><a href="online-resources.html">Online Resources</a></li>
+          <li><a href="topics.html">Browse by topic</a></li>
+          <li><a href="how-we-choose.html">How we choose</a></li>
         </ul>
       </div>
       <div>
@@ -337,6 +415,7 @@ ul.items .t a:hover { text-decoration: underline; }
         <ul>
           <li><a href="https://coolcommunitychurch.github.io/coolchurch-website/about.html">About</a></li>
           <li><a href="https://coolcommunitychurch.github.io/coolchurch-website/sermons.html">Sermons</a></li>
+          <li><a href="https://coolcommunitychurch.github.io/coolchurch-website/visit.html">Plan Your Visit</a></li>
           <li><a href="https://coolcommunitychurch.github.io/coolchurch-website/crossroads.html">Crossroads Counseling</a></li>
           <li><a href="https://subsplash.com/coolcommunitychurch/app" target="_blank" rel="noopener">Get the app</a></li>
         </ul>

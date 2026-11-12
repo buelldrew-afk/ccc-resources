@@ -124,6 +124,7 @@ ul.items .t a { text-decoration: none; }
 ul.items .t a:hover { text-decoration: underline; }
 .feedback { margin-top: 48px; background: var(--paper); border: 1px solid var(--rule); border-left: 4px solid var(--blue); border-radius: var(--radius); padding: 20px 22px; display: grid; gap: 8px; }
 .feedback p { font-size: 16px; }
+/* Church site header and footer */
 .wide { max-width: 1120px; margin: 0 auto; padding-inline: max(16px, env(safe-area-inset-left, 0px)) max(16px, env(safe-area-inset-right, 0px)); }
 .site-header { background: #fff; border-bottom: 1px solid var(--rule); }
 .site-header .wide { display: flex; align-items: center; gap: 20px; min-height: 72px; }
@@ -140,17 +141,112 @@ ul.items .t a:hover { text-decoration: underline; }
 .site-footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
 .site-footer .logo { width: 120px; height: auto; margin-bottom: 16px; display: block; }
 .site-footer .legal { margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.15); font-size: .85rem; color: #A7A9AC; }
-@media (max-width: 560px) { .site-nav { gap: 14px; } .site-nav .hide-sm { display: none; } .brand img { height: 46px; } }
+.site-header { position: relative; z-index: 20; }
+.site-nav { gap: 22px; }
+.site-nav .btn { padding: 10px 18px; }
+.menu-toggle { display: none; margin-left: auto; background: none; border: 0; padding: 8px; cursor: pointer; color: var(--navy); }
+.menu-toggle svg { width: 28px; height: 28px; display: block; }
+@media (max-width: 900px) {
+  .menu-toggle { display: block; }
+  .site-nav { display: none; position: absolute; left: 0; right: 0; top: 72px; flex-direction: column; align-items: stretch; gap: 0;
+              background: #fff; border-bottom: 1px solid var(--rule); padding: 8px 16px 16px; box-shadow: 0 12px 24px rgba(20,28,50,.12); }
+  .site-nav.open { display: flex; }
+  .site-nav a { padding: 12px 4px; border-bottom: 1px solid #EEF0F3; }
+  .site-nav .btn { margin-top: 10px; text-align: center; border-bottom: 0; }
+}
+/* The resource menu: brand text and the Ministries drop-down */
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand span { color: var(--navy); font-weight: 800; font-size: .95rem; line-height: 1.15; letter-spacing: .01em; border-left: 1.5px solid var(--rule); padding-left: 12px; }
+.site-nav a[aria-current="page"], .dd.here > .dd-btn { color: var(--blue); }
+.dd { position: relative; }
+.dd-btn { font: inherit; font-weight: 600; font-size: .98rem; color: var(--fg); background: none; border: 0; padding: 0; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
+.dd-btn svg { width: 16px; height: 16px; transition: transform .15s; }
+.dd-btn:hover { color: var(--blue); }
+.dd-menu { display: none; position: absolute; top: calc(100% + 14px); left: -16px; min-width: 300px; background: #fff; border: 1px solid var(--rule); border-radius: var(--radius); box-shadow: 0 16px 32px rgba(20,28,50,.14); padding: 8px; z-index: 30; }
+.dd-menu a { display: block; padding: 9px 12px; border-radius: 6px; font-size: .95rem; }
+.dd-menu a:hover { background: var(--paper); }
+.dd.open .dd-menu { display: block; }
+.dd.open .dd-btn svg { transform: rotate(180deg); }
+@media (hover: hover) and (min-width: 901px) {
+  .dd:hover .dd-menu, .dd:focus-within .dd-menu { display: block; }
+  .dd::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 16px; }
+}
+@media (max-width: 900px) {
+  .dd { border-bottom: 1px solid #EEF0F3; }
+  .dd-btn { width: 100%; justify-content: space-between; padding: 12px 4px; }
+  .dd-menu { position: static; box-shadow: none; border: 0; padding: 0 0 8px 12px; min-width: 0; }
+  .dd-menu a { padding: 9px 4px; border-bottom: 0; }
+}
+@media (max-width: 560px) { .brand img { height: 46px; } .brand span { font-size: .85rem; } }
+/* Short note in place of the full statement */
+.choose-note { margin: 24px 0 0; padding: 14px 18px; background: var(--paper); border: 1px solid var(--rule); border-radius: var(--radius); font-size: 15.5px; color: var(--muted); }
+.choose-note a { font-weight: 700; white-space: nowrap; }
+/* Search and filters */
+.finder { padding-top: 20px; }
+.find { width: 100%; font: inherit; font-size: 16px; padding: 11px 16px; border: 1.5px solid var(--rule); border-radius: 999px; background: #fff; color: var(--fg); }
+.find:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px var(--accent-soft); }
+.fchips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.fchip { font: inherit; font-size: 13.5px; font-weight: 700; color: var(--navy); background: #fff; border: 1.5px solid var(--rule); border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.fchip:hover { border-color: var(--blue); }
+.fchip[aria-pressed="true"] { background: var(--blue); border-color: var(--blue); color: #fff; }
+.fcount { margin-top: 8px; font-size: 14px; color: var(--muted); min-height: 1.4em; }
+.hidden { display: none !important; }
+/* Entries: cover, link, tags */
+ul.items li.entry { grid-template-columns: 56px 1fr auto; gap: 4px 16px; }
+ul.items li.entry.no-cover { grid-template-columns: 1fr auto; }
+.cover { width: 56px; height: 84px; object-fit: cover; border-radius: 4px; box-shadow: 0 3px 8px rgba(20,28,50,.18); background: var(--paper); }
+.cover.blank { background: linear-gradient(160deg, #DDE3EA, #B9C6D3); box-shadow: none; }
+.get { display: inline-block; margin-top: 6px; font-size: 14px; font-weight: 700; text-decoration: none; }
+.get:hover { text-decoration: underline; }
+.study { margin-top: 4px; font-size: 14px; font-weight: 700; color: var(--steel); }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.tag { font-size: 12px; font-weight: 700; color: var(--steel); border: 1px solid var(--rule); border-radius: 999px; padding: 1px 8px; }
+.found { margin-top: 4px; font-size: 13.5px; color: var(--muted); }
+.chip.start { color: #fff; background: var(--navy); }
+.chip.new { color: #fff; background: #2E8540; }
+@media (max-width: 560px) {
+  ul.items li.entry { grid-template-columns: 48px 1fr; }
+  ul.items li.entry .item-side { grid-column: 2; }
+  ul.items li.entry.no-cover { grid-template-columns: 1fr; }
+  ul.items li.entry.no-cover .item-side { grid-column: 1; }
+  .cover { width: 48px; height: 72px; }
+}
+/* Home page */
+.results { list-style: none; padding: 0; margin: 10px 0 0; }
+.results li { padding: 10px 0; border-bottom: 1px solid var(--rule); }
+.results a { font-weight: 700; text-decoration: none; }
+.results .where { font-size: 14px; color: var(--muted); }
+.topic-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.topic-grid a { font-size: 14.5px; font-weight: 700; text-decoration: none; color: var(--navy); background: var(--paper); border: 1.5px solid var(--rule); border-radius: 999px; padding: 6px 14px; }
+.topic-grid a:hover { background: var(--blue); border-color: var(--blue); color: #fff; }
 </style>
+<script src="site.js" defer></script>
 </head>
 <body>
 <header class="site-header">
   <div class="wide">
-    <a class="brand" href="https://coolcommunitychurch.github.io/coolchurch-website/index.html"><img src="media/brand/logo.png" alt="Cool Community Church" width="75" height="56"></a>
-    <nav class="site-nav" aria-label="Main">
-      <a href="./">Resources</a>
-      <a class="hide-sm" href="https://coolcommunitychurch.github.io/coolchurch-website/sermons.html">Sermons</a>
-      <a class="hide-sm" href="https://coolcommunitychurch.github.io/coolchurch-website/visit.html">Plan Your Visit</a>
+    <a class="brand" href="./"><img src="media/brand/logo.png" alt="Cool Community Church" width="75" height="56"><span>Recommended<br>Resources</span></a>
+    <button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <a href="./">Home</a>
+      <div class="dd here">
+        <button class="dd-btn" type="button" aria-expanded="false" aria-controls="dd-ministries">Ministries<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="dd-menu" id="dd-ministries">
+          <a href="marriage-family.html">Marriage &amp; Family</a>
+          <a href="small-groups.html">Small Groups &amp; Adult Bible Study</a>
+          <a href="childrens-ministry.html" aria-current="page">Children's Ministry</a>
+          <a href="youth-ministry.html">Youth Ministry</a>
+          <a href="mens-womens-ministry.html">Men's &amp; Women's Ministry</a>
+          <a href="personal-growth-counseling.html">Personal Growth &amp; Counseling</a>
+          <a href="elders-leaders.html">Elders &amp; Leaders</a>
+        </div>
+      </div>
+      <a href="topics.html">Topics</a>
+      <a href="online-resources.html">Online</a>
+      <a href="./#new">What's New</a>
+      <a href="how-we-choose.html">How We Choose</a>
       <a class="btn" href="https://coolcommunitychurch.github.io/coolchurch-website/index.html">Church website</a>
     </nav>
   </div>
@@ -165,36 +261,16 @@ ul.items .t a:hover { text-decoration: underline; }
 </header>
 
 <div class="wrap">
-  <section class="statement" id="how-we-choose">
-    <div class="prose">
-      <h2>How We Choose</h2>
-      <p>The elders are called to guard the flock and to hold firm to sound teaching (Acts 20:28; Titus 1:9). One of the most practical ways we do that is by caring about what our people read and study together. This list is meant to make that easy. We would much rather point you toward good books than spend our time warning you away from bad ones.</p>
-      <p>Every resource here has been read by Pastor Drew, sold by a bookstore we trust, or reviewed and approved. Each one fits the convictions below.</p>
-    </div>
-
-    <ul class="standards">
-      <li><strong>Scripture is our authority</strong><span>The Bible is inspired, inerrant, and sufficient for life and godliness.</span></li>
-      <li><strong>Our doctrinal statement</strong><span>Reformed in our understanding of salvation, dispensational in our reading of Israel and the end times.</span></li>
-      <li><strong>What We Teach</strong><span>We choose books that are in keeping with our church's What We Teach document.</span></li>
-      <li><strong>Biblical counseling</strong><span>We love the rich, Scripture-filled help that comes from the biblical counseling movement: ACBC, CCEF, and authors like Paul Tripp, Ed Welch, and David Powlison. For struggles such as conflict, anger, anxiety, and grief, these are the voices we turn to first.</span></li>
-    </ul>
-
-    <div class="tiers">
-      <h3>What the labels mean</h3>
-      <div class="tier"><span><span class="chip pick">Pastor Drew's pick</span></span><p>Pastor Drew has read it and recommends it personally.</p></div>
-      <div class="tier"><span><span class="chip grace">Grace Books</span></span><p>Sold by Grace Books, the bookstore ministry of Grace Community Church. Anything they carry is approved.</p></div>
-      <div class="tier"><span><span class="chip ok">Approved</span></span><p>Reviewed and approved for use at Cool Community Church.</p></div>
-      <div class="tier"><span><span class="chip challies">Recommended by Tim Challies</span></span><p>From Tim Challies's recommended-book lists at challies.com, checked against our convictions before it was added.</p></div>
-    </div>
-
-    <div class="ask">
-      <h3>Want to use something that isn't listed?</h3>
-      <p>That isn't a no. It just hasn't been reviewed yet. Give Pastor Drew the title, the author, and how you plan to use it, and we'll get back to you.</p>
-      <p>If your group is already partway through a study that isn't on the list, finish it, then choose your next study from here.</p>
-    </div>
-  </section>
+  <p class="choose-note">Everything here has been read by Pastor Drew, sold by a bookstore we trust, or reviewed and approved. <a href="how-we-choose.html">How we choose and what the labels mean →</a></p>
 </div>
 
+<div class="finder" role="search">
+  <div class="wrap">
+    <input type="search" class="find" placeholder="Search this page" aria-label="Search this page">
+    <div class="fchips" aria-label="Show only"><button type="button" class="fchip" data-f="start" aria-pressed="false">Start here</button><button type="button" class="fchip" data-f="new" aria-pressed="false">New</button><button type="button" class="fchip" data-f="pick" aria-pressed="false">Pastor Drew's picks</button><button type="button" class="fchip" data-f="grace" aria-pressed="false">Grace Books</button><button type="button" class="fchip" data-f="readaloud" aria-pressed="false">Read aloud</button><button type="button" class="fchip" data-f="age2-5" aria-pressed="false">Ages 2–5</button><button type="button" class="fchip" data-f="age6-9" aria-pressed="false">Ages 6–9</button><button type="button" class="fchip" data-f="age10-12" aria-pressed="false">Ages 10–12</button><button type="button" class="fchip" data-f="age12+" aria-pressed="false">Ages 12 and up</button></div>
+    <p class="fcount" aria-live="polite"></p>
+  </div>
+</div>
 <nav class="index" aria-label="Sections">
   <div class="wrap">
     <a href="#bibles">Bibles &amp; story Bibles</a>
@@ -210,12 +286,12 @@ ul.items .t a:hover { text-decoration: underline; }
   <section class="group" id="bibles">
     <h2>Bibles &amp; Story Bibles</h2>
     <ul class="items">
-      <li><div class="item-main"><div class="t">The Jesus Storybook Bible</div><div class="a">Sally Lloyd-Jones</div><div class="n">Shows how every story whispers Jesus' name.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The Biggest Story Bible Storybook</div><div class="a">Kevin DeYoung</div><div class="n">The whole story of Scripture for children.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The Big Picture Story Bible</div><div class="a">David Helm</div><div class="n">Traces God's promise from creation to new creation.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">ESV Following Jesus Bible</div><div class="a">Crossway</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
-      <li><div class="item-main"><div class="t">My First Bible in Pictures</div><div class="a">Tyndale</div><div class="n">For the youngest children.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
-      <li><div class="item-main"><div class="t">The New Bible in Pictures for Little Eyes</div><div class="a">Moody Publishers</div><div class="n">For the youngest children.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li class="entry" data-f="pick age2-5 age6-9" data-q="the jesus storybook bible sally lloyd-jones shows how every story whispers jesus&#x27; name."><img class="cover" src="media/covers/jesus-storybook-bible.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">The Jesus Storybook Bible</div><div class="a">Sally Lloyd-Jones</div><div class="n">Shows how every story whispers Jesus' name.</div><div class="tags"><span class="tag age">Ages 2–5</span><span class="tag age">Ages 6–9</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=The+Jesus+Storybook+Bible+Sally+Lloyd-Jones" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick age2-5 age6-9" data-q="the biggest story bible storybook kevin deyoung the whole story of scripture for children."><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">The Biggest Story Bible Storybook</div><div class="a">Kevin DeYoung</div><div class="n">The whole story of Scripture for children.</div><div class="tags"><span class="tag age">Ages 2–5</span><span class="tag age">Ages 6–9</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=The+Biggest+Story+Bible+Storybook+Kevin+DeYoung" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="ok age2-5 age6-9" data-q="the big picture story bible david helm traces god&#x27;s promise from creation to new creation."><img class="cover" src="media/covers/big-picture-story-bible.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">The Big Picture Story Bible</div><div class="a">David Helm</div><div class="n">Traces God's promise from creation to new creation.</div><div class="tags"><span class="tag age">Ages 2–5</span><span class="tag age">Ages 6–9</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=The+Big+Picture+Story+Bible+David+Helm" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li class="entry" data-f="grace age6-9 age10-12" data-q="esv following jesus bible crossway "><img class="cover" src="media/covers/esv-following-jesus-bible.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">ESV Following Jesus Bible</div><div class="a">Crossway</div><div class="tags"><span class="tag age">Ages 6–9</span><span class="tag age">Ages 10–12</span></div><a class="get" href="https://www.gracebooks.com/esv-following-jesus-bible.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li class="entry" data-f="grace age2-5" data-q="my first bible in pictures tyndale for the youngest children."><img class="cover" src="media/covers/my-first-bible-in-pictures.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">My First Bible in Pictures</div><div class="a">Tyndale</div><div class="n">For the youngest children.</div><div class="tags"><span class="tag age">Ages 2–5</span></div><a class="get" href="https://www.gracebooks.com/my-first-bible-in-pictures.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li class="entry" data-f="grace age2-5" data-q="the new bible in pictures for little eyes moody publishers for the youngest children."><img class="cover" src="media/covers/new-bible-in-pictures-for-little-eyes.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">The New Bible in Pictures for Little Eyes</div><div class="a">Moody Publishers</div><div class="n">For the youngest children.</div><div class="tags"><span class="tag age">Ages 2–5</span></div><a class="get" href="https://www.gracebooks.com/new-bible-in-pictures-for-little-eyes.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
     </ul>
   </section>
 
@@ -223,37 +299,37 @@ ul.items .t a:hover { text-decoration: underline; }
     <h2>Big Truths for Little Hearts</h2>
     <p class="group-intro">Books that teach children who God is and what He has done.</p>
     <ul class="items">
-      <li><div class="item-main"><div class="t">Big Theology for Little Hearts</div><div class="a">Crossway</div><div class="n">Board books on single doctrines. Grace Books carries <i>Creation</i> and <i>The Church</i>.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
-      <li><div class="item-main"><div class="t">The Acrostic of God</div><div class="a">New Growth Press</div><div class="n">A rhyming theology for kids.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
-      <li><div class="item-main"><div class="t">The Radical Book for Kids</div><div class="a">New Growth Press</div><div class="n">For ages 8 to 12.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
-      <li><div class="item-main"><div class="t">Everyone a Child Should Know</div><div class="a">10ofThose</div><div class="n">Short biographies of heroes of the faith.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
-      <li><div class="item-main"><div class="t">Heaven for Kids</div><div class="a">Randy Alcorn</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
-      <li><div class="item-main"><div class="t">The Garden, the Curtain and the Cross</div><div class="a">The Good Book Company</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
-      <li><div class="item-main"><div class="t">Seek and Find: Old Testament Bible Stories</div><div class="a">The Good Book Company</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
-      <li><div class="item-main"><div class="t">Baby Believer primers</div><div class="a">Harvest House</div><div class="n"><i>Holy Week</i>, <i>Let There Be Light</i>, and <i>Jesus Heals</i>.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
-      <li><div class="item-main"><div class="t">Leading Little Ones to God</div><div class="a">Marian Schoolland</div><div class="n">A classic children's devotional on the basics of the faith.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li class="entry" data-f="grace age2-5 start" data-q="big theology for little hearts crossway board books on single doctrines. grace books carries creation and the church."><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">Big Theology for Little Hearts</div><div class="a">Crossway</div><div class="n">Board books on single doctrines. Grace Books carries <i>Creation</i> and <i>The Church</i>.</div><div class="tags"><span class="tag age">Ages 2–5</span></div><a class="get" href="https://www.gracebooks.com/search/?q=Big+Theology+for+Little+Hearts" target="_blank" rel="noopener">Find it at Grace Books →</a></div><div class="item-side"><span class="chip start">Start here</span><span class="chip grace">Grace Books</span></div></li>
+      <li class="entry" data-f="grace age6-9 start" data-q="the acrostic of god new growth press a rhyming theology for kids."><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">The Acrostic of God</div><div class="a">New Growth Press</div><div class="n">A rhyming theology for kids.</div><div class="tags"><span class="tag age">Ages 6–9</span></div><a class="get" href="https://www.gracebooks.com/the-acrostic-of-god-a-rhyming-theology-for-kids-ha.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip start">Start here</span><span class="chip grace">Grace Books</span></div></li>
+      <li class="entry" data-f="grace age10-12" data-q="the radical book for kids new growth press for ages 8 to 12."><img class="cover" src="media/covers/radical-book-for-kids.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">The Radical Book for Kids</div><div class="a">New Growth Press</div><div class="n">For ages 8 to 12.</div><div class="tags"><span class="tag age">Ages 10–12</span></div><a class="get" href="https://www.gracebooks.com/the-radical-book-for-kids-exploring-the-roots-and.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li class="entry" data-f="grace age6-9" data-q="everyone a child should know 10ofthose short biographies of heroes of the faith."><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">Everyone a Child Should Know</div><div class="a">10ofThose</div><div class="n">Short biographies of heroes of the faith.</div><div class="tags"><span class="tag age">Ages 6–9</span></div><a class="get" href="https://www.gracebooks.com/everyone-a-child-should-know.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li class="entry" data-f="grace age6-9 age10-12" data-q="heaven for kids randy alcorn "><img class="cover" src="media/covers/heaven-for-kids.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">Heaven for Kids</div><div class="a">Randy Alcorn</div><div class="tags"><span class="tag age">Ages 6–9</span><span class="tag age">Ages 10–12</span></div><a class="get" href="https://www.gracebooks.com/heaven-for-kids.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li class="entry" data-f="grace age2-5 age6-9" data-q="the garden, the curtain and the cross the good book company "><img class="cover" src="media/covers/garden-the-curtain-and-the-cross.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">The Garden, the Curtain and the Cross</div><div class="a">The Good Book Company</div><div class="tags"><span class="tag age">Ages 2–5</span><span class="tag age">Ages 6–9</span></div><a class="get" href="https://www.gracebooks.com/the-garden-the-curtain-and-the-cross.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li class="entry" data-f="grace age2-5 age6-9" data-q="seek and find: old testament bible stories the good book company "><img class="cover" src="media/covers/seek-and-find.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">Seek and Find: Old Testament Bible Stories</div><div class="a">The Good Book Company</div><div class="tags"><span class="tag age">Ages 2–5</span><span class="tag age">Ages 6–9</span></div><a class="get" href="https://www.gracebooks.com/seek-and-find-old-testament-bible-stories.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li class="entry" data-f="grace age2-5" data-q="baby believer primers harvest house holy week, let there be light, and jesus heals."><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">Baby Believer primers</div><div class="a">Harvest House</div><div class="n"><i>Holy Week</i>, <i>Let There Be Light</i>, and <i>Jesus Heals</i>.</div><div class="tags"><span class="tag age">Ages 2–5</span></div><a class="get" href="https://www.gracebooks.com/search/?q=Baby+Believer+primers" target="_blank" rel="noopener">Find it at Grace Books →</a></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li class="entry" data-f="ok age2-5 age6-9" data-q="leading little ones to god marian schoolland a classic children&#x27;s devotional on the basics of the faith."><img class="cover" src="media/covers/leading-little-ones-to-god.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">Leading Little Ones to God</div><div class="a">Marian Schoolland</div><div class="n">A classic children's devotional on the basics of the faith.</div><div class="tags"><span class="tag age">Ages 2–5</span><span class="tag age">Ages 6–9</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Leading+Little+Ones+to+God+Marian+Schoolland" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
     </ul>
   </section>
 
   <section class="group" id="storybooks">
     <h2>Storybooks</h2>
     <ul class="items">
-      <li><div class="item-main"><div class="t">The Barber Who Wanted to Pray</div><div class="a">R. C. Sproul</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The Prince's Poison Cup</div><div class="a">R. C. Sproul</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
-      <li><div class="item-main"><div class="t">The Priest with Dirty Clothes</div><div class="a">R. C. Sproul</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
-      <li><div class="item-main"><div class="t">The Lightlings</div><div class="a">R. C. Sproul</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
-      <li><div class="item-main"><div class="t">The Knight's Map</div><div class="a">R. C. Sproul</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
-      <li><div class="item-main"><div class="t">The Donkey Who Carried a King</div><div class="a">R. C. Sproul</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
-      <li><div class="item-main"><div class="t">The Great Elephant</div><div class="a">An illustrated allegory</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
-      <li><div class="item-main"><div class="t">Little Pilgrim's Big Journey</div><div class="a">Lithos Kids</div><div class="n"><i>The Pilgrim's Progress</i> retold for children.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li class="entry" data-f="pick age6-9 start" data-q="the barber who wanted to pray r. c. sproul "><img class="cover" src="media/covers/barber-who-wanted-to-pray.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">The Barber Who Wanted to Pray</div><div class="a">R. C. Sproul</div><div class="tags"><span class="tag age">Ages 6–9</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=The+Barber+Who+Wanted+to+Pray+R.+C.+Sproul" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip start">Start here</span><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="grace age6-9" data-q="the prince&#x27;s poison cup r. c. sproul "><img class="cover" src="media/covers/princes-poison-cup.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">The Prince's Poison Cup</div><div class="a">R. C. Sproul</div><div class="tags"><span class="tag age">Ages 6–9</span></div><a class="get" href="https://www.gracebooks.com/princes-poison-cup.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li class="entry" data-f="grace age6-9" data-q="the priest with dirty clothes r. c. sproul "><img class="cover" src="media/covers/priest-with-dirty-clothes.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">The Priest with Dirty Clothes</div><div class="a">R. C. Sproul</div><div class="tags"><span class="tag age">Ages 6–9</span></div><a class="get" href="https://www.gracebooks.com/the-priest-with-dirty-clothes.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li class="entry" data-f="grace age6-9" data-q="the lightlings r. c. sproul "><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">The Lightlings</div><div class="a">R. C. Sproul</div><div class="tags"><span class="tag age">Ages 6–9</span></div><a class="get" href="https://www.gracebooks.com/lightlings.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li class="entry" data-f="grace age6-9" data-q="the knight&#x27;s map r. c. sproul "><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">The Knight's Map</div><div class="a">R. C. Sproul</div><div class="tags"><span class="tag age">Ages 6–9</span></div><a class="get" href="https://www.gracebooks.com/the-knights-map.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li class="entry" data-f="grace age6-9" data-q="the donkey who carried a king r. c. sproul "><img class="cover" src="media/covers/donkey-who-carried-a-king.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">The Donkey Who Carried a King</div><div class="a">R. C. Sproul</div><div class="tags"><span class="tag age">Ages 6–9</span></div><a class="get" href="https://www.gracebooks.com/the-donkey-who-carried-a-king.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li class="entry" data-f="grace age6-9" data-q="the great elephant an illustrated allegory "><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">The Great Elephant</div><div class="a">An illustrated allegory</div><div class="tags"><span class="tag age">Ages 6–9</span></div><a class="get" href="https://www.gracebooks.com/the-great-elephant-an-illustrated-allegory.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li class="entry" data-f="grace age2-5 age6-9" data-q="little pilgrim&#x27;s big journey lithos kids the pilgrim&#x27;s progress retold for children."><img class="cover" src="media/covers/little-pilgrims-big-journey.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">Little Pilgrim's Big Journey</div><div class="a">Lithos Kids</div><div class="n"><i>The Pilgrim's Progress</i> retold for children.</div><div class="tags"><span class="tag age">Ages 2–5</span><span class="tag age">Ages 6–9</span></div><a class="get" href="https://www.gracebooks.com/little-pilgrims-big-journey-part-1.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
     </ul>
   </section>
 
   <section class="group" id="hard-topics">
     <h2>Hard Topics, Gently</h2>
     <ul class="items">
-      <li><div class="item-main"><div class="t">God Made All of Me</div><div class="a">Justin &amp; Lindsey Holcomb</div><div class="n">Helps parents teach young children that their bodies are God's good gift and how to keep them safe.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The Talk</div><div class="a">Luke Gilkerson</div><div class="n">Seven lessons to introduce a child to biblical sexuality.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li class="entry" data-f="pick age2-5 age6-9" data-q="god made all of me justin &amp; lindsey holcomb helps parents teach young children that their bodies are god&#x27;s good gift and how to keep them safe."><img class="cover" src="media/covers/god-made-all-of-me.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">God Made All of Me</div><div class="a">Justin &amp; Lindsey Holcomb</div><div class="n">Helps parents teach young children that their bodies are God's good gift and how to keep them safe.</div><div class="tags"><span class="tag age">Ages 2–5</span><span class="tag age">Ages 6–9</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=God+Made+All+of+Me+Justin+%26+Lindsey+Holcomb" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="ok age6-9 age10-12" data-q="the talk luke gilkerson seven lessons to introduce a child to biblical sexuality."><img class="cover" src="media/covers/talk.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">The Talk</div><div class="a">Luke Gilkerson</div><div class="n">Seven lessons to introduce a child to biblical sexuality.</div><div class="tags"><span class="tag age">Ages 6–9</span><span class="tag age">Ages 10–12</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=The+Talk+Luke+Gilkerson" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
     </ul>
   </section>
 
@@ -261,19 +337,19 @@ ul.items .t a:hover { text-decoration: underline; }
     <h2>Reading Aloud Together</h2>
     <p class="group-intro">Good stories for families and classrooms to read together.</p>
     <ul class="items">
-      <li><div class="item-main"><div class="t">A Christmas Carol: Reader's Edition</div><div class="a">Charles Dickens · edited &amp; abridged by Drew Buell · Cool Publishers</div><div class="n">Pastor Drew's own edition, revised and abridged for reading aloud as a family.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The Hobbit</div><div class="a">J. R. R. Tolkien</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The Chronicles of Narnia</div><div class="a">C. S. Lewis</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The Wingfeather Saga</div><div class="a">Andrew Peterson</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The Green Ember</div><div class="a">S. D. Smith</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The Wind in the Willows</div><div class="a">Kenneth Grahame</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Treasure Island</div><div class="a">Robert Louis Stevenson</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Because of Winn-Dixie, The Tale of Despereaux, and Mercy Watson</div><div class="a">Kate DiCamillo</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Letters from Father Christmas</div><div class="a">J. R. R. Tolkien</div><div class="n">For the Christmas season.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The Story of the Other Wise Man</div><div class="a">Henry Van Dyke</div><div class="n">For the Christmas season.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The True Gift</div><div class="a">Patricia MacLachlan</div><div class="n">For the Christmas season.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The Hound of the Baskervilles</div><div class="a">Arthur Conan Doyle</div><div class="n">For older children.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The Fisherman's Lady</div><div class="a">George MacDonald</div><div class="n">A novel for older readers.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick readaloud age10-12 start" data-q="a christmas carol: reader&#x27;s edition charles dickens · edited &amp; abridged by drew buell · cool publishers pastor drew&#x27;s own edition, revised and abridged for reading aloud as a family."><img class="cover" src="media/covers/christmas-carol.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">A Christmas Carol: Reader's Edition</div><div class="a">Charles Dickens · edited &amp; abridged by Drew Buell · Cool Publishers</div><div class="n">Pastor Drew's own edition, revised and abridged for reading aloud as a family.</div><div class="tags"><span class="tag">Read aloud</span><span class="tag age">Ages 10–12</span></div><a class="get" href="https://coolpublishers.com/" target="_blank" rel="noopener">From Cool Publishers →</a></div><div class="item-side"><span class="chip start">Start here</span><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick readaloud age10-12 start" data-q="the hobbit j. r. r. tolkien "><img class="cover" src="media/covers/hobbit.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">The Hobbit</div><div class="a">J. R. R. Tolkien</div><div class="tags"><span class="tag">Read aloud</span><span class="tag age">Ages 10–12</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=The+Hobbit+J.+R.+R.+Tolkien" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip start">Start here</span><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick readaloud age6-9 age10-12" data-q="the chronicles of narnia c. s. lewis "><img class="cover" src="media/covers/chronicles-of-narnia.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">The Chronicles of Narnia</div><div class="a">C. S. Lewis</div><div class="tags"><span class="tag">Read aloud</span><span class="tag age">Ages 6–9</span><span class="tag age">Ages 10–12</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=The+Chronicles+of+Narnia+C.+S.+Lewis" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick readaloud age10-12" data-q="the wingfeather saga andrew peterson "><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">The Wingfeather Saga</div><div class="a">Andrew Peterson</div><div class="tags"><span class="tag">Read aloud</span><span class="tag age">Ages 10–12</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=The+Wingfeather+Saga+Andrew+Peterson" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick readaloud age6-9 age10-12" data-q="the green ember s. d. smith "><img class="cover" src="media/covers/green-ember.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">The Green Ember</div><div class="a">S. D. Smith</div><div class="tags"><span class="tag">Read aloud</span><span class="tag age">Ages 6–9</span><span class="tag age">Ages 10–12</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=The+Green+Ember+S.+D.+Smith" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick readaloud age6-9 age10-12" data-q="the wind in the willows kenneth grahame "><img class="cover" src="media/covers/wind-in-the-willows.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">The Wind in the Willows</div><div class="a">Kenneth Grahame</div><div class="tags"><span class="tag">Read aloud</span><span class="tag age">Ages 6–9</span><span class="tag age">Ages 10–12</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=The+Wind+in+the+Willows+Kenneth+Grahame" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick readaloud age10-12" data-q="treasure island robert louis stevenson "><img class="cover" src="media/covers/treasure-island.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">Treasure Island</div><div class="a">Robert Louis Stevenson</div><div class="tags"><span class="tag">Read aloud</span><span class="tag age">Ages 10–12</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Treasure+Island+Robert+Louis+Stevenson" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick readaloud age6-9" data-q="because of winn-dixie, the tale of despereaux, and mercy watson kate dicamillo "><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">Because of Winn-Dixie, The Tale of Despereaux, and Mercy Watson</div><div class="a">Kate DiCamillo</div><div class="tags"><span class="tag">Read aloud</span><span class="tag age">Ages 6–9</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Because+of+Winn-Dixie%2C+The+Tale+of+Despereaux%2C+and+Mercy+Watson+Kate+DiCamillo" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick readaloud age6-9" data-q="letters from father christmas j. r. r. tolkien for the christmas season."><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">Letters from Father Christmas</div><div class="a">J. R. R. Tolkien</div><div class="n">For the Christmas season.</div><div class="tags"><span class="tag">Read aloud</span><span class="tag age">Ages 6–9</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Letters+from+Father+Christmas+J.+R.+R.+Tolkien" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick readaloud age10-12" data-q="the story of the other wise man henry van dyke for the christmas season."><img class="cover" src="media/covers/story-of-the-other-wise-man.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">The Story of the Other Wise Man</div><div class="a">Henry Van Dyke</div><div class="n">For the Christmas season.</div><div class="tags"><span class="tag">Read aloud</span><span class="tag age">Ages 10–12</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=The+Story+of+the+Other+Wise+Man+Henry+Van+Dyke" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick readaloud age6-9" data-q="the true gift patricia maclachlan for the christmas season."><img class="cover" src="media/covers/true-gift.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">The True Gift</div><div class="a">Patricia MacLachlan</div><div class="n">For the Christmas season.</div><div class="tags"><span class="tag">Read aloud</span><span class="tag age">Ages 6–9</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=The+True+Gift+Patricia+MacLachlan" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick readaloud age12+ new" data-q="the hound of the baskervilles arthur conan doyle for older children."><img class="cover" src="media/covers/hound-of-the-baskervilles.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">The Hound of the Baskervilles</div><div class="a">Arthur Conan Doyle</div><div class="n">For older children.</div><div class="tags"><span class="tag">Read aloud</span><span class="tag age">Ages 12 and up</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=The+Hound+of+the+Baskervilles+Arthur+Conan+Doyle" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip new">New</span><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick readaloud age12+ new" data-q="the fisherman&#x27;s lady george macdonald a novel for older readers."><img class="cover" src="media/covers/fishermans-lady.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">The Fisherman's Lady</div><div class="a">George MacDonald</div><div class="n">A novel for older readers.</div><div class="tags"><span class="tag">Read aloud</span><span class="tag age">Ages 12 and up</span></div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=The+Fisherman%27s+Lady+George+MacDonald" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip new">New</span><span class="chip pick">Pastor Drew's pick</span></div></li>
     </ul>
   </section>
 
@@ -310,6 +386,8 @@ ul.items .t a:hover { text-decoration: underline; }
           <li><a href="personal-growth-counseling.html">Personal Growth &amp; Counseling</a></li>
           <li><a href="elders-leaders.html">Elders &amp; Leaders</a></li>
           <li><a href="online-resources.html">Online Resources</a></li>
+          <li><a href="topics.html">Browse by topic</a></li>
+          <li><a href="how-we-choose.html">How we choose</a></li>
         </ul>
       </div>
       <div>
@@ -317,6 +395,7 @@ ul.items .t a:hover { text-decoration: underline; }
         <ul>
           <li><a href="https://coolcommunitychurch.github.io/coolchurch-website/about.html">About</a></li>
           <li><a href="https://coolcommunitychurch.github.io/coolchurch-website/sermons.html">Sermons</a></li>
+          <li><a href="https://coolcommunitychurch.github.io/coolchurch-website/visit.html">Plan Your Visit</a></li>
           <li><a href="https://coolcommunitychurch.github.io/coolchurch-website/crossroads.html">Crossroads Counseling</a></li>
           <li><a href="https://subsplash.com/coolcommunitychurch/app" target="_blank" rel="noopener">Get the app</a></li>
         </ul>

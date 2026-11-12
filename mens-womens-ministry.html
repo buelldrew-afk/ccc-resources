@@ -124,6 +124,7 @@ ul.items .t a { text-decoration: none; }
 ul.items .t a:hover { text-decoration: underline; }
 .feedback { margin-top: 48px; background: var(--paper); border: 1px solid var(--rule); border-left: 4px solid var(--blue); border-radius: var(--radius); padding: 20px 22px; display: grid; gap: 8px; }
 .feedback p { font-size: 16px; }
+/* Church site header and footer */
 .wide { max-width: 1120px; margin: 0 auto; padding-inline: max(16px, env(safe-area-inset-left, 0px)) max(16px, env(safe-area-inset-right, 0px)); }
 .site-header { background: #fff; border-bottom: 1px solid var(--rule); }
 .site-header .wide { display: flex; align-items: center; gap: 20px; min-height: 72px; }
@@ -140,17 +141,112 @@ ul.items .t a:hover { text-decoration: underline; }
 .site-footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
 .site-footer .logo { width: 120px; height: auto; margin-bottom: 16px; display: block; }
 .site-footer .legal { margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.15); font-size: .85rem; color: #A7A9AC; }
-@media (max-width: 560px) { .site-nav { gap: 14px; } .site-nav .hide-sm { display: none; } .brand img { height: 46px; } }
+.site-header { position: relative; z-index: 20; }
+.site-nav { gap: 22px; }
+.site-nav .btn { padding: 10px 18px; }
+.menu-toggle { display: none; margin-left: auto; background: none; border: 0; padding: 8px; cursor: pointer; color: var(--navy); }
+.menu-toggle svg { width: 28px; height: 28px; display: block; }
+@media (max-width: 900px) {
+  .menu-toggle { display: block; }
+  .site-nav { display: none; position: absolute; left: 0; right: 0; top: 72px; flex-direction: column; align-items: stretch; gap: 0;
+              background: #fff; border-bottom: 1px solid var(--rule); padding: 8px 16px 16px; box-shadow: 0 12px 24px rgba(20,28,50,.12); }
+  .site-nav.open { display: flex; }
+  .site-nav a { padding: 12px 4px; border-bottom: 1px solid #EEF0F3; }
+  .site-nav .btn { margin-top: 10px; text-align: center; border-bottom: 0; }
+}
+/* The resource menu: brand text and the Ministries drop-down */
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand span { color: var(--navy); font-weight: 800; font-size: .95rem; line-height: 1.15; letter-spacing: .01em; border-left: 1.5px solid var(--rule); padding-left: 12px; }
+.site-nav a[aria-current="page"], .dd.here > .dd-btn { color: var(--blue); }
+.dd { position: relative; }
+.dd-btn { font: inherit; font-weight: 600; font-size: .98rem; color: var(--fg); background: none; border: 0; padding: 0; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
+.dd-btn svg { width: 16px; height: 16px; transition: transform .15s; }
+.dd-btn:hover { color: var(--blue); }
+.dd-menu { display: none; position: absolute; top: calc(100% + 14px); left: -16px; min-width: 300px; background: #fff; border: 1px solid var(--rule); border-radius: var(--radius); box-shadow: 0 16px 32px rgba(20,28,50,.14); padding: 8px; z-index: 30; }
+.dd-menu a { display: block; padding: 9px 12px; border-radius: 6px; font-size: .95rem; }
+.dd-menu a:hover { background: var(--paper); }
+.dd.open .dd-menu { display: block; }
+.dd.open .dd-btn svg { transform: rotate(180deg); }
+@media (hover: hover) and (min-width: 901px) {
+  .dd:hover .dd-menu, .dd:focus-within .dd-menu { display: block; }
+  .dd::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 16px; }
+}
+@media (max-width: 900px) {
+  .dd { border-bottom: 1px solid #EEF0F3; }
+  .dd-btn { width: 100%; justify-content: space-between; padding: 12px 4px; }
+  .dd-menu { position: static; box-shadow: none; border: 0; padding: 0 0 8px 12px; min-width: 0; }
+  .dd-menu a { padding: 9px 4px; border-bottom: 0; }
+}
+@media (max-width: 560px) { .brand img { height: 46px; } .brand span { font-size: .85rem; } }
+/* Short note in place of the full statement */
+.choose-note { margin: 24px 0 0; padding: 14px 18px; background: var(--paper); border: 1px solid var(--rule); border-radius: var(--radius); font-size: 15.5px; color: var(--muted); }
+.choose-note a { font-weight: 700; white-space: nowrap; }
+/* Search and filters */
+.finder { padding-top: 20px; }
+.find { width: 100%; font: inherit; font-size: 16px; padding: 11px 16px; border: 1.5px solid var(--rule); border-radius: 999px; background: #fff; color: var(--fg); }
+.find:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px var(--accent-soft); }
+.fchips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.fchip { font: inherit; font-size: 13.5px; font-weight: 700; color: var(--navy); background: #fff; border: 1.5px solid var(--rule); border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.fchip:hover { border-color: var(--blue); }
+.fchip[aria-pressed="true"] { background: var(--blue); border-color: var(--blue); color: #fff; }
+.fcount { margin-top: 8px; font-size: 14px; color: var(--muted); min-height: 1.4em; }
+.hidden { display: none !important; }
+/* Entries: cover, link, tags */
+ul.items li.entry { grid-template-columns: 56px 1fr auto; gap: 4px 16px; }
+ul.items li.entry.no-cover { grid-template-columns: 1fr auto; }
+.cover { width: 56px; height: 84px; object-fit: cover; border-radius: 4px; box-shadow: 0 3px 8px rgba(20,28,50,.18); background: var(--paper); }
+.cover.blank { background: linear-gradient(160deg, #DDE3EA, #B9C6D3); box-shadow: none; }
+.get { display: inline-block; margin-top: 6px; font-size: 14px; font-weight: 700; text-decoration: none; }
+.get:hover { text-decoration: underline; }
+.study { margin-top: 4px; font-size: 14px; font-weight: 700; color: var(--steel); }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.tag { font-size: 12px; font-weight: 700; color: var(--steel); border: 1px solid var(--rule); border-radius: 999px; padding: 1px 8px; }
+.found { margin-top: 4px; font-size: 13.5px; color: var(--muted); }
+.chip.start { color: #fff; background: var(--navy); }
+.chip.new { color: #fff; background: #2E8540; }
+@media (max-width: 560px) {
+  ul.items li.entry { grid-template-columns: 48px 1fr; }
+  ul.items li.entry .item-side { grid-column: 2; }
+  ul.items li.entry.no-cover { grid-template-columns: 1fr; }
+  ul.items li.entry.no-cover .item-side { grid-column: 1; }
+  .cover { width: 48px; height: 72px; }
+}
+/* Home page */
+.results { list-style: none; padding: 0; margin: 10px 0 0; }
+.results li { padding: 10px 0; border-bottom: 1px solid var(--rule); }
+.results a { font-weight: 700; text-decoration: none; }
+.results .where { font-size: 14px; color: var(--muted); }
+.topic-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.topic-grid a { font-size: 14.5px; font-weight: 700; text-decoration: none; color: var(--navy); background: var(--paper); border: 1.5px solid var(--rule); border-radius: 999px; padding: 6px 14px; }
+.topic-grid a:hover { background: var(--blue); border-color: var(--blue); color: #fff; }
 </style>
+<script src="site.js" defer></script>
 </head>
 <body>
 <header class="site-header">
   <div class="wide">
-    <a class="brand" href="https://coolcommunitychurch.github.io/coolchurch-website/index.html"><img src="media/brand/logo.png" alt="Cool Community Church" width="75" height="56"></a>
-    <nav class="site-nav" aria-label="Main">
-      <a href="./">Resources</a>
-      <a class="hide-sm" href="https://coolcommunitychurch.github.io/coolchurch-website/sermons.html">Sermons</a>
-      <a class="hide-sm" href="https://coolcommunitychurch.github.io/coolchurch-website/visit.html">Plan Your Visit</a>
+    <a class="brand" href="./"><img src="media/brand/logo.png" alt="Cool Community Church" width="75" height="56"><span>Recommended<br>Resources</span></a>
+    <button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <a href="./">Home</a>
+      <div class="dd here">
+        <button class="dd-btn" type="button" aria-expanded="false" aria-controls="dd-ministries">Ministries<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="dd-menu" id="dd-ministries">
+          <a href="marriage-family.html">Marriage &amp; Family</a>
+          <a href="small-groups.html">Small Groups &amp; Adult Bible Study</a>
+          <a href="childrens-ministry.html">Children's Ministry</a>
+          <a href="youth-ministry.html">Youth Ministry</a>
+          <a href="mens-womens-ministry.html" aria-current="page">Men's &amp; Women's Ministry</a>
+          <a href="personal-growth-counseling.html">Personal Growth &amp; Counseling</a>
+          <a href="elders-leaders.html">Elders &amp; Leaders</a>
+        </div>
+      </div>
+      <a href="topics.html">Topics</a>
+      <a href="online-resources.html">Online</a>
+      <a href="./#new">What's New</a>
+      <a href="how-we-choose.html">How We Choose</a>
       <a class="btn" href="https://coolcommunitychurch.github.io/coolchurch-website/index.html">Church website</a>
     </nav>
   </div>
@@ -165,36 +261,16 @@ ul.items .t a:hover { text-decoration: underline; }
 </header>
 
 <div class="wrap">
-  <section class="statement" id="how-we-choose">
-    <div class="prose">
-      <h2>How We Choose</h2>
-      <p>The elders are called to guard the flock and to hold firm to sound teaching (Acts 20:28; Titus 1:9). One of the most practical ways we do that is by caring about what our people read and study together. This list is meant to make that easy. We would much rather point you toward good books than spend our time warning you away from bad ones.</p>
-      <p>Every resource here has been read by Pastor Drew, sold by a bookstore we trust, or reviewed and approved. Each one fits the convictions below.</p>
-    </div>
-
-    <ul class="standards">
-      <li><strong>Scripture is our authority</strong><span>The Bible is inspired, inerrant, and sufficient for life and godliness.</span></li>
-      <li><strong>Our doctrinal statement</strong><span>Reformed in our understanding of salvation, dispensational in our reading of Israel and the end times.</span></li>
-      <li><strong>What We Teach</strong><span>We choose books that are in keeping with our church's What We Teach document.</span></li>
-      <li><strong>Biblical counseling</strong><span>We love the rich, Scripture-filled help that comes from the biblical counseling movement: ACBC, CCEF, and authors like Paul Tripp, Ed Welch, and David Powlison. For struggles such as conflict, anger, anxiety, and grief, these are the voices we turn to first.</span></li>
-    </ul>
-
-    <div class="tiers">
-      <h3>What the labels mean</h3>
-      <div class="tier"><span><span class="chip pick">Pastor Drew's pick</span></span><p>Pastor Drew has read it and recommends it personally.</p></div>
-      <div class="tier"><span><span class="chip grace">Grace Books</span></span><p>Sold by Grace Books, the bookstore ministry of Grace Community Church. Anything they carry is approved.</p></div>
-      <div class="tier"><span><span class="chip ok">Approved</span></span><p>Reviewed and approved for use at Cool Community Church.</p></div>
-      <div class="tier"><span><span class="chip challies">Recommended by Tim Challies</span></span><p>From Tim Challies's recommended-book lists at challies.com, checked against our convictions before it was added.</p></div>
-    </div>
-
-    <div class="ask">
-      <h3>Want to use something that isn't listed?</h3>
-      <p>That isn't a no. It just hasn't been reviewed yet. Give Pastor Drew the title, the author, and how you plan to use it, and we'll get back to you.</p>
-      <p>If your group is already partway through a study that isn't on the list, finish it, then choose your next study from here.</p>
-    </div>
-  </section>
+  <p class="choose-note">Everything here has been read by Pastor Drew, sold by a bookstore we trust, or reviewed and approved. <a href="how-we-choose.html">How we choose and what the labels mean →</a></p>
 </div>
 
+<div class="finder" role="search">
+  <div class="wrap">
+    <input type="search" class="find" placeholder="Search this page" aria-label="Search this page">
+    <div class="fchips" aria-label="Show only"><button type="button" class="fchip" data-f="start" aria-pressed="false">Start here</button><button type="button" class="fchip" data-f="new" aria-pressed="false">New</button><button type="button" class="fchip" data-f="pick" aria-pressed="false">Pastor Drew's picks</button><button type="button" class="fchip" data-f="grace" aria-pressed="false">Grace Books</button><button type="button" class="fchip" data-f="challies" aria-pressed="false">Tim Challies</button><button type="button" class="fchip" data-f="leaders" aria-pressed="false">For leaders</button></div>
+    <p class="fcount" aria-live="polite"></p>
+  </div>
+</div>
 <nav class="index" aria-label="Sections">
   <div class="wrap">
     <a href="#studies">Group studies</a>
@@ -209,61 +285,61 @@ ul.items .t a:hover { text-decoration: underline; }
   <section class="group" id="studies">
     <h2>Group Studies</h2>
     <ul class="items">
-      <li><div class="item-main"><div class="t">Disciplines of a Godly Man</div><div class="a">R. Kent Hughes</div><div class="n">Men's study. The updated edition includes a complete study guide.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Men of the Word</div><div class="a">Nathan Busenitz, ed.</div><div class="n">Men's study. Character studies of men in Scripture who walked with God.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Disciplines of a Godly Woman</div><div class="a">Barbara Hughes</div><div class="n">Women's study.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Twelve Extraordinary Women</div><div class="a">John MacArthur</div><div class="n">Women's study, with a companion workbook.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">Twelve Ordinary Men</div><div class="a">John MacArthur</div><div class="n">Men's study on the twelve disciples.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li class="entry" data-f="pick" data-q="disciplines of a godly man r. kent hughes men&#x27;s study. the updated edition includes a complete study guide."><img class="cover" src="media/covers/disciplines-of-a-godly-man.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">Disciplines of a Godly Man</div><div class="a">R. Kent Hughes</div><div class="n">Men's study. The updated edition includes a complete study guide.</div><div class="study">19 chapters · study guide built into the updated edition</div><a class="get" href="https://www.gracebooks.com/disciplines-of-a-godly-man-updated-edition-with-co.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick" data-q="men of the word nathan busenitz, ed. men&#x27;s study. character studies of men in scripture who walked with god."><img class="cover" src="media/covers/men-of-the-word.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">Men of the Word</div><div class="a">Nathan Busenitz, ed.</div><div class="n">Men's study. Character studies of men in Scripture who walked with God.</div><div class="study">Chapters by Grace Church pastors · group-study guide in the back</div><a class="get" href="https://www.gracebooks.com/men-of-the-word-insights-for-life-from-the-heroes.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick" data-q="disciplines of a godly woman barbara hughes women&#x27;s study."><img class="cover" src="media/covers/disciplines-of-a-godly-woman.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">Disciplines of a Godly Woman</div><div class="a">Barbara Hughes</div><div class="n">Women's study.</div><div class="study">Book with Bible study helps · paperback is out of print</div><a class="get" href="https://www.gracebooks.com/disciplines-of-a-godly-woman.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="pick" data-q="twelve extraordinary women john macarthur women&#x27;s study, with a companion workbook."><img class="cover" src="media/covers/twelve-extraordinary-women.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">Twelve Extraordinary Women</div><div class="a">John MacArthur</div><div class="n">Women's study, with a companion workbook.</div><div class="study">Companion workbook with Scripture and study questions</div><a class="get" href="https://www.gracebooks.com/twelve-extraordinary-women-workbook.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="grace" data-q="twelve ordinary men john macarthur men&#x27;s study on the twelve disciples."><img class="cover" src="media/covers/twelve-ordinary-men.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">Twelve Ordinary Men</div><div class="a">John MacArthur</div><div class="n">Men's study on the twelve disciples.</div><div class="study">Companion workbook with Scripture and study questions</div><a class="get" href="https://www.gracebooks.com/twelve-ordinary-men-softcover.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
     </ul>
   </section>
 
   <section class="group" id="men">
     <h2>For Men</h2>
     <ul class="items">
-      <li><div class="item-main"><div class="t">Tender Warrior</div><div class="a">Stu Weber</div><div class="n">Biblical manhood for husbands and fathers.</div></div><div class="item-side"><span class="chip pick">Pastor Drew's pick</span></div></li>
-      <li><div class="item-main"><div class="t">The Power of Integrity</div><div class="a">John MacArthur</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
-      <li><div class="item-main"><div class="t">Biblical Manhood</div><div class="a">Stuart Scott</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
-      <li><div class="item-main"><div class="t">The Complete Husband</div><div class="a">Lou Priolo</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
-      <li><div class="item-main"><div class="t">The Exemplary Husband</div><div class="a">Stuart Scott</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Future Men</div><div class="a">Douglas Wilson</div><div class="n">Raising boys to be men.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Let the Men Be Men</div><div class="a">Chris Mueller</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">What Every Man Wishes His Father Had Told Him</div><div class="a">Byron Yawn</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Fight Like a Man</div><div class="a">E. Z. Zwayne</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Spirit Warriors</div><div class="a">Stu Weber</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">The Man in the Mirror</div><div class="a">Patrick Morley</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">The Measure of a Man</div><div class="a">Gene Getz</div><div class="n">The qualities of a godly man from 1 Timothy 3 and Titus 1.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">The Toxic War on Masculinity</div><div class="a">Nancy Pearcey</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Masculine Christianity</div><div class="a">Zachary Garris</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">The Big Fight</div><div class="a">Tim Thornborough</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Men Counseling Men</div><div class="a">John D. Street, ed.</div><div class="n">For leaders.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
-      <li><div class="item-main"><div class="t">Using Authority Well</div><div class="a">Jonathan Leeman</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
-      <li><div class="item-main"><div class="t">How to Lead Your Family</div><div class="a">Joel Beeke</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
-      <li><div class="item-main"><div class="t">The Redeemed Man</div><div class="a">Joel Beeke, Richard Phillips &amp; Paul Smalley, eds.</div><div class="n">Pastors and teachers on how grace reshapes a man's faith, family, and work.</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
-      <li><div class="item-main"><div class="t">The Humility Project for Men</div><div class="a">Ed Welch</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
-      <li><div class="item-main"><div class="t">The Manual</div><div class="a">Al Stewart</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
-      <li><div class="item-main"><div class="t">Reclaiming Masculinity</div><div class="a">Matt Fuller</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li class="entry" data-f="pick start" data-q="tender warrior stu weber biblical manhood for husbands and fathers."><img class="cover" src="media/covers/tender-warrior.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">Tender Warrior</div><div class="a">Stu Weber</div><div class="n">Biblical manhood for husbands and fathers.</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Tender+Warrior+Stu+Weber" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip start">Start here</span><span class="chip pick">Pastor Drew's pick</span></div></li>
+      <li class="entry" data-f="grace" data-q="the power of integrity john macarthur "><img class="cover" src="media/covers/power-of-integrity.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">The Power of Integrity</div><div class="a">John MacArthur</div><a class="get" href="https://www.gracebooks.com/power-of-integrity.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li class="entry" data-f="grace" data-q="biblical manhood stuart scott "><img class="cover" src="media/covers/biblical-manhood.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">Biblical Manhood</div><div class="a">Stuart Scott</div><a class="get" href="https://www.gracebooks.com/biblical-manhood.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li class="entry" data-f="grace" data-q="the complete husband lou priolo "><img class="cover" src="media/covers/complete-husband.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">The Complete Husband</div><div class="a">Lou Priolo</div><a class="get" href="https://www.gracebooks.com/the-complete-husband-2nd-ed.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li class="entry" data-f="ok" data-q="the exemplary husband stuart scott "><img class="cover" src="media/covers/exemplary-husband.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">The Exemplary Husband</div><div class="a">Stuart Scott</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=The+Exemplary+Husband+Stuart+Scott" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li class="entry" data-f="ok" data-q="future men douglas wilson raising boys to be men."><img class="cover" src="media/covers/future-men.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">Future Men</div><div class="a">Douglas Wilson</div><div class="n">Raising boys to be men.</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Future+Men+Douglas+Wilson" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li class="entry" data-f="ok" data-q="let the men be men chris mueller "><img class="cover" src="media/covers/let-the-men-be-men.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">Let the Men Be Men</div><div class="a">Chris Mueller</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Let+the+Men+Be+Men+Chris+Mueller" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li class="entry" data-f="ok" data-q="what every man wishes his father had told him byron yawn "><img class="cover" src="media/covers/what-every-man-wishes-his-father-had-told-him.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">What Every Man Wishes His Father Had Told Him</div><div class="a">Byron Yawn</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=What+Every+Man+Wishes+His+Father+Had+Told+Him+Byron+Yawn" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li class="entry" data-f="ok" data-q="fight like a man e. z. zwayne "><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">Fight Like a Man</div><div class="a">E. Z. Zwayne</div><a class="get" href="https://www.gracebooks.com/fight-like-a-man.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li class="entry" data-f="ok" data-q="spirit warriors stu weber "><img class="cover" src="media/covers/spirit-warriors.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">Spirit Warriors</div><div class="a">Stu Weber</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Spirit+Warriors+Stu+Weber" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li class="entry" data-f="ok" data-q="the man in the mirror patrick morley "><img class="cover" src="media/covers/man-in-the-mirror.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">The Man in the Mirror</div><div class="a">Patrick Morley</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=The+Man+in+the+Mirror+Patrick+Morley" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li class="entry" data-f="ok" data-q="the measure of a man gene getz the qualities of a godly man from 1 timothy 3 and titus 1."><img class="cover" src="media/covers/measure-of-a-man.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">The Measure of a Man</div><div class="a">Gene Getz</div><div class="n">The qualities of a godly man from 1 Timothy 3 and Titus 1.</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=The+Measure+of+a+Man+Gene+Getz" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li class="entry" data-f="ok" data-q="the toxic war on masculinity nancy pearcey "><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">The Toxic War on Masculinity</div><div class="a">Nancy Pearcey</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=The+Toxic+War+on+Masculinity+Nancy+Pearcey" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li class="entry" data-f="ok" data-q="masculine christianity zachary garris "><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">Masculine Christianity</div><div class="a">Zachary Garris</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Masculine+Christianity+Zachary+Garris" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li class="entry" data-f="ok" data-q="the big fight tim thornborough "><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">The Big Fight</div><div class="a">Tim Thornborough</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=The+Big+Fight+Tim+Thornborough" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li class="entry" data-f="grace leaders" data-q="men counseling men john d. street, ed. for leaders."><img class="cover" src="media/covers/men-counseling-men.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">Men Counseling Men</div><div class="a">John D. Street, ed.</div><div class="n">For leaders.</div><div class="tags"><span class="tag">For leaders</span></div><a class="get" href="https://www.gracebooks.com/men-counseling-men.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li class="entry" data-f="challies" data-q="using authority well jonathan leeman "><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">Using Authority Well</div><div class="a">Jonathan Leeman</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Using+Authority+Well+Jonathan+Leeman" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li class="entry" data-f="challies" data-q="how to lead your family joel beeke "><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">How to Lead Your Family</div><div class="a">Joel Beeke</div><a class="get" href="https://www.gracebooks.com/how-to-lead-your-family-a-guide-for-men-wanting-to.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li class="entry" data-f="challies new" data-q="the redeemed man joel beeke, richard phillips &amp; paul smalley, eds. pastors and teachers on how grace reshapes a man&#x27;s faith, family, and work."><img class="cover" src="media/covers/redeemed-man.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">The Redeemed Man</div><div class="a">Joel Beeke, Richard Phillips &amp; Paul Smalley, eds.</div><div class="n">Pastors and teachers on how grace reshapes a man's faith, family, and work.</div><a class="get" href="https://www.gracebooks.com/the-redeemed-man.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip new">New</span><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li class="entry" data-f="challies" data-q="the humility project for men ed welch "><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">The Humility Project for Men</div><div class="a">Ed Welch</div><a class="get" href="https://www.gracebooks.com/the-humility-project-for-men-study-guide.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li class="entry" data-f="challies" data-q="the manual al stewart "><img class="cover" src="media/covers/manual.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">The Manual</div><div class="a">Al Stewart</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=The+Manual+Al+Stewart" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li class="entry" data-f="challies" data-q="reclaiming masculinity matt fuller "><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">Reclaiming Masculinity</div><div class="a">Matt Fuller</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Reclaiming+Masculinity+Matt+Fuller" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
     </ul>
   </section>
 
   <section class="group" id="women">
     <h2>For Women</h2>
     <ul class="items">
-      <li><div class="item-main"><div class="t">The Excellent Wife</div><div class="a">Martha Peace</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
-      <li><div class="item-main"><div class="t">The Gospel Comes with a House Key</div><div class="a">Rosaria Butterfield</div><div class="n">Ordinary, gospel-centered hospitality.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
-      <li><div class="item-main"><div class="t">Wise Words for Moms</div><div class="a">Ginger Hubbard</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
-      <li><div class="item-main"><div class="t">Faithful Women and Their Extraordinary God</div><div class="a">Noël Piper</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">A Young Woman After God's Own Heart</div><div class="a">Elizabeth George</div><div class="n">For young women.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Shopping for Time</div><div class="a">Carolyn Mahaney &amp; daughters</div><div class="n">Using time well.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Fierce Women</div><div class="a">Kimberly Wagner</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
-      <li><div class="item-main"><div class="t">True Woman 101</div><div class="a">Mary Kassian &amp; Nancy DeMoss Wolgemuth</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
-      <li><div class="item-main"><div class="t">True Beauty</div><div class="a">Carolyn Mahaney &amp; Nicole Whitacre</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
-      <li><div class="item-main"><div class="t">To Be a Woman</div><div class="a">Katie McCoy</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
-      <li><div class="item-main"><div class="t">Risen Motherhood</div><div class="a">Emily Jensen &amp; Laura Wifler</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
-      <li><div class="item-main"><div class="t">Making Good Return</div><div class="a">Kathleen Nielson</div><div class="n">For women in later life.</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
-      <li><div class="item-main"><div class="t">Homemaking Matters</div><div class="a">Marci Ferrell</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
-      <li><div class="item-main"><div class="t">Mothering Against Futility</div><div class="a">Simona Gorton</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
-      <li><div class="item-main"><div class="t">A Place of Quiet Rest</div><div class="a">Nancy Leigh DeMoss</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
-      <li><div class="item-main"><div class="t">Purity Is Possible</div><div class="a">Helen Thorne</div></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li class="entry" data-f="grace start" data-q="the excellent wife martha peace "><img class="cover" src="media/covers/excellent-wife.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">The Excellent Wife</div><div class="a">Martha Peace</div><a class="get" href="https://www.gracebooks.com/excellent-wife.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip start">Start here</span><span class="chip grace">Grace Books</span></div></li>
+      <li class="entry" data-f="grace start" data-q="the gospel comes with a house key rosaria butterfield ordinary, gospel-centered hospitality."><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">The Gospel Comes with a House Key</div><div class="a">Rosaria Butterfield</div><div class="n">Ordinary, gospel-centered hospitality.</div><a class="get" href="https://www.gracebooks.com/the-gospel-comes-with-a-house-key.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip start">Start here</span><span class="chip grace">Grace Books</span></div></li>
+      <li class="entry" data-f="grace" data-q="wise words for moms ginger hubbard "><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">Wise Words for Moms</div><div class="a">Ginger Hubbard</div><a class="get" href="https://www.gracebooks.com/wise-words-for-moms-0966378660.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li class="entry" data-f="ok" data-q="faithful women and their extraordinary god noël piper "><img class="cover" src="media/covers/faithful-women-and-their-extraordinary-god.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">Faithful Women and Their Extraordinary God</div><div class="a">Noël Piper</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Faithful+Women+and+Their+Extraordinary+God+No%C3%ABl+Piper" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li class="entry" data-f="ok" data-q="a young woman after god&#x27;s own heart elizabeth george for young women."><img class="cover" src="media/covers/young-woman-after-gods-own-heart.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">A Young Woman After God's Own Heart</div><div class="a">Elizabeth George</div><div class="n">For young women.</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=A+Young+Woman+After+God%27s+Own+Heart+Elizabeth+George" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li class="entry" data-f="ok" data-q="shopping for time carolyn mahaney &amp; daughters using time well."><img class="cover" src="media/covers/shopping-for-time.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">Shopping for Time</div><div class="a">Carolyn Mahaney &amp; daughters</div><div class="n">Using time well.</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Shopping+for+Time+Carolyn+Mahaney+%26+daughters" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li class="entry" data-f="challies" data-q="fierce women kimberly wagner "><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">Fierce Women</div><div class="a">Kimberly Wagner</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Fierce+Women+Kimberly+Wagner" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li class="entry" data-f="challies" data-q="true woman 101 mary kassian &amp; nancy demoss wolgemuth "><img class="cover" src="media/covers/true-woman-101.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">True Woman 101</div><div class="a">Mary Kassian &amp; Nancy DeMoss Wolgemuth</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=True+Woman+101+Mary+Kassian+%26+Nancy+DeMoss+Wolgemuth" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li class="entry" data-f="challies" data-q="true beauty carolyn mahaney &amp; nicole whitacre "><img class="cover" src="media/covers/true-beauty.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">True Beauty</div><div class="a">Carolyn Mahaney &amp; Nicole Whitacre</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=True+Beauty+Carolyn+Mahaney+%26+Nicole+Whitacre" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li class="entry" data-f="challies" data-q="to be a woman katie mccoy "><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">To Be a Woman</div><div class="a">Katie McCoy</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=To+Be+a+Woman+Katie+McCoy" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li class="entry" data-f="challies" data-q="risen motherhood emily jensen &amp; laura wifler "><img class="cover" src="media/covers/risen-motherhood.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">Risen Motherhood</div><div class="a">Emily Jensen &amp; Laura Wifler</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Risen+Motherhood+Emily+Jensen+%26+Laura+Wifler" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li class="entry" data-f="challies" data-q="making good return kathleen nielson for women in later life."><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">Making Good Return</div><div class="a">Kathleen Nielson</div><div class="n">For women in later life.</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Making+Good+Return+Kathleen+Nielson" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li class="entry" data-f="challies" data-q="homemaking matters marci ferrell "><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">Homemaking Matters</div><div class="a">Marci Ferrell</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Homemaking+Matters+Marci+Ferrell" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li class="entry" data-f="challies" data-q="mothering against futility simona gorton "><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">Mothering Against Futility</div><div class="a">Simona Gorton</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Mothering+Against+Futility+Simona+Gorton" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li class="entry" data-f="challies" data-q="a place of quiet rest nancy leigh demoss "><img class="cover" src="media/covers/place-of-quiet-rest.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">A Place of Quiet Rest</div><div class="a">Nancy Leigh DeMoss</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=A+Place+of+Quiet+Rest+Nancy+Leigh+DeMoss" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
+      <li class="entry" data-f="challies" data-q="purity is possible helen thorne "><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">Purity Is Possible</div><div class="a">Helen Thorne</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Purity+Is+Possible+Helen+Thorne" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip challies">Recommended by Tim Challies</span></div></li>
     </ul>
   </section>
 
@@ -271,12 +347,12 @@ ul.items .t a:hover { text-decoration: underline; }
     <h2>God's Design for Men &amp; Women</h2>
     <p class="group-intro">For leaders and serious readers.</p>
     <ul class="items">
-      <li><div class="item-main"><div class="t">Divine Design</div><div class="a">John MacArthur</div><div class="n">God's complementary roles for men and women.</div></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
-      <li><div class="item-main"><div class="t">Men and Women in the Church</div><div class="a">Kevin DeYoung</div><div class="n">A short, biblical, practical introduction.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Recovering Biblical Manhood and Womanhood</div><div class="a">John Piper &amp; Wayne Grudem, eds.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Biblical Foundations for Manhood and Womanhood</div><div class="a">Wayne Grudem, ed.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">To Preach or Not to Preach</div><div class="a">William Varner</div><div class="n">Women's ministry then and now.</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
-      <li><div class="item-main"><div class="t">Women's Ministry in the Local Church</div><div class="a">J. Ligon Duncan &amp; Susan Hunt</div></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li class="entry" data-f="grace" data-q="divine design john macarthur god&#x27;s complementary roles for men and women."><img class="cover" src="media/covers/divine-design.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">Divine Design</div><div class="a">John MacArthur</div><div class="n">God's complementary roles for men and women.</div><a class="get" href="https://www.gracebooks.com/divine-design-gods-complementary-roles-for-men-a.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip grace">Grace Books</span></div></li>
+      <li class="entry" data-f="ok" data-q="men and women in the church kevin deyoung a short, biblical, practical introduction."><img class="cover" src="media/covers/men-and-women-in-the-church.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">Men and Women in the Church</div><div class="a">Kevin DeYoung</div><div class="n">A short, biblical, practical introduction.</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Men+and+Women+in+the+Church+Kevin+DeYoung" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li class="entry" data-f="ok" data-q="recovering biblical manhood and womanhood john piper &amp; wayne grudem, eds. "><img class="cover" src="media/covers/recovering-biblical-manhood-and-womanhood.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">Recovering Biblical Manhood and Womanhood</div><div class="a">John Piper &amp; Wayne Grudem, eds.</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Recovering+Biblical+Manhood+and+Womanhood+John+Piper+%26+Wayne+Grudem%2C+eds." target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li class="entry" data-f="ok" data-q="biblical foundations for manhood and womanhood wayne grudem, ed. "><img class="cover" src="media/covers/biblical-foundations-for-manhood-and-womanhood.jpg" alt="" loading="lazy" width="56" height="84"><div class="item-main"><div class="t">Biblical Foundations for Manhood and Womanhood</div><div class="a">Wayne Grudem, ed.</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Biblical+Foundations+for+Manhood+and+Womanhood+Wayne+Grudem%2C+ed." target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li class="entry" data-f="ok" data-q="to preach or not to preach william varner women&#x27;s ministry then and now."><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">To Preach or Not to Preach</div><div class="a">William Varner</div><div class="n">Women's ministry then and now.</div><a class="get" href="https://www.gracebooks.com/to-preach-or-not-to-preach.html" target="_blank" rel="noopener">Get it at Grace Books →</a></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
+      <li class="entry" data-f="ok" data-q="women&#x27;s ministry in the local church j. ligon duncan &amp; susan hunt "><div class="cover blank" aria-hidden="true"></div><div class="item-main"><div class="t">Women's Ministry in the Local Church</div><div class="a">J. Ligon Duncan &amp; Susan Hunt</div><a class="get" href="https://www.christianbook.com/apps/search?Ntt=Women%27s+Ministry+in+the+Local+Church+J.+Ligon+Duncan+%26+Susan+Hunt" target="_blank" rel="noopener">Find it →</a></div><div class="item-side"><span class="chip ok">Approved</span></div></li>
     </ul>
   </section>
 
@@ -313,6 +389,8 @@ ul.items .t a:hover { text-decoration: underline; }
           <li><a href="personal-growth-counseling.html">Personal Growth &amp; Counseling</a></li>
           <li><a href="elders-leaders.html">Elders &amp; Leaders</a></li>
           <li><a href="online-resources.html">Online Resources</a></li>
+          <li><a href="topics.html">Browse by topic</a></li>
+          <li><a href="how-we-choose.html">How we choose</a></li>
         </ul>
       </div>
       <div>
@@ -320,6 +398,7 @@ ul.items .t a:hover { text-decoration: underline; }
         <ul>
           <li><a href="https://coolcommunitychurch.github.io/coolchurch-website/about.html">About</a></li>
           <li><a href="https://coolcommunitychurch.github.io/coolchurch-website/sermons.html">Sermons</a></li>
+          <li><a href="https://coolcommunitychurch.github.io/coolchurch-website/visit.html">Plan Your Visit</a></li>
           <li><a href="https://coolcommunitychurch.github.io/coolchurch-website/crossroads.html">Crossroads Counseling</a></li>
           <li><a href="https://subsplash.com/coolcommunitychurch/app" target="_blank" rel="noopener">Get the app</a></li>
         </ul>
