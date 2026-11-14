@@ -229,6 +229,34 @@ ul.items li.entry.no-cover { grid-template-columns: 1fr auto; }
   ul.items li.entry.no-cover .item-side { grid-column: 1; }
   .cover { width: 48px; height: 72px; }
 }
+/* Online Resources: cards with artwork, a format badge, and app buttons */
+ul.items:has(> li.card) { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; border-top: 0; }
+ul.items li.entry.card { grid-template-columns: 72px 1fr; gap: 4px 16px; padding: 18px; border: 1px solid var(--rule); border-radius: 14px;
+                         background: #fff; box-shadow: 0 2px 10px rgba(20,28,50,.06); position: relative; align-content: start; }
+ul.items li.entry.card .item-side { position: absolute; top: 14px; right: 14px; padding: 0; }
+.art { width: 72px; height: 72px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 12px rgba(20,28,50,.16); background: #fff; }
+.art.blank { display: grid; place-items: center; background: linear-gradient(160deg, var(--steel), var(--navy)); color: #fff; font-size: 36px; font-weight: 800; }
+.fmt { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; margin-bottom: 4px; }
+.fmt svg { width: 15px; height: 15px; }
+.fmt-podcast { color: #7A3FB0; } .fmt-youtube { color: #C4302B; } .fmt-website { color: var(--blue); }
+.fmt-sermons { color: #2E7D5B; } .fmt-app { color: #B26A00; }
+li.card .t { font-size: 1.1rem; }
+li.card .n p { margin: 6px 0 0; }
+li.card .n p.caveat { font-size: 14px; background: #FFF6E3; border-left: 3px solid #E0A526; padding: 8px 10px; border-radius: 4px; }
+.gos { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.go { font-size: 13px; font-weight: 700; line-height: 1; padding: 8px 12px; border-radius: 999px; border: 1.5px solid var(--rule);
+      color: var(--navy); background: #fff; text-decoration: none; white-space: nowrap; }
+.go:hover { border-color: var(--blue); color: var(--blue); }
+.gos .go:first-child { background: var(--navy); border-color: var(--navy); color: #fff; }
+.gos .go:first-child:hover { background: var(--blue); border-color: var(--blue); color: #fff; }
+.gos .go.go-site { border-color: transparent; background: none; padding-inline: 6px; color: var(--blue); }
+.gos .go.go-site:hover { text-decoration: underline; }
+@media (max-width: 560px) {
+  ul.items:has(> li.card) { grid-template-columns: 1fr; }
+  ul.items li.entry.card { grid-template-columns: 64px 1fr; gap: 4px 14px; padding: 16px; }
+  ul.items li.entry.card .item-side { grid-column: auto; }
+  .art { width: 64px; height: 64px; border-radius: 12px; }
+}
 /* Home page */
 .results { list-style: none; padding: 0; margin: 10px 0 0; }
 .results li { padding: 10px 0; border-bottom: 1px solid var(--rule); }
