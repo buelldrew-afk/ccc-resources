@@ -146,7 +146,7 @@ ul.items .t a:hover { text-decoration: underline; }
 .site-nav .btn { padding: 10px 18px; }
 .menu-toggle { display: none; margin-left: auto; background: none; border: 0; padding: 8px; cursor: pointer; color: var(--navy); }
 .menu-toggle svg { width: 28px; height: 28px; display: block; }
-@media (max-width: 1180px) {
+@media (max-width: 900px) {
   .menu-toggle { display: block; }
   .site-nav { display: none; position: absolute; left: 0; right: 0; top: 72px; flex-direction: column; align-items: stretch; gap: 0;
               background: #fff; border-bottom: 1px solid var(--rule); padding: 8px 16px 16px; box-shadow: 0 12px 24px rgba(20,28,50,.12); }
@@ -166,17 +166,33 @@ ul.items .t a:hover { text-decoration: underline; }
 .dd-menu a { display: block; padding: 9px 12px; border-radius: 6px; font-size: .95rem; }
 .dd-menu a:hover { background: var(--paper); }
 .dd.open .dd-menu { display: block; }
-.dd-menu.dd-wide { min-width: 520px; columns: 2; column-gap: 8px; left: auto; right: -16px; }
-.dd-menu.dd-wide a { break-inside: avoid; }
+/* The Browse panel spans the header, with ministries on the left and topics on the right */
+.site-header .wide { position: relative; }
+.dd-mega { position: static; }
+.dd-mega .dd-menu { left: auto; right: 0; top: 100%; width: min(860px, calc(100% - 32px)); padding: 20px 24px; gap: 32px; }
+.dd-mega.open .dd-menu { display: grid; grid-template-columns: 1fr 2fr; }
+.mega-col h3 { font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; color: var(--steel); margin: 0 0 8px; padding: 0 12px; }
+.topic-links { columns: 2; column-gap: 8px; }
+.topic-links a { break-inside: avoid; }
+.dd-menu { white-space: normal; }
+.mega-col a.all { color: var(--blue); font-weight: 700; margin-top: 6px; }
+.site-nav a.out { color: #5B6474; font-weight: 600; }
+.site-nav a.out:hover { color: var(--blue); }
+.see-new { margin: 10px 0 0; font-size: .95rem; }
+.see-new a { color: var(--blue); font-weight: 700; text-decoration: none; }
 .dd.open .dd-btn svg { transform: rotate(180deg); }
-@media (hover: hover) and (min-width: 1181px) {
+@media (hover: hover) and (min-width: 901px) {
   .dd:hover .dd-menu, .dd:focus-within .dd-menu { display: block; }
+  .dd-mega:hover .dd-menu, .dd-mega:focus-within .dd-menu { display: grid; grid-template-columns: 1fr 2fr; }
   .dd::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 16px; }
 }
-@media (max-width: 1180px) {
+@media (max-width: 900px) {
   .dd { border-bottom: 1px solid #EEF0F3; }
   .dd-btn { width: 100%; justify-content: space-between; padding: 12px 4px; }
-  .dd-menu, .dd-menu.dd-wide { position: static; box-shadow: none; border: 0; padding: 0 0 8px 12px; min-width: 0; columns: 1; }
+  .dd-menu, .dd-mega .dd-menu { position: static; box-shadow: none; border: 0; padding: 0 0 8px 12px; min-width: 0; width: auto; }
+  .dd-mega.open .dd-menu { display: block; }
+  .mega-col h3 { padding: 10px 4px 4px; }
+  .topic-links { columns: 1; }
   .dd-menu a { padding: 9px 4px; border-bottom: 0; }
 }
 @media (max-width: 560px) { .brand img { height: 46px; } .brand span { font-size: .85rem; } }
@@ -227,53 +243,54 @@ ul.items li.entry.no-cover { grid-template-columns: 1fr auto; }
 <body>
 <header class="site-header">
   <div class="wide">
-    <a class="brand" href="./"><img src="media/brand/logo.png" alt="Cool Community Church" width="75" height="56"><span>Recommended<br>Resources</span></a>
+    <a class="brand" href="./" aria-label="Recommended Resources home"><img src="media/brand/logo.png" alt="Cool Community Church" width="75" height="56"><span>Recommended<br>Resources</span></a>
     <button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Menu">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
     </button>
     <nav class="site-nav" id="site-nav" aria-label="Main">
-      <a href="./">Home</a>
-      <a href="how-we-choose.html">How We Choose</a>
+      <div class="dd dd-mega here">
+        <button class="dd-btn" type="button" aria-expanded="false" aria-controls="dd-browse">Browse<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="dd-menu" id="dd-browse">
+          <div class="mega-col">
+            <h3>By Ministry</h3>
+            <a href="marriage-family.html">Marriage &amp; Family</a>
+            <a href="small-groups.html">Small Groups &amp; Adult Bible Study</a>
+            <a href="childrens-ministry.html" aria-current="page">Children's Ministry</a>
+            <a href="youth-ministry.html">Youth Ministry</a>
+            <a href="mens-womens-ministry.html">Men's &amp; Women's Ministry</a>
+            <a href="personal-growth-counseling.html">Personal Growth &amp; Counseling</a>
+            <a href="elders-leaders.html">Elders &amp; Leaders</a>
+          </div>
+          <div class="mega-col mega-topics">
+            <h3>By Topic</h3>
+            <div class="topic-links">
+              <a href="topics.html#grief">Grief &amp; Suffering</a>
+              <a href="topics.html#anxiety">Anxiety, Fear &amp; Depression</a>
+              <a href="topics.html#conflict">Anger, Conflict &amp; Forgiveness</a>
+              <a href="topics.html#addiction">Addiction &amp; Sexual Sin</a>
+              <a href="topics.html#marriage">Marriage</a>
+              <a href="topics.html#hard-seasons">Marriage &amp; Family in Hard Seasons</a>
+              <a href="topics.html#parenting">Parenting</a>
+              <a href="topics.html#family-worship">Family Worship &amp; Reading Together</a>
+              <a href="topics.html#identity">Men, Women, Sexuality &amp; Identity</a>
+              <a href="topics.html#adoption">Adoption &amp; Foster Care</a>
+              <a href="topics.html#doubt">Doubt, Worldview &amp; Defending the Faith</a>
+              <a href="topics.html#knowing-god">Knowing God &amp; the Gospel</a>
+              <a href="topics.html#growth">Growing in Christ</a>
+              <a href="topics.html#prayer">Prayer &amp; Daily Devotions</a>
+              <a href="topics.html#evangelism">Sharing Your Faith</a>
+              <a href="topics.html#church">The Church</a>
+              <a href="topics.html#helping">Helping Others</a>
+              <a href="topics.html#money">Money &amp; Possessions</a>
+              <a href="topics.html#history">Church History &amp; Biography</a>
+            </div>
+            <a class="all" href="topics.html">All topics on one page →</a>
+          </div>
+        </div>
+      </div>
       <a href="online-resources.html">Online Resources</a>
-      <div class="dd here">
-        <button class="dd-btn" type="button" aria-expanded="false" aria-controls="dd-ministries">Ministry Suggestions<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
-        <div class="dd-menu" id="dd-ministries">
-          <a href="marriage-family.html">Marriage &amp; Family</a>
-          <a href="small-groups.html">Small Groups &amp; Adult Bible Study</a>
-          <a href="childrens-ministry.html" aria-current="page">Children's Ministry</a>
-          <a href="youth-ministry.html">Youth Ministry</a>
-          <a href="mens-womens-ministry.html">Men's &amp; Women's Ministry</a>
-          <a href="personal-growth-counseling.html">Personal Growth &amp; Counseling</a>
-          <a href="elders-leaders.html">Elders &amp; Leaders</a>
-        </div>
-      </div>
-      <div class="dd">
-        <button class="dd-btn" type="button" aria-expanded="false" aria-controls="dd-topics">Topics<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
-        <div class="dd-menu dd-wide" id="dd-topics">
-          <a href="topics.html">All topics</a>
-          <a href="topics.html#grief">Grief &amp; Suffering</a>
-          <a href="topics.html#anxiety">Anxiety, Fear &amp; Depression</a>
-          <a href="topics.html#conflict">Anger, Conflict &amp; Forgiveness</a>
-          <a href="topics.html#addiction">Addiction &amp; Sexual Sin</a>
-          <a href="topics.html#marriage">Marriage</a>
-          <a href="topics.html#hard-seasons">Marriage &amp; Family in Hard Seasons</a>
-          <a href="topics.html#parenting">Parenting</a>
-          <a href="topics.html#family-worship">Family Worship &amp; Reading Together</a>
-          <a href="topics.html#identity">Men, Women, Sexuality &amp; Identity</a>
-          <a href="topics.html#adoption">Adoption &amp; Foster Care</a>
-          <a href="topics.html#doubt">Doubt, Worldview &amp; Defending the Faith</a>
-          <a href="topics.html#knowing-god">Knowing God &amp; the Gospel</a>
-          <a href="topics.html#growth">Growing in Christ</a>
-          <a href="topics.html#prayer">Prayer &amp; Daily Devotions</a>
-          <a href="topics.html#evangelism">Sharing Your Faith</a>
-          <a href="topics.html#church">The Church</a>
-          <a href="topics.html#helping">Helping Others</a>
-          <a href="topics.html#money">Money &amp; Possessions</a>
-          <a href="topics.html#history">Church History &amp; Biography</a>
-        </div>
-      </div>
-      <a href="./#new">What's New</a>
-      <a class="btn" href="https://coolcommunitychurch.github.io/coolchurch-website/index.html">Church website</a>
+      <a href="how-we-choose.html">How We Choose</a>
+      <a class="out" href="https://coolcommunitychurch.github.io/coolchurch-website/index.html">Church website <span aria-hidden="true">↗</span></a>
     </nav>
   </div>
 </header>
