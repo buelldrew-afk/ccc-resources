@@ -26,6 +26,17 @@
   });
 })();
 
+// "Where we differ" popups: built-in popovers, with a fallback for older browsers.
+(function () {
+  if (HTMLElement.prototype.hasOwnProperty('popover')) return;
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[popovertarget]');
+    if (!b) return;
+    var p = document.getElementById(b.getAttribute('popovertarget'));
+    if (p) p.classList.toggle('open', b.getAttribute('popovertargetaction') !== 'hide' && !p.classList.contains('open'));
+  });
+})();
+
 // The drop-downs (Ministry Suggestions, Topics): tap or click to open; Escape or a click elsewhere closes them.
 (function () {
   [].slice.call(document.querySelectorAll('.dd')).forEach(function (dd) {

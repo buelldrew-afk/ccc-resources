@@ -242,7 +242,18 @@ ul.items li.entry.card .item-side { position: absolute; top: 14px; right: 14px; 
 .fmt-sermons { color: #2E7D5B; } .fmt-app { color: #B26A00; }
 li.card .t { font-size: 1.1rem; }
 li.card .n p { margin: 6px 0 0; }
-li.card .n p.caveat { font-size: 14px; background: #FFF6E3; border-left: 3px solid #E0A526; padding: 8px 10px; border-radius: 4px; }
+.differ { margin-top: 10px; padding: 9px 12px; background: var(--paper); border-radius: 8px; font-size: 14px; color: var(--muted); }
+.differ p { margin: 0; }
+.differ-btn { margin-top: 4px; padding: 0; border: 0; background: none; font: inherit; font-weight: 700; color: var(--blue); cursor: pointer; }
+.differ-btn::after { content: " ›"; }
+.differ-btn:hover { text-decoration: underline; }
+.differ-pop { display: none; }
+.differ-pop:popover-open, .differ-pop.open { display: block; position: fixed; inset: 0; margin: auto; height: fit-content; width: min(440px, calc(100% - 32px));
+  border: 0; border-radius: 14px; padding: 24px; background: #fff; color: var(--fg); box-shadow: 0 24px 60px rgba(20,28,50,.35); z-index: 100; }
+.differ-pop::backdrop { background: rgba(20,28,50,.45); }
+.differ-pop h3 { margin: 0 0 10px; font-size: 1.15rem; color: var(--navy); }
+.differ-pop p { margin: 0 0 18px; line-height: 1.55; }
+.differ-close { font: inherit; font-weight: 700; padding: 9px 18px; border: 0; border-radius: 999px; background: var(--navy); color: #fff; cursor: pointer; }
 .gos { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
 .go { font-size: 13px; font-weight: 700; line-height: 1; padding: 8px 12px; border-radius: 999px; border: 1.5px solid var(--rule);
       color: var(--navy); background: #fff; text-decoration: none; white-space: nowrap; }
