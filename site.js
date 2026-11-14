@@ -6,9 +6,27 @@
     var open = nav.classList.toggle('open');
     btn.setAttribute('aria-expanded', String(open));
   });
+  // A link that jumps within the same page (a topic on the Topics page) closes the menus.
+  nav.addEventListener('click', function (e) {
+    var a = e.target.closest('a');
+    if (!a) return;
+    var url = new URL(a.href, location.href), target = url.hash && document.getElementById(url.hash.slice(1));
+    if (target && url.pathname === location.pathname) {
+      // Close the menu first, then scroll, so the jump lands where it should.
+      e.preventDefault();
+      history.pushState(null, '', url.hash);
+      setTimeout(function () { target.scrollIntoView(); }, 0);
+    }
+    nav.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+    [].slice.call(nav.querySelectorAll('.dd.open')).forEach(function (dd) {
+      dd.classList.remove('open');
+      dd.querySelector('.dd-btn').setAttribute('aria-expanded', 'false');
+    });
+  });
 })();
 
-// The Ministries drop-down: tap or click to open; Escape or a click elsewhere closes it.
+// The drop-downs (Ministry Suggestions, Topics): tap or click to open; Escape or a click elsewhere closes them.
 (function () {
   [].slice.call(document.querySelectorAll('.dd')).forEach(function (dd) {
     var b = dd.querySelector('.dd-btn');
