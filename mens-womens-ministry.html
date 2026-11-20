@@ -198,6 +198,18 @@ ul.items .t a:hover { text-decoration: underline; }
 /* Short note in place of the full statement */
 .choose-note { margin: 24px 0 0; padding: 14px 18px; background: var(--paper); border: 1px solid var(--rule); border-radius: var(--radius); font-size: 15.5px; color: var(--muted); }
 .choose-note a { font-weight: 700; white-space: nowrap; }
+/* Home (Online Resources): the rest of the site, and the algorithm note */
+.home-intro { padding-top: 28px; display: grid; gap: 18px; }
+.site-guide h2, .born-again h2 { font-size: 1.25rem; margin: 0 0 6px; color: var(--navy); }
+.site-guide > p { margin: 0 0 12px; color: var(--muted); }
+.guide-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+.guide-tiles a { display: block; background: #fff; border: 1px solid var(--rule); border-radius: var(--radius); padding: 12px 14px; text-decoration: none; color: var(--fg); }
+.guide-tiles a:hover { border-color: var(--blue); }
+.guide-tiles strong { display: block; color: var(--navy); }
+.guide-tiles span { font-size: 14px; color: var(--muted); }
+@media (max-width: 560px) { .guide-tiles { grid-template-columns: 1fr 1fr; gap: 8px; } .guide-tiles span { display: none; } .guide-tiles a { padding: 10px 12px; font-size: 15px; } }
+.born-again { background: var(--paper); border: 1px solid var(--rule); border-left: 4px solid var(--blue); border-radius: var(--radius); padding: 18px 22px; }
+.born-again p { margin: 0; max-width: 70ch; }
 /* Search and filters */
 .finder { padding-top: 20px; }
 .find { width: 100%; font: inherit; font-size: 16px; padding: 11px 16px; border: 1.5px solid var(--rule); border-radius: 999px; background: #fff; color: var(--fg); }
@@ -298,6 +310,7 @@ li.card .n p { margin: 6px 0 0; }
             <a href="mens-womens-ministry.html" aria-current="page">Men's &amp; Women's Ministry</a>
             <a href="personal-growth-counseling.html">Personal Growth &amp; Counseling</a>
             <a href="elders-leaders.html">Elders &amp; Leaders</a>
+            <a class="all" href="books.html">All books &amp; studies, search, and what&rsquo;s new →</a>
           </div>
           <div class="mega-col mega-topics">
             <h3>By Topic</h3>
@@ -326,7 +339,7 @@ li.card .n p { margin: 6px 0 0; }
           </div>
         </div>
       </div>
-      <a href="online-resources.html">Online Resources</a>
+      <a href="./">Online Resources</a>
       <a href="how-we-choose.html">How We Choose</a>
       <a class="out" href="https://coolcommunitychurch.github.io/coolchurch-website/index.html">Church website <span aria-hidden="true">↗</span></a>
     </nav>
@@ -334,7 +347,7 @@ li.card .n p { margin: 6px 0 0; }
 </header>
 <header class="top">
   <div class="wrap">
-    <p class="back"><a href="./">← All recommended resources</a></p>
+    <p class="back"><a href="books.html">← All books &amp; studies</a></p>
     <p class="eyebrow">Cool Community Church · Men's &amp; Women's Ministry</p>
     <h1>Recommended Resources</h1>
     <p class="lede">Studies and books we trust for men's and women's ministries, and for anyone growing in biblical manhood and womanhood.</p>  </div>
@@ -464,7 +477,8 @@ li.card .n p { margin: 6px 0 0; }
           <li><a href="mens-womens-ministry.html">Men's &amp; Women's Ministry</a></li>
           <li><a href="personal-growth-counseling.html">Personal Growth &amp; Counseling</a></li>
           <li><a href="elders-leaders.html">Elders &amp; Leaders</a></li>
-          <li><a href="online-resources.html">Online Resources</a></li>
+          <li><a href="./">Online Resources</a></li>
+          <li><a href="books.html">All books &amp; studies</a></li>
           <li><a href="topics.html">Browse by topic</a></li>
           <li><a href="how-we-choose.html">How we choose</a></li>
         </ul>

@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="media/brand/favicon.png">
+<title>Books &amp; Studies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap">
+<style>
+/* Styled to match the new Cool Community Church website (brand colors and type from the Feb 2025 brand guidelines).
+   Layout: a navy banner, the "How We Choose" statement, a sticky section index, then a list of entries per section. */
+:root {
+  --navy: #202D50;
+  --steel: #436A8B;
+  --blue: #1C75BC;
+  --paper: #F6F7F9;
+  --bg: #FFFFFF;
+  --surface: #FFFFFF;
+  --fg: #1B2235;
+  --muted: #5C5C5C;
+  --rule: #E4E6EA;
+  --accent: #1C75BC;
+  --accent-soft: #EEF4FB;
+  --pick: #7A5A12;
+  --pick-soft: #F6EEDB;
+  --grace: #1C75BC;
+  --grace-soft: #E6F0FA;
+  --ok: #436A8B;
+  --ok-soft: #E8EEF3;
+  --challies: #7A3B52;
+  --challies-soft: #F3E6EB;
+  --font: "Avenir Next", "Avenir", "Nunito Sans", "Helvetica Neue", Arial, sans-serif;
+  --radius: 10px;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font-family: var(--font); font-size: 17px; line-height: 1.65;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+a { color: var(--blue); }
+a:hover { color: var(--navy); }
+.wrap {
+  max-width: 800px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+header.top { background: linear-gradient(160deg, var(--steel), var(--navy)); color: #fff; padding-block: 56px 44px; }
+header.top h1 { color: #fff; }
+header.top .eyebrow { color: #D6DCE6; }
+header.top .lede { color: #fff; opacity: .95; font-size: 1.15rem; }
+.eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--steel); margin: 0 0 10px; }
+h1, h2, h3 { color: var(--navy); font-weight: 800; }
+h1 { font-size: clamp(32px, 6vw, 48px); line-height: 1.12; letter-spacing: -.01em; margin: 0 0 12px; text-wrap: balance; }
+.lede { color: var(--muted); margin: 0; max-width: 60ch; }
+.draft { display: inline-block; margin-top: 18px; font-size: 13px; font-weight: 700; color: #5C4400; background: #FFF4D6; padding: 4px 12px; border-radius: 999px; }
+
+h2 { font-size: clamp(24px, 3vw, 30px); line-height: 1.2; margin: 0 0 6px; text-wrap: balance; }
+h3 { font-size: 19px; line-height: 1.3; margin: 0 0 4px; }
+p { margin: 0; }
+.prose { display: grid; gap: 14px; max-width: 65ch; }
+
+section.statement { padding-block: 44px; display: grid; gap: 24px; }
+.standards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; list-style: none; padding: 0; margin: 0; }
+.standards li { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 18px 20px; min-width: 0; }
+.standards strong { display: block; font-size: 15.5px; color: var(--navy); margin-bottom: 2px; }
+.standards span { color: var(--muted); font-size: 15px; line-height: 1.55; }
+
+.tiers { display: grid; gap: 10px; }
+.tier { display: grid; grid-template-columns: 13.5em 1fr; gap: 12px; align-items: baseline; }
+.tier p { color: var(--muted); font-size: 15.5px; min-width: 0; }
+.ask { background: var(--paper); border: 1px solid var(--rule); border-radius: var(--radius); padding: 20px 22px; display: grid; gap: 8px; }
+.ask p { font-size: 16px; }
+
+.chip { display: inline-block; font-size: 12.5px; font-weight: 700; letter-spacing: .02em; padding: 3px 10px; border-radius: 999px; white-space: nowrap; }
+.chip.pick { color: var(--pick); background: var(--pick-soft); }
+.chip.grace { color: var(--grace); background: var(--grace-soft); }
+.chip.ok { color: var(--ok); background: var(--ok-soft); }
+.chip.challies { color: var(--challies); background: var(--challies-soft); }
+
+nav.index {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: var(--paper); border-block: 1px solid var(--rule);
+}
+nav.index .wrap { display: flex; gap: 8px; overflow-x: auto; padding-block: 12px; scrollbar-width: none; }
+nav.index a {
+  flex: none; font-size: 14px; font-weight: 700; color: var(--navy); text-decoration: none;
+  padding: 6px 14px; border-radius: 999px; border: 1.5px solid var(--rule); background: var(--surface);
+}
+nav.index a:hover, nav.index a:focus-visible { color: #fff; background: var(--blue); border-color: var(--blue); outline: none; }
+
+main { padding-block: 12px 64px; }
+section.group { padding-top: 40px; scroll-margin-top: 70px; }
+.group-intro { color: var(--muted); font-size: 15.5px; max-width: 62ch; margin-bottom: 8px; }
+ul.items { list-style: none; padding: 0; margin: 14px 0 0; border-top: 2px solid var(--navy); }
+ul.items li { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; padding: 16px 0; border-bottom: 1px solid var(--rule); }
+.item-main { min-width: 0; }
+.t { font-weight: 700; font-size: 18px; line-height: 1.3; color: var(--navy); }
+.a { color: var(--steel); font-size: 15px; font-weight: 600; }
+.n { font-size: 15px; margin-top: 4px; }
+.n q { font-style: italic; }
+.item-side { padding-top: 3px; display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+
+footer { border-top: 1px solid var(--rule); padding-block: 24px 40px; color: var(--muted); font-size: 14px; }
+
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  header.top { padding-block: 40px 32px; }
+  .tier { grid-template-columns: 1fr; gap: 4px; }
+  ul.items li { grid-template-columns: 1fr; }
+  .item-side { padding-top: 4px; flex-direction: row; flex-wrap: wrap; align-items: flex-start; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+.back { margin: 0 0 14px; font-size: 14px; font-weight: 600; }
+.back a { color: #fff; text-decoration: none; opacity: .9; }
+.back a:hover { opacity: 1; text-decoration: underline; }
+.feedback a, ul.items .t a { color: var(--accent); }
+ul.items .t a { text-decoration: none; }
+ul.items .t a:hover { text-decoration: underline; }
+.feedback { margin-top: 48px; background: var(--paper); border: 1px solid var(--rule); border-left: 4px solid var(--blue); border-radius: var(--radius); padding: 20px 22px; display: grid; gap: 8px; }
+.feedback p { font-size: 16px; }
+/* Church site header and footer */
+.wide { max-width: 1120px; margin: 0 auto; padding-inline: max(16px, env(safe-area-inset-left, 0px)) max(16px, env(safe-area-inset-right, 0px)); }
+.site-header { background: #fff; border-bottom: 1px solid var(--rule); }
+.site-header .wide { display: flex; align-items: center; gap: 20px; min-height: 72px; }
+.brand img { height: 56px; width: auto; display: block; }
+.site-nav { margin-left: auto; display: flex; align-items: center; gap: 20px; }
+.site-nav a { text-decoration: none; color: var(--fg); font-weight: 600; font-size: .98rem; }
+.site-nav a:hover, .site-nav a[aria-current="page"] { color: var(--blue); }
+.btn { display: inline-block; text-decoration: none; font-weight: 700; padding: 10px 18px; border-radius: 999px; background: var(--blue); color: #fff !important; line-height: 1.2; }
+.btn:hover { background: var(--navy); }
+.site-footer { background: var(--navy); color: #D6DCE6; padding: 56px 0 32px; font-size: .97rem; border: 0; margin: 0; }
+.site-footer a { color: #fff; }
+.site-footer h3 { color: #fff; font-size: 1rem; text-transform: uppercase; letter-spacing: .08em; margin: 0 0 10px; }
+.site-footer .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; }
+.site-footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.site-footer .logo { width: 120px; height: auto; margin-bottom: 16px; display: block; }
+.site-footer .legal { margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.15); font-size: .85rem; color: #A7A9AC; }
+.site-header { position: relative; z-index: 20; }
+.site-nav { gap: 22px; white-space: nowrap; }
+.site-nav .btn { padding: 10px 18px; }
+.menu-toggle { display: none; margin-left: auto; background: none; border: 0; padding: 8px; cursor: pointer; color: var(--navy); }
+.menu-toggle svg { width: 28px; height: 28px; display: block; }
+@media (max-width: 900px) {
+  .menu-toggle { display: block; }
+  .site-nav { display: none; position: absolute; left: 0; right: 0; top: 72px; flex-direction: column; align-items: stretch; gap: 0;
+              background: #fff; border-bottom: 1px solid var(--rule); padding: 8px 16px 16px; box-shadow: 0 12px 24px rgba(20,28,50,.12); }
+  .site-nav.open { display: flex; }
+  .site-nav a { padding: 12px 4px; border-bottom: 1px solid #EEF0F3; }
+  .site-nav .btn { margin-top: 10px; text-align: center; border-bottom: 0; }
+}
+/* The resource menu: brand text and the Ministries drop-down */
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand span { color: var(--navy); font-weight: 800; font-size: .95rem; line-height: 1.15; letter-spacing: .01em; border-left: 1.5px solid var(--rule); padding-left: 12px; }
+.site-nav a[aria-current="page"], .dd.here > .dd-btn { color: var(--blue); }
+.dd { position: relative; }
+.dd-btn { font: inherit; font-weight: 600; font-size: .98rem; color: var(--fg); background: none; border: 0; padding: 0; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
+.dd-btn svg { width: 16px; height: 16px; transition: transform .15s; }
+.dd-btn:hover { color: var(--blue); }
+.dd-menu { display: none; position: absolute; top: calc(100% + 14px); left: -16px; min-width: 300px; background: #fff; border: 1px solid var(--rule); border-radius: var(--radius); box-shadow: 0 16px 32px rgba(20,28,50,.14); padding: 8px; z-index: 30; }
+.dd-menu a { display: block; padding: 9px 12px; border-radius: 6px; font-size: .95rem; }
+.dd-menu a:hover { background: var(--paper); }
+.dd.open .dd-menu { display: block; }
+/* The Browse panel spans the header, with ministries on the left and topics on the right */
+.site-header .wide { position: relative; }
+.dd-mega { position: static; }
+.dd-mega .dd-menu { left: auto; right: 0; top: 100%; width: min(860px, calc(100% - 32px)); padding: 20px 24px; gap: 32px; }
+.dd-mega.open .dd-menu { display: grid; grid-template-columns: 1fr 2fr; }
+.mega-col h3 { font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; color: var(--steel); margin: 0 0 8px; padding: 0 12px; }
+.topic-links { columns: 2; column-gap: 8px; }
+.topic-links a { break-inside: avoid; }
+.dd-menu { white-space: normal; }
+.mega-col a.all { color: var(--blue); font-weight: 700; margin-top: 6px; }
+.site-nav a.out { color: #5B6474; font-weight: 600; }
+.site-nav a.out:hover { color: var(--blue); }
+.see-new { margin: 10px 0 0; font-size: .95rem; }
+.see-new a { color: var(--blue); font-weight: 700; text-decoration: none; }
+.dd.open .dd-btn svg { transform: rotate(180deg); }
+@media (hover: hover) and (min-width: 901px) {
+  .dd:hover .dd-menu, .dd:focus-within .dd-menu { display: block; }
+  .dd-mega:hover .dd-menu, .dd-mega:focus-within .dd-menu { display: grid; grid-template-columns: 1fr 2fr; }
+  .dd::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 16px; }
+}
+@media (max-width: 900px) {
+  .dd { border-bottom: 1px solid #EEF0F3; }
+  .dd-btn { width: 100%; justify-content: space-between; padding: 12px 4px; }
+  .dd-menu, .dd-mega .dd-menu { position: static; box-shadow: none; border: 0; padding: 0 0 8px 12px; min-width: 0; width: auto; }
+  .dd-mega.open .dd-menu { display: block; }
+  .mega-col h3 { padding: 10px 4px 4px; }
+  .topic-links { columns: 1; }
+  .dd-menu a { padding: 9px 4px; border-bottom: 0; }
+}
+@media (max-width: 560px) { .brand img { height: 46px; } .brand span { font-size: .85rem; } }
+/* Short note in place of the full statement */
+.choose-note { margin: 24px 0 0; padding: 14px 18px; background: var(--paper); border: 1px solid var(--rule); border-radius: var(--radius); font-size: 15.5px; color: var(--muted); }
+.choose-note a { font-weight: 700; white-space: nowrap; }
+/* Home (Online Resources): the rest of the site, and the algorithm note */
+.home-intro { padding-top: 28px; display: grid; gap: 18px; }
+.site-guide h2, .born-again h2 { font-size: 1.25rem; margin: 0 0 6px; color: var(--navy); }
+.site-guide > p { margin: 0 0 12px; color: var(--muted); }
+.guide-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+.guide-tiles a { display: block; background: #fff; border: 1px solid var(--rule); border-radius: var(--radius); padding: 12px 14px; text-decoration: none; color: var(--fg); }
+.guide-tiles a:hover { border-color: var(--blue); }
+.guide-tiles strong { display: block; color: var(--navy); }
+.guide-tiles span { font-size: 14px; color: var(--muted); }
+@media (max-width: 560px) { .guide-tiles { grid-template-columns: 1fr 1fr; gap: 8px; } .guide-tiles span { display: none; } .guide-tiles a { padding: 10px 12px; font-size: 15px; } }
+.born-again { background: var(--paper); border: 1px solid var(--rule); border-left: 4px solid var(--blue); border-radius: var(--radius); padding: 18px 22px; }
+.born-again p { margin: 0; max-width: 70ch; }
+/* Search and filters */
+.finder { padding-top: 20px; }
+.find { width: 100%; font: inherit; font-size: 16px; padding: 11px 16px; border: 1.5px solid var(--rule); border-radius: 999px; background: #fff; color: var(--fg); }
+.find:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px var(--accent-soft); }
+.fchips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.fchip { font: inherit; font-size: 13.5px; font-weight: 700; color: var(--navy); background: #fff; border: 1.5px solid var(--rule); border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.fchip:hover { border-color: var(--blue); }
+.fchip[aria-pressed="true"] { background: var(--blue); border-color: var(--blue); color: #fff; }
+.fcount { margin-top: 8px; font-size: 14px; color: var(--muted); min-height: 1.4em; }
+.hidden { display: none !important; }
+/* Entries: cover, link, tags */
+ul.items li.entry { grid-template-columns: 56px 1fr auto; gap: 4px 16px; }
+ul.items li.entry.no-cover { grid-template-columns: 1fr auto; }
+.cover { width: 56px; height: 84px; object-fit: cover; border-radius: 4px; box-shadow: 0 3px 8px rgba(20,28,50,.18); background: var(--paper); }
+.cover.blank { background: linear-gradient(160deg, #DDE3EA, #B9C6D3); box-shadow: none; }
+.get { display: inline-block; margin-top: 6px; font-size: 14px; font-weight: 700; text-decoration: none; }
+.get:hover { text-decoration: underline; }
+.study { margin-top: 4px; font-size: 14px; font-weight: 700; color: var(--steel); }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.tag { font-size: 12px; font-weight: 700; color: var(--steel); border: 1px solid var(--rule); border-radius: 999px; padding: 1px 8px; }
+.found { margin-top: 4px; font-size: 13.5px; color: var(--muted); }
+.chip.start { color: #fff; background: var(--navy); }
+.chip.new { color: #fff; background: #2E8540; }
+@media (max-width: 560px) {
+  ul.items li.entry { grid-template-columns: 48px 1fr; }
+  ul.items li.entry .item-side { grid-column: 2; }
+  ul.items li.entry.no-cover { grid-template-columns: 1fr; }
+  ul.items li.entry.no-cover .item-side { grid-column: 1; }
+  .cover { width: 48px; height: 72px; }
+}
+/* Online Resources: cards with artwork, a format badge, and app buttons */
+ul.items:has(> li.card) { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; border-top: 0; }
+ul.items li.entry.card { grid-template-columns: 72px 1fr; gap: 4px 16px; padding: 18px; border: 1px solid var(--rule); border-radius: 14px;
+                         background: #fff; box-shadow: 0 2px 10px rgba(20,28,50,.06); position: relative; align-content: start; }
+ul.items li.entry.card .item-side { position: absolute; top: 14px; right: 14px; padding: 0; }
+.art { width: 72px; height: 72px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 12px rgba(20,28,50,.16); background: #fff; }
+.art.blank { display: grid; place-items: center; background: linear-gradient(160deg, var(--steel), var(--navy)); color: #fff; font-size: 36px; font-weight: 800; }
+.fmt { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; margin-bottom: 4px; }
+.fmt svg { width: 15px; height: 15px; }
+.fmt-podcast { color: #7A3FB0; } .fmt-youtube { color: #C4302B; } .fmt-website { color: var(--blue); }
+.fmt-sermons { color: #2E7D5B; } .fmt-app { color: #B26A00; }
+li.card .t { font-size: 1.1rem; }
+li.card .n p { margin: 6px 0 0; }
+.differ { margin-top: 10px; padding: 9px 12px; background: var(--paper); border-radius: 8px; font-size: 14px; color: var(--muted); }
+.differ p { margin: 0; }
+.differ-btn { margin-top: 4px; padding: 0; border: 0; background: none; font: inherit; font-weight: 700; color: var(--blue); cursor: pointer; }
+.differ-btn::after { content: " ›"; }
+.differ-btn:hover { text-decoration: underline; }
+.differ-pop { display: none; }
+.differ-pop:popover-open, .differ-pop.open { display: block; position: fixed; inset: 0; margin: auto; height: fit-content; width: min(440px, calc(100% - 32px));
+  border: 0; border-radius: 14px; padding: 24px; background: #fff; color: var(--fg); box-shadow: 0 24px 60px rgba(20,28,50,.35); z-index: 100; }
+.differ-pop::backdrop { background: rgba(20,28,50,.45); }
+.differ-pop h3 { margin: 0 0 10px; font-size: 1.15rem; color: var(--navy); }
+.differ-pop p { margin: 0 0 18px; line-height: 1.55; }
+.differ-close { font: inherit; font-weight: 700; padding: 9px 18px; border: 0; border-radius: 999px; background: var(--navy); color: #fff; cursor: pointer; }
+.gos { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.go { font-size: 13px; font-weight: 700; line-height: 1; padding: 8px 12px; border-radius: 999px; border: 1.5px solid var(--rule);
+      color: var(--navy); background: #fff; text-decoration: none; white-space: nowrap; }
+.go:hover { border-color: var(--blue); color: var(--blue); }
+.gos .go:first-child { background: var(--navy); border-color: var(--navy); color: #fff; }
+.gos .go:first-child:hover { background: var(--blue); border-color: var(--blue); color: #fff; }
+.gos .go.go-site { border-color: transparent; background: none; padding-inline: 6px; color: var(--blue); }
+.gos .go.go-site:hover { text-decoration: underline; }
+@media (max-width: 560px) {
+  ul.items:has(> li.card) { grid-template-columns: 1fr; }
+  ul.items li.entry.card { grid-template-columns: 64px 1fr; gap: 4px 14px; padding: 16px; }
+  ul.items li.entry.card .item-side { grid-column: auto; }
+  .art { width: 64px; height: 64px; border-radius: 12px; }
+}
+/* Home page */
+.results { list-style: none; padding: 0; margin: 10px 0 0; }
+.results li { padding: 10px 0; border-bottom: 1px solid var(--rule); }
+.results a { font-weight: 700; text-decoration: none; }
+.results .where { font-size: 14px; color: var(--muted); }
+.topic-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.topic-grid a { font-size: 14.5px; font-weight: 700; text-decoration: none; color: var(--navy); background: var(--paper); border: 1.5px solid var(--rule); border-radius: 999px; padding: 6px 14px; }
+.topic-grid a:hover { background: var(--blue); border-color: var(--blue); color: #fff; }
+</style>
+<script src="search-index.js" defer></script>
+<script src="site.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wide">
+    <a class="brand" href="./" aria-label="Recommended Resources home"><img src="media/brand/logo.png" alt="Cool Community Church" width="75" height="56"><span>Recommended<br>Resources</span></a>
+    <button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <nav class="site-nav" id="site-nav" aria-label="Main">
+      <div class="dd dd-mega here">
+        <button class="dd-btn" type="button" aria-expanded="false" aria-controls="dd-browse">Browse<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="dd-menu" id="dd-browse">
+          <div class="mega-col">
+            <h3>By Ministry</h3>
+            <a href="marriage-family.html">Marriage &amp; Family</a>
+            <a href="small-groups.html">Small Groups &amp; Adult Bible Study</a>
+            <a href="childrens-ministry.html">Children's Ministry</a>
+            <a href="youth-ministry.html">Youth Ministry</a>
+            <a href="mens-womens-ministry.html">Men's &amp; Women's Ministry</a>
+            <a href="personal-growth-counseling.html">Personal Growth &amp; Counseling</a>
+            <a href="elders-leaders.html">Elders &amp; Leaders</a>
+            <a class="all" href="books.html" aria-current="page">All books &amp; studies, search, and what&rsquo;s new →</a>
+          </div>
+          <div class="mega-col mega-topics">
+            <h3>By Topic</h3>
+            <div class="topic-links">
+              <a href="topics.html#grief">Grief &amp; Suffering</a>
+              <a href="topics.html#anxiety">Anxiety, Fear &amp; Depression</a>
+              <a href="topics.html#conflict">Anger, Conflict &amp; Forgiveness</a>
+              <a href="topics.html#addiction">Addiction &amp; Sexual Sin</a>
+              <a href="topics.html#marriage">Marriage</a>
+              <a href="topics.html#hard-seasons">Marriage &amp; Family in Hard Seasons</a>
+              <a href="topics.html#parenting">Parenting</a>
+              <a href="topics.html#family-worship">Family Worship &amp; Reading Together</a>
+              <a href="topics.html#identity">Men, Women, Sexuality &amp; Identity</a>
+              <a href="topics.html#adoption">Adoption &amp; Foster Care</a>
+              <a href="topics.html#doubt">Doubt, Worldview &amp; Defending the Faith</a>
+              <a href="topics.html#knowing-god">Knowing God &amp; the Gospel</a>
+              <a href="topics.html#growth">Growing in Christ</a>
+              <a href="topics.html#prayer">Prayer &amp; Daily Devotions</a>
+              <a href="topics.html#evangelism">Evangelism &amp; Missions</a>
+              <a href="topics.html#church">The Church</a>
+              <a href="topics.html#helping">Helping Others</a>
+              <a href="topics.html#money">Money &amp; Possessions</a>
+              <a href="topics.html#history">Church History &amp; Biography</a>
+            </div>
+            <a class="all" href="topics.html">All topics on one page →</a>
+          </div>
+        </div>
+      </div>
+      <a href="./">Online Resources</a>
+      <a href="how-we-choose.html">How We Choose</a>
+      <a class="out" href="https://coolcommunitychurch.github.io/coolchurch-website/index.html">Church website <span aria-hidden="true">↗</span></a>
+    </nav>
+  </div>
+</header>
+<header class="top">
+  <div class="wrap">
+    <p class="back"><a href="./">← Home</a></p>
+    <p class="eyebrow">Cool Community Church · Recommended Resources</p>
+    <h1>Books &amp; Studies</h1>
+    <p class="lede">Books, Bible studies, and study guides we trust, gathered by ministry and by topic so our leaders and members can spend their time growing instead of searching.</p>  </div>
+</header>
+
+<div class="finder" role="search">
+  <div class="wrap">
+    <input type="search" class="find" id="site-search" placeholder="Search every resource: a title, an author, or a need like grief or marriage" aria-label="Search every resource">
+    <p class="see-new"><a href="#new">See what's new →</a></p>
+    <p class="fcount" aria-live="polite"></p>
+    <ul class="results" id="site-results"></ul>
+  </div>
+</div>
+<main class="wrap">
+  <section class="group" id="ministries">
+    <h2>Choose a Ministry</h2>
+    <ul class="items">
+      <li><div class="item-main"><div class="t"><a href="marriage-family.html">Marriage &amp; Family</a></div><div class="n">Marriages, preparing for marriage, parenting from the early years through the teens, family worship, adoption, and hard seasons.</div><div class="a">137 resources</div></div></li>
+      <li><div class="item-main"><div class="t"><a href="small-groups.html">Small Groups &amp; Adult Bible Study</a></div><div class="n">Ready-made studies, books by Pastor Drew, and books to read and discuss together, arranged by topic.</div><div class="a">168 resources</div></div></li>
+      <li><div class="item-main"><div class="t"><a href="childrens-ministry.html">Children's Ministry</a></div><div class="n">Story Bibles, books that teach big truths to little hearts, storybooks, and family read-alouds.</div><div class="a">38 resources</div></div></li>
+      <li><div class="item-main"><div class="t"><a href="youth-ministry.html">Youth Ministry</a></div><div class="n">Books for students, apologetics and culture, life after high school, and help for parents and leaders.</div><div class="a">41 resources</div></div></li>
+      <li><div class="item-main"><div class="t"><a href="mens-womens-ministry.html">Men's &amp; Women's Ministry</a></div><div class="n">Group studies, books for men and for women, and God's design for both.</div><div class="a">49 resources</div></div></li>
+      <li><div class="item-main"><div class="t"><a href="personal-growth-counseling.html">Personal Growth &amp; Counseling</a></div><div class="n">Biblical counseling resources for depression, anxiety, anger, addiction, grief, and growing in Christ.</div><div class="a">92 resources</div></div></li>
+      <li><div class="item-main"><div class="t"><a href="elders-leaders.html">Elders &amp; Leaders</a></div><div class="n">Shepherding the flock, preaching, the leader's own soul, and leading through hard times.</div><div class="a">16 resources</div></div></li>
+      <li><div class="item-main"><div class="t"><a href="./">Online Resources</a></div><div class="n">Podcasts, teaching ministries, websites, and YouTube channels we trust.</div><div class="a">48 resources</div></div></li>
+    </ul>
+  </section>
+  <section class="group" id="topics">
+    <h2>Browse by Topic</h2>
+    <p class="group-intro">Resources gathered by need, from every ministry.</p>
+    <div class="topic-grid"><a href="topics.html#grief">Grief &amp; Suffering</a><a href="topics.html#anxiety">Anxiety, Fear &amp; Depression</a><a href="topics.html#conflict">Anger, Conflict &amp; Forgiveness</a><a href="topics.html#addiction">Addiction &amp; Sexual Sin</a><a href="topics.html#marriage">Marriage</a><a href="topics.html#hard-seasons">Marriage &amp; Family in Hard Seasons</a><a href="topics.html#parenting">Parenting</a><a href="topics.html#family-worship">Family Worship &amp; Reading Together</a><a href="topics.html#identity">Men, Women, Sexuality &amp; Identity</a><a href="topics.html#adoption">Adoption &amp; Foster Care</a><a href="topics.html#doubt">Doubt, Worldview &amp; Defending the Faith</a><a href="topics.html#knowing-god">Knowing God &amp; the Gospel</a><a href="topics.html#growth">Growing in Christ</a><a href="topics.html#prayer">Prayer &amp; Daily Devotions</a><a href="topics.html#evangelism">Evangelism &amp; Missions</a><a href="topics.html#church">The Church</a><a href="topics.html#helping">Helping Others</a><a href="topics.html#money">Money &amp; Possessions</a><a href="topics.html#history">Church History &amp; Biography</a></div>
+  </section>
+  <section class="group" id="new">
+    <h2>What's New</h2>
+    <p class="group-intro">Recently added. These also carry a "New" label on their pages.</p>
+    <ul class="items">
+      <li><div class="item-main"><div class="t"><a href="./#counseling">The BCC Podcast</a></div><div class="a">Biblical Counseling Coalition</div><div class="n">Online Resources · added November 19</div></div></li>
+      <li><div class="item-main"><div class="t"><a href="./#counseling">Biblical Counseling Coalition</a></div><div class="a">Kevin Carson and others</div><div class="n">Online Resources · added November 19</div></div></li>
+      <li><div class="item-main"><div class="t"><a href="elders-leaders.html#preaching">Expository Exultation</a></div><div class="a">John Piper</div><div class="n">Elders &amp; Leaders · added November 16</div></div></li>
+      <li><div class="item-main"><div class="t"><a href="elders-leaders.html#preaching">Lectures to My Students</a></div><div class="a">Charles Spurgeon</div><div class="n">Elders &amp; Leaders · added November 16</div></div></li>
+      <li><div class="item-main"><div class="t"><a href="./#study-tools">The Best Commentaries on Every Book of the Bible</a></div><div class="a">Tim Challies</div><div class="n">Online Resources · added November 16</div></div></li>
+      <li><div class="item-main"><div class="t"><a href="./#news">BreakPoint</a></div><div class="a">John Stonestreet · The Colson Center</div><div class="n">Online Resources · added November 16</div></div></li>
+      <li><div class="item-main"><div class="t"><a href="./#apologetics">Creation Ministries International</a></div><div class="a">Creation scientists and writers</div><div class="n">Online Resources · added November 16</div></div></li>
+      <li><div class="item-main"><div class="t"><a href="./#ideas">Dial In with Jonny Ardavanis</a></div><div class="a">Jonny Ardavanis</div><div class="n">Online Resources · added November 16</div></div></li>
+      <li><div class="item-main"><div class="t"><a href="./#daily">Focal Point</a></div><div class="a">Mike Fabarez · Compass Bible Church</div><div class="n">Online Resources · added November 16</div></div></li>
+      <li><div class="item-main"><div class="t"><a href="./#apologetics">Gary Habermas</a></div><div class="a">Liberty University</div><div class="n">Online Resources · added November 16</div></div></li>
+    </ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wide">
+    <div class="cols">
+      <div>
+        <img class="logo" src="media/brand/logo-white.png" alt="Cool Community Church" width="120" height="89">
+        <h3>Visit</h3>
+        <p>Sundays at 10:30 am<br>863 Cave Valley Rd<br>Cool, CA 95614</p>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="tel:+15308854385">(530) 885-4385</a></li>
+          <li><a href="mailto:info@coolchurch.org">info@coolchurch.org</a></li>
+          <li>Office: Mon–Thu, 10 am–4 pm</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Resources</h3>
+        <ul>
+          <li><a href="marriage-family.html">Marriage &amp; Family</a></li>
+          <li><a href="small-groups.html">Small Groups &amp; Adult Bible Study</a></li>
+          <li><a href="childrens-ministry.html">Children's Ministry</a></li>
+          <li><a href="youth-ministry.html">Youth Ministry</a></li>
+          <li><a href="mens-womens-ministry.html">Men's &amp; Women's Ministry</a></li>
+          <li><a href="personal-growth-counseling.html">Personal Growth &amp; Counseling</a></li>
+          <li><a href="elders-leaders.html">Elders &amp; Leaders</a></li>
+          <li><a href="./">Online Resources</a></li>
+          <li><a href="books.html">All books &amp; studies</a></li>
+          <li><a href="topics.html">Browse by topic</a></li>
+          <li><a href="how-we-choose.html">How we choose</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Church</h3>
+        <ul>
+          <li><a href="https://coolcommunitychurch.github.io/coolchurch-website/about.html">About</a></li>
+          <li><a href="https://coolcommunitychurch.github.io/coolchurch-website/sermons.html">Sermons</a></li>
+          <li><a href="https://coolcommunitychurch.github.io/coolchurch-website/visit.html">Plan Your Visit</a></li>
+          <li><a href="https://coolcommunitychurch.github.io/coolchurch-website/crossroads.html">Crossroads Counseling</a></li>
+          <li><a href="https://subsplash.com/coolcommunitychurch/app" target="_blank" rel="noopener">Get the app</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="legal">© 2026 Cool Community Church · Recommended resources, updated November 2026</p>
+  </div>
+</footer>
+</body>
+</html>
